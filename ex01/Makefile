@@ -51,14 +51,13 @@ $(NAME): $(OBJS)
 	@echo "$(LIGHT_GREEN)Created $(NAME) executable$(DEF_COLOR)"
 	
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.cpp | $(MAKE_OBJ_DIR) $(DEPS_PATH)
-			@echo "$<"
 			@echo "$(CYAN)Compiling $< $(DEF_COLOR)"
-			@$(CC) $(CFLAGS) $(INCS) -MMD -MP $< -o $@
+			@$(CC) $(CFLAGS) $(INCS) -MMD -MP -c $< -o $@
 			@mv $(basename $@).d $(DEPS_PATH)
 
 $(MAKE_OBJ_DIR):
 	@echo "$(GREEN)Creating $(NAME) Obj Dir $(DEF_COLOR)"
-	@mkdir -p $(OBJS_PATH)
+	@mkdir -p $(MAKE_OBJ_DIR)
 
 
 $(DEPS_PATH):

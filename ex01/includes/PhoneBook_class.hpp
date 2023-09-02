@@ -1,7 +1,7 @@
 #ifndef PHONEBOOK_CLASS_HPP
 # define PHONEBOOK_CLASS_HPP
 
-#include "Contact.class.hpp"
+#include "Contact_class.hpp"
 
 class PhoneBook
 {
@@ -15,7 +15,7 @@ class PhoneBook
 
         void    add(void);
         void    search(void);
-        void    print(Contact contact);
+        void    print_info(Contact contact);
 
         Contact get_contact(int index);
 };

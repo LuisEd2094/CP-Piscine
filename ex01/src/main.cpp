@@ -1,13 +1,15 @@
 #include "Contact_class.hpp"
+#include "PhoneBook_class.hpp"
 
 int main(void)
 {
     Contact new_contact;
+    PhoneBook phonebook;
 
-    new_contact.set_first_name("Hello");
+    phonebook.add();
+    new_contact= phonebook.get_contact(0);
 
-    std::string name = new_contact.get_first_name();
+    phonebook.print_info(phonebook.get_contact(0));
 
-    std::cout << name << "HOLA" << std::endl;
     
 }
