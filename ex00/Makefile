@@ -32,7 +32,7 @@ all: $(NAME)
 	
 $(OBJS_PATH)%.o: %.cpp | $(MAKE_OBJ_DIR) $(DEPS_PATH)
 			@echo "$(CYAN)Compiling $< $(DEF_COLOR)"
-			@$(CC) $(CFLAGS) $(INCS) -MMD -MP -c $< -o $@ 
+			@$(CC) $(CFLAGS) -MMD -MP -c $< -o $@ 
 			@mv $(basename $@).d $(DEPS_PATH)
 
 
