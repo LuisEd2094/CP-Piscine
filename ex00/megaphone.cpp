@@ -15,7 +15,8 @@ void toUpper(std::string &str)
 
 int main (int argc, char **argv)
 {
-	int i = 1; 
+	int i = 1;
+	std::string str; 
 
     if (argc < 2)
         std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
@@ -23,7 +24,7 @@ int main (int argc, char **argv)
     {
 		while (argv[i])
 		{
-            std::string str = static_cast<std::string>(argv[i]);
+ 			str = static_cast<std::string>(argv[i]);
             toUpper(str);
 			std::cout << str;
 			i++;
