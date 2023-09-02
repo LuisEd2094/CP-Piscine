@@ -2,9 +2,14 @@ NAME        = phonebook
 CFLAGS      = -Wall -Wextra  -Werror -g -std=c++98
 CC			= c++
 RM          = rm -f
+CONTACT_PATH = Contact/
+PHONE_PATH	=	PhoneBook/
+SRCS_PATH	= src/
 OBJS_PATH	= obj/
-MAKE_OBJ_DIR	= $(OBJS_PATH)
+MAKE_OBJ_DIR	=	$(OBJS_PATH) $(addprefix $(OBJS_PATH), $(CONTACT_PATH) $(PHONE_PATH)) 
 DEPS_PATH	= deps/
+INCS        = -I./includes
+
 
 #Colors
 
@@ -22,23 +27,34 @@ LIGHT_GREEN = \033[1;92m
 
 ###
 
-SRC         =	Contact.class.cpp main.cpp
+SRC         =	main.cpp
 
-DEPS		= 	$(addprefix $(DEPS_PATH), $(SRC:.cpp=.d))
+CONTACT		=	Contact_class.cpp
 
-OBJS        =	$(addprefix $(OBJS_PATH), $(SRC:.cpp=.o)) 
+PHONE		=	PhoneBook_class.cpp
+
+CONTACT_FILES = $(addprefix $(CONTACT_PATH), $(CONTACT))
+
+PHONE_FILES 	= $(addprefix $(PHONE_PATH), $(PHONE))
+
+DEPS		= 	$(addprefix $(DEPS_PATH),	$(SRC:.cpp=.d) $(CONTACT:.cpp=.d) $(PHONE:.cpp=.d))
+
+SRC			+=	$(CONTACT_FILES) $(PHONE_FILES) 
+
+OBJS 		=	$(addprefix $(OBJS_PATH), $(SRC:.cpp=.o))
 				
 all: $(NAME)
-	
-$(OBJS_PATH)%.o: %.cpp | $(MAKE_OBJ_DIR) $(DEPS_PATH)
-			@echo "$(CYAN)Compiling $< $(DEF_COLOR)"
-			@$(CC) $(CFLAGS) $(INCS) -MMD -MP -c $< -o $@ 
-			@mv $(basename $@).d $(DEPS_PATH)
 
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(INCS) $(OBJS) -o $(NAME)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 	@echo "$(LIGHT_GREEN)Created $(NAME) executable$(DEF_COLOR)"
+	
+$(OBJS_PATH)%.o: $(SRCS_PATH)%.cpp | $(MAKE_OBJ_DIR) $(DEPS_PATH)
+			@echo "$<"
+			@echo "$(CYAN)Compiling $< $(DEF_COLOR)"
+			@$(CC) $(CFLAGS) $(INCS) -MMD -MP $< -o $@
+			@mv $(basename $@).d $(DEPS_PATH)
 
 $(MAKE_OBJ_DIR):
 	@echo "$(GREEN)Creating $(NAME) Obj Dir $(DEF_COLOR)"
