@@ -16,13 +16,12 @@ PhoneBook::~PhoneBook(void)
 void PhoneBook::add(void)
 {
     Contact new_contact;
-    int index = this->index;
 
     if (this->index > 7)
         std::cout << "You have reached the book limit, you will overwrite " << \
         this->contacts[0].get_first_name() << std::endl;
     new_contact.create();
-    this->contacts[index] = new_contact;
+    this->contacts[this->index % 8] = new_contact;
     this->index++;
 }
 
