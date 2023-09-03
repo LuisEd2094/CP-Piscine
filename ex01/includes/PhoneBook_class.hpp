@@ -13,7 +13,7 @@ class PhoneBook
         int         index;
         std::string get_spaces(int size);
         void        print_formatted_value(std::string str);
-        std::string resize_str(std::string str, int str_size);
+        std::string resize_str(std::string str);
         
     public:
         PhoneBook(void);

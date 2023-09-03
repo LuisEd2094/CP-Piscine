@@ -52,7 +52,7 @@ std::string PhoneBook::get_spaces(int size)
     return(str);
 }
 
-std::string PhoneBook::resize_str(std::string str, int str_size)
+std::string PhoneBook::resize_str(std::string str)
 {
     str.resize(10);
     str[9] = '.';
@@ -65,10 +65,10 @@ void PhoneBook::print_formatted_value(std::string str)
     int str_size = str.size();
     
     std::cout << "|";
-    if (str_size < 10)
+    if (str_size <= 10)
         std::cout << get_spaces(10 - str_size) << str;
     else
-        std::cout << resize_str(str, str_size); 
+        std::cout << resize_str(str); 
 
 }
 
