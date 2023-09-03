@@ -6,8 +6,6 @@ Contact::Contact(void)
 Contact::~Contact(void)
 {
 }
-
-
 std::string Contact::get_input(std::string info)
 {
     std::string str;
@@ -21,7 +19,19 @@ std::string Contact::get_input(std::string info)
     return (str);
 }
 
-void    print_formatted_info(std::string prefix, std::string info)
+
+void Contact::create(void)
+{
+    std::string str;
+
+    this->set_first_name(get_input("first name"));
+    this->set_last_name(get_input("last name"));
+    this->set_nick_name(get_input("nick name"));
+    this->set_phone_number(get_input("phone number"));
+    this->set_darkest_secret(get_input("darkest secret"));   
+}
+
+void    Contact::print_formatted_info(std::string prefix, std::string info)
 {
     std::cout << prefix << info << std::endl;
 }
@@ -36,16 +46,6 @@ void    Contact::print_info(void)
     print_formatted_info("Darkest secret: ", this->get_darkest_secret());
 }
 
-void Contact::create(void)
-{
-    std::string str;
-
-    this->set_first_name(get_input("first name"));
-    this->set_last_name(get_input("last name"));
-    this->set_nick_name(get_input("nick name"));
-    this->set_phone_number(get_input("phone number"));
-    this->set_darkest_secret(get_input("darkest secret"));   
-}
 
 void Contact::set_first_name(std::string str)
 {

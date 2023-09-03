@@ -13,6 +13,7 @@ class Contact
         std::string phone_number;
         std::string darkest_secret;
         std::string get_input(std::string info);
+        void        print_formatted_info(std::string prefix, std::string info);
 
     public:
         Contact(void);
