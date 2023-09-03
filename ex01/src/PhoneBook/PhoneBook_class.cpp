@@ -43,18 +43,7 @@ void PhoneBook::add(void)
     this->index++;
 }
 
-void    PhoneBook::print_info(Contact contact)
-{
-    contact.print_info();
-}
-
-Contact PhoneBook::get_contact(int index)
-{
-    return (this->contacts[index]);
-}
-
-
-std::string get_spaces(int size)
+std::string PhoneBook::get_spaces(int size)
 {
     std::string str;
 
@@ -63,9 +52,24 @@ std::string get_spaces(int size)
     return(str);
 }
 
-void print_formatted_value(std::string str)
+std::string PhoneBook::resize_str(std::string str, int str_size)
 {
-    std::cout << "|" << get_spaces(10 - str.size()) << str;
+    str.resize(10);
+    str[9] = '.';
+    return (str);
+}
+
+
+void PhoneBook::print_formatted_value(std::string str)
+{
+    int str_size = str.size();
+    
+    std::cout << "|";
+    if (str_size < 10)
+        std::cout << get_spaces(10 - str_size) << str;
+    else
+        std::cout << resize_str(str, str_size); 
+
 }
 
 void PhoneBook::print_ui(Contact *contacts)
