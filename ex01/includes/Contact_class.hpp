@@ -12,12 +12,14 @@ class Contact
         std::string nick_name; 
         std::string phone_number;
         std::string darkest_secret;
+        std::string get_input(std::string info);
 
     public:
         Contact(void);
         ~Contact(void);
 
         void    create(void);
+        void    print_info(void);
 
         void    set_first_name(std::string str);
         void    set_last_name(std::string str);

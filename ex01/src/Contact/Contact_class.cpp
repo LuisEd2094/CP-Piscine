@@ -8,7 +8,7 @@ Contact::~Contact(void)
 }
 
 
-std::string get_input(std::string info)
+std::string Contact::get_input(std::string info)
 {
     std::string str;
 
@@ -19,6 +19,21 @@ std::string get_input(std::string info)
         std::getline(std::cin, str);
     }
     return (str);
+}
+
+void    print_formatted_info(std::string prefix, std::string info)
+{
+    std::cout << prefix << info << std::endl;
+}
+
+void    Contact::print_info(void)
+
+{
+    print_formatted_info("First name: ", this->get_first_name());
+    print_formatted_info("Last name: ", this->get_last_name());
+    print_formatted_info("Nick name: ", this->get_nick_name());
+    print_formatted_info("Phone number: ", this->get_phone_number());
+    print_formatted_info("Darkest secret: ", this->get_darkest_secret());
 }
 
 void Contact::create(void)

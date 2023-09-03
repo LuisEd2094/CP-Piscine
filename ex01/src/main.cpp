@@ -3,21 +3,25 @@
 
 int main(void)
 {
-    Contact new_contact;
-    PhoneBook phonebook;
 
-    phonebook.add();
-    new_contact= phonebook.get_contact(0);
-    phonebook.print_info(phonebook.get_contact(0));
+	PhoneBook 	PhoneBook;
+	std::string	str ="";
 
-
-
-
-    for (int i = 0; i < 8; i++)
-        phonebook.add();
-    new_contact= phonebook.get_contact(0);
-
-    phonebook.print_info(phonebook.get_contact(0));
-
-    std::cout << 9 % 8 << std::endl;
+    PhoneBook.welcome_message();
+    PhoneBook.instructions();
+	while (1)
+	{
+		std::cout << "Enter a command > ";
+		std::getline(std::cin, str);
+		if (str == "ADD")
+			PhoneBook.add();
+		else if (str == "SEARCH")
+			PhoneBook.search();
+        else if (str == "EXIT")
+            break;
+        else
+            PhoneBook.instructions();
+	}
+    PhoneBook.exit_message();
+	return (0);
 }
