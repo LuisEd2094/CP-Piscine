@@ -108,6 +108,7 @@ void    PhoneBook::search(void)
         this->print_ui(this->contacts);
         std::cout << "Select a contact index: ";
         std::getline(std::cin, str);
+        str = remove_white_space(str);
         index = atoi(str.c_str()) - 1;
         if (index >= 0 && index < this->index)
         {

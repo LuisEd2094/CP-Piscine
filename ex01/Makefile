@@ -4,9 +4,10 @@ CC			= c++
 RM          = rm -f
 CONTACT_PATH = Contact/
 PHONE_PATH	=	PhoneBook/
+FT_LIB_PATH	=	ft_lib/
 SRCS_PATH	= src/
 OBJS_PATH	= obj/
-MAKE_OBJ_DIR	=	$(OBJS_PATH) $(addprefix $(OBJS_PATH), $(CONTACT_PATH) $(PHONE_PATH)) 
+MAKE_OBJ_DIR	=	$(OBJS_PATH) $(addprefix $(OBJS_PATH), $(CONTACT_PATH) $(PHONE_PATH) $(FT_LIB_PATH)) 
 DEPS_PATH	= deps/
 INCS        = -I./includes
 
@@ -27,21 +28,25 @@ LIGHT_GREEN = \033[1;92m
 
 ###
 
-SRC         =	main.cpp
+SRC        		=	main.cpp
 
-CONTACT		=	Contact_class.cpp
+CONTACT			=	Contact_class.cpp
 
-PHONE		=	PhoneBook_class.cpp
+PHONE			=	PhoneBook_class.cpp
 
-CONTACT_FILES = $(addprefix $(CONTACT_PATH), $(CONTACT))
+FT_LIB			=	remove_white_spaces.cpp
 
-PHONE_FILES 	= $(addprefix $(PHONE_PATH), $(PHONE))
+FT_LIB_FILES	=	$(addprefix $(FT_LIB_PATH), $(FT_LIB))
 
-DEPS		= 	$(addprefix $(DEPS_PATH),	$(SRC:.cpp=.d) $(CONTACT:.cpp=.d) $(PHONE:.cpp=.d))
+CONTACT_FILES 	=	$(addprefix $(CONTACT_PATH), $(CONTACT))
 
-SRC			+=	$(CONTACT_FILES) $(PHONE_FILES) 
+PHONE_FILES 	=	$(addprefix $(PHONE_PATH), $(PHONE))
 
-OBJS 		=	$(addprefix $(OBJS_PATH), $(SRC:.cpp=.o))
+DEPS			= 	$(addprefix $(DEPS_PATH),	$(SRC:.cpp=.d) $(CONTACT:.cpp=.d) $(PHONE:.cpp=.d) $(FT_LIB:.cpp=.d))
+
+SRC				+=	$(CONTACT_FILES) $(PHONE_FILES) $(FT_LIB_FILES)
+
+OBJS 			=	$(addprefix $(OBJS_PATH), $(SRC:.cpp=.o))
 				
 all: $(NAME)
 

@@ -3,6 +3,7 @@
 
 # include <iostream>
 # include <string>
+# include "ft_lib.hpp"
 
 class Contact
 {

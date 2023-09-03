@@ -15,6 +15,7 @@ std::string Contact::get_input(std::string info)
     {
         std::cout << "Enter " << info << " for your contact: ";
         std::getline(std::cin, str);
+        str = remove_white_space(str);
     }
     return (str);
 }
