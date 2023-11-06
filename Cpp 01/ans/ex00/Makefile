@@ -22,7 +22,7 @@ LIGHT_GREEN = \033[1;92m
 
 ###
 
-SRC         =	main.cpp Zombie.cpp #newZombie.cpp  randomChump.cpp
+SRC         =	main.cpp Zombie.cpp newZombie.cpp  randomChump.cpp
 
 DEPS		= 	$(addprefix $(DEPS_PATH), $(SRC:.cpp=.d))
 
