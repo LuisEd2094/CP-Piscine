@@ -1,5 +1,5 @@
 NAME        = phonebook
-CFLAGS      = -Wall -Wextra  -Werror -g -std=c++98
+CFLAGS      = -Wall -Wextra  -Werror -g -std=c++98 -pedantic
 CC			= c++
 RM          = rm -f
 CONTACT_PATH = Contact/
