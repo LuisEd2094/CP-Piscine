@@ -1,4 +1,4 @@
-NAME        = thisIsBrain
+NAME        = unnecessaryViolence
 CFLAGS      = -Wall -Wextra  -Werror -g -std=c++98 -pedantic
 CC			= c++
 RM          = rm -f
