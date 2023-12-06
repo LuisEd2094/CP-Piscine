@@ -1,5 +1,5 @@
-NAME        = harl
-CFLAGS      = -Wall -Wextra  -Werror -g -std=c++98 -pedantic
+NAME        = harlfilter
+CFLAGS      = -g -std=c++98 -pedantic -Wall -Wextra  -Werror  #-Wno-error=implicit-fallthrough
 CC			= c++
 RM          = rm -f
 OBJS_PATH	= obj/
