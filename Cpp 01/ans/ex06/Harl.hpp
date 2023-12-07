@@ -1,10 +1,13 @@
-#include <string>
+#ifndef HARL_HPP
+# define HARL_HPP
+
+# include <string>
 
 class Harl
 {
     public:
-        Harl(){};
-        ~Harl(){};
+        Harl();
+        ~Harl();
         void complain( std::string level );
     
     private:
@@ -13,3 +16,5 @@ class Harl
         void warning( void );
         void error( void );
 };
+
+#endif
