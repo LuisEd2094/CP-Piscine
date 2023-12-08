@@ -22,7 +22,7 @@ LIGHT_GREEN = \033[1;92m
 
 ###
 
-SRC         =	main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
+SRC         =	main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 
 DEPS		= 	$(addprefix $(DEPS_PATH), $(SRC:.cpp=.d))
 
