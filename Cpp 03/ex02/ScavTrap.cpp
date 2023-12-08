@@ -50,6 +50,7 @@ void ScavTrap::attack(std::string const& target)
 
     }
 }
+
 void ScavTrap::guardGate()
 {
     std::cout << "ScavTrap " << this->m_name;
