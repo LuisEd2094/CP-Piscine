@@ -22,7 +22,7 @@ LIGHT_GREEN = \033[1;92m
 
 ###
 
-SRC         =	Animal.cpp  Cat.cpp  Dog.cpp Brain.cpp main.cpp
+SRC         =	Animal.cpp  Cat.cpp  Dog.cpp  main.cpp Brain.cpp
 
 DEPS		= 	$(addprefix $(DEPS_PATH), $(SRC:.cpp=.d))
 

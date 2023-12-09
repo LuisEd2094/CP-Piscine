@@ -19,10 +19,10 @@ Animal& Animal::operator=(const Animal& rhs)
     }
     return *this;
 }
-Animal::Animal(const Animal& src)
+Animal::Animal(const Animal& src):
+    m_type(src.m_type)
 {
     std::cout << "Animal copy constructor called" << std::endl;
-    *this = src; 
 }
 
 Animal::~Animal(void)

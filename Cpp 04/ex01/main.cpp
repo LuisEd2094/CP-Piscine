@@ -3,23 +3,58 @@
 #include "Dog.hpp"
 #include "Brain.hpp"
 
+
+void anotherTest(void)
+{
+	Animal* animals[10];
+	
+	for (int i = 0; i < 10; i++)
+	{
+		if (i >= 5)
+			animals[i] = new Dog();
+		else
+			animals[i] = new Cat();
+	}
+	std::cout << std::endl;
+	for (int i = 0; i < 10; i++)
+	{
+		std::cout << animals[i] << std::endl;
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		Cat *copyCat = (Cat *)(animals[i]);
+		for (int j = 0; j < 100; j++)
+		{
+			std::cout << copyCat->getBrain()->getIdea(j) << std::endl;
+		}
+		std::cout << "DONE WITH A CAT " << std::endl << std::endl;
+	}
+
+	std::cout << std::endl;
+	for (int i = 0; i < 10; i++)
+	{
+		delete animals[i];
+	}
+}
+
 int main()
 {
-	/*Animal		*newAnimal = new Animal();
+	//Animal		*newAnimal = new Animal();
 	Cat			*newCat = new Cat();
-	Dog			*newDog = new Dog();*/
-	Brain		*newBrain = new Brain();
-	Brain		*anotherBrain = new Brain();
+	Cat			*anotherCat = new Cat(*newCat);
 
-	*anotherBrain = *newBrain;
-
-	std::cout << newBrain << std::endl<< anotherBrain << std::endl<< std::endl;
+	/*for (int i = 0; i < 100; i++)
+		std::cout << newCat->getBrain()->getIdea(i) << std::endl;
 
 	for (int i = 0; i < 100; i++)
-		std::cout << newBrain->getIdea(i) << std::endl;
+		std::cout << anotherCat->getBrain()->getIdea(i) << std::endl;*/
 
-	delete newBrain;
-	std::cout << "ANOTHER BRAIN" << std::endl<< std::endl<< std::endl<< std::endl;
-	for (int i = 0; i < 100; i++)
-		std::cout << anotherBrain->getIdea(i) << std::endl;
+	std::cout << newCat << std::endl << anotherCat << std::endl;
+
+	delete newCat;
+	delete anotherCat;
+
+	anotherTest();
+
+
 }

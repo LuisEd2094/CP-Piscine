@@ -1,16 +1,35 @@
 #include "WrongCat.hpp"
 
-WrongCat::WrongCat(void) : WrongAnimal("WrongCat")
+WrongCat::WrongCat(void)
+	: WrongAnimal("WrongCat")
 {
-    std::cout << this->m_type << " constructor called" << std::endl;
+	std::cout << "WrongCat(void) constructor called" << std::endl;
+}
+
+WrongCat::WrongCat(std::string type)
+	: WrongAnimal(type)
+{
+	std::cout << "WrongCat(\"" << type << "\") constructor called" << std::endl;
+}
+
+WrongCat::WrongCat(const WrongCat& other)
+	: WrongAnimal(other)
+{
+	std::cout << "WrongCat copy constructor called on " << other.m_type << std::endl;
+}
+
+WrongCat& WrongCat::operator=(const WrongCat& rhs)
+{
+	this->m_type = rhs.m_type;
+	return *this;
 }
 
 WrongCat::~WrongCat(void)
 {
-    std::cout << this->m_type << " destructor called" << std::endl;
+	std::cout << "WrongCat destructor called for " << this->m_type << std::endl;
 }
 
-void    WrongCat::makeSound( void ) const
+void WrongCat::makeSound(void) const
 {
-    std::cout << "The WrongCat goes: Bark!" << std::endl;
+	std::cout << "Meow" << std::endl;
 }
