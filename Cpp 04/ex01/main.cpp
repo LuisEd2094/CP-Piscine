@@ -43,17 +43,23 @@ int main()
 	Cat			*newCat = new Cat();
 	Cat			*anotherCat = new Cat(*newCat);
 
-	/*for (int i = 0; i < 100; i++)
+	for (int i = 0; i < 100; i++)
 		std::cout << newCat->getBrain()->getIdea(i) << std::endl;
+	delete newCat;
 
 	for (int i = 0; i < 100; i++)
-		std::cout << anotherCat->getBrain()->getIdea(i) << std::endl;*/
+		std::cout << anotherCat->getBrain()->getIdea(i) << std::endl;
 
 	std::cout << newCat << std::endl << anotherCat << std::endl;
 
-	delete newCat;
 	delete anotherCat;
 
+	const Animal *animalCat = new Cat();
+
+	for (int i = 0; i < 100; i++)
+		std::cout << ((Cat *)(animalCat))->getBrain()->getIdea(i) << std::endl;
+
+	delete animalCat;
 	anotherTest();
 
 
