@@ -55,12 +55,22 @@ int main()
 	delete anotherCat;
 
 	const Animal *animalCat = new Cat();
+	const Animal *animalDog = new Dog();
 
 	for (int i = 0; i < 100; i++)
 		std::cout << ((Cat *)(animalCat))->getBrain()->getIdea(i) << std::endl;
 
+	std::cout << ((Cat *)(animalCat))->getType() << std::endl;
+	std::cout << animalCat->getType() << std::endl;
+
+	animalCat->makeSound();
+	((Cat *)(animalCat))->makeSound();
+	animalDog->makeSound();
+	((Dog *)(animalDog))->makeSound();
+
 	delete animalCat;
-	anotherTest();
+	delete animalDog;
+	//anotherTest();
 
 
 }
