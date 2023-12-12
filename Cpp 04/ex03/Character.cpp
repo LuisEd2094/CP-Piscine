@@ -19,7 +19,12 @@ Character::Character(const Character& other)
 	: m_name(other.m_name)
 {
 	for (int i = 0; i < 4; i++)
+	{
+		if (this->m_inventory[i])
+			delete this->m_inventory[i];
 		this->m_inventory[i] = (other.m_inventory[i]) ? other.m_inventory[i]->clone() : NULL;
+
+	}
 }
 
 Character& Character::operator=(const Character& rhs)
@@ -28,19 +33,29 @@ Character& Character::operator=(const Character& rhs)
     {
         this->m_name = rhs.m_name;
         for (int i = 0; i < 4; i++)
-            this->m_inventory[i] = (rhs.m_inventory[i]) ? rhs.m_inventory[i]->clone() : NULL;
+		{
+				if (this->m_inventory[i])
+					delete this->m_inventory[i];
+				this->m_inventory[i] = (rhs.m_inventory[i]) ? rhs.m_inventory[i]->clone() : NULL;
+		}
     }
     return *this;
 }
 
-Character::~Character(void) {}
+Character::~Character(void) 
+{
+        for (int i = 0; i < 4; i++)
+		{
+			if (this->m_inventory[i])
+				delete this->m_inventory[i];
+		}
+
+}
 
 std::string const & Character::getName(void) const
 {
 	return (this->m_name);
 }
-
-
 
 void Character::equip(AMateria* m)
 {	
