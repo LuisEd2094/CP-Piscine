@@ -12,7 +12,10 @@ class Ice : public AMateria
         Ice(const Ice& other);
         Ice& operator=(const Ice& rhs);
         ~Ice(void);
-        Ice* clone(void) const;
+
+        void use(ICharacter& target);
+	    AMateria* clone(void) const;
+
 };
 
 

@@ -22,7 +22,7 @@ LIGHT_GREEN = \033[1;92m
 
 ###
 
-SRC         =	main.cpp AMateria.cpp Ice.cpp
+SRC         =	AMateria.cpp  Character.cpp  Ice.cpp  Cure.cpp main.cpp
 
 DEPS		= 	$(addprefix $(DEPS_PATH), $(SRC:.cpp=.d))
 
