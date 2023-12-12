@@ -1,7 +1,8 @@
 #include "Ice.hpp"
 
+std::string Ice::m_type = "ice";
+
 Ice::Ice(void) : AMateria("ice") {}
-Ice::Ice(std::string const& type) : AMateria(type) {}
 Ice::~Ice(void){}
 
 Ice::Ice(const Ice& other) : AMateria(other) {}

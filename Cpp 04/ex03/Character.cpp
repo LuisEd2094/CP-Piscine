@@ -23,7 +23,6 @@ Character::Character(const Character& other)
 		if (this->m_inventory[i])
 			delete this->m_inventory[i];
 		this->m_inventory[i] = (other.m_inventory[i]) ? other.m_inventory[i]->clone() : NULL;
-
 	}
 }
 
@@ -47,7 +46,10 @@ Character::~Character(void)
         for (int i = 0; i < 4; i++)
 		{
 			if (this->m_inventory[i])
+			{
 				delete this->m_inventory[i];
+				this->m_inventory[i] = NULL;
+			}
 		}
 
 }
