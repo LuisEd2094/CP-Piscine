@@ -22,7 +22,7 @@ LIGHT_GREEN = \033[1;92m
 
 ###
 
-SRC         =	Bureaucrat.cpp  main.cpp
+SRC         =	Bureaucrat.cpp  Form.cpp  main.cpp
 
 DEPS		= 	$(addprefix $(DEPS_PATH), $(SRC:.cpp=.d))
 
