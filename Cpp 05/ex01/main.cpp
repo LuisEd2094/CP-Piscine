@@ -47,13 +47,7 @@ void creationTest()
 
 int main()
 {
-    //upAndDownTest();
-    //creationTest();
-    Bureaucrat John("John", 100);
-    Bureaucrat Alice;
+    upAndDownTest();
+    creationTest();
 
-    Alice = John;
-
-    std::cout << Alice;
-    std::cout << John;
 }
