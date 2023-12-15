@@ -19,11 +19,7 @@ Form::Form(const Form & other)
     {}
 
 Form& Form::operator=(const Form & rhs) {
-    if (this != &rhs)
-    {
-        //Other member variables are const, can't copy them
-        this->m_is_signed = rhs.m_is_signed;
-    }
+    (void)rhs;
     return (*this);
 }
 
