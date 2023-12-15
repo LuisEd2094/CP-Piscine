@@ -2,14 +2,23 @@
 # define SHRUBBERYCREATIONFORM_HPP
 
 # include <iostream>
+# include <fstream>
+# include "AForm.hpp"
+# include "Bureaucrat.hpp"
 
-class ShrubberyCreationForm
+
+class ShrubberyCreationForm : public AForm 
 {
-    public:
+    private:
+        const std::string m_target;
         ShrubberyCreationForm();
+    public:
+        ShrubberyCreationForm(const std::string& target);
         ~ShrubberyCreationForm();
         ShrubberyCreationForm(const ShrubberyCreationForm & other);
         ShrubberyCreationForm& operator=(const ShrubberyCreationForm& rhs);
+        
+        void execute(const Bureaucrat& executor) const;
 };
 
 #endif

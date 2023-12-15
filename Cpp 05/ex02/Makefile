@@ -22,7 +22,8 @@ LIGHT_GREEN = \033[1;92m
 
 ###
 
-SRC         =	AForm.cpp  Bureaucrat.cpp  PresidentialPardonForm.cpp   main.cpp
+SRC         =	AForm.cpp  Bureaucrat.cpp  PresidentialPardonForm.cpp  \
+				RobotomyRequestForm.cpp  ShrubberyCreationForm.cpp  main.cpp
 
 DEPS		= 	$(addprefix $(DEPS_PATH), $(SRC:.cpp=.d))
 
@@ -55,7 +56,7 @@ $(DEPS_PATH):
 clean: clean_objects
 
 fclean:  clean_objects
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) *_shrubbery
 	@echo "$(GREEN)$(NAME) executable cleaned!$(DEF_COLOR)"
 
 clean_objects:
