@@ -84,7 +84,7 @@ void AForm::checkValidExecution(const Bureaucrat & executor) const
 {
     if (!this->m_is_signed)
         throw AForm::NotSignedException();
-    else if (this->m_grade_to_execute > executor.getGrade())
+    else if (this->m_grade_to_execute < executor.getGrade())
         throw AForm::GradeTooLowException();
 }
 
