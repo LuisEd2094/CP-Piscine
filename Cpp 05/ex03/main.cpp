@@ -12,6 +12,8 @@ void interTest()
     AForm *form = intern.makeForm("robotomy request", "Bender");
 
     std::cout << *form;
+
+    delete form;
 }
 
 int main()

@@ -19,6 +19,7 @@ class Intern
         AForm* makeForm(const std::string& form, const std::string target);
     private:
         std::string tolower(std::string& str);
+   
 };
 
 #endif

@@ -24,19 +24,33 @@ std::string Intern::tolower(std::string& str)
 	return (str);
 }
 
+static AForm *newShrubbery(const std::string target) {
+	return new ShrubberyCreationForm(target);
+}
+
+static AForm *newRobotomy(const std::string target) {
+	return new RobotomyRequestForm(target);
+}
+
+static AForm *newPresidential(const std::string target) {
+	return new PresidentialPardonForm(target);
+}
+
+typedef AForm *(*FormConstructorPtr)(const std::string);
+
 
 AForm* Intern::makeForm(const std::string& form, const std::string target)
 {
     std::string copy = form;
     std::string valid_forms[] = {
-        "presidential pardon",
+        "shrubbery creation",
         "robotomy request",
-        "shrubbery creation"
+        "presidential pardon"
     };
-    AForm* forms[] = {
-        new RobotomyRequestForm(target),
-        new PresidentialPardonForm(target),
-        new ShrubberyCreationForm(target),
+    FormConstructorPtr forms[]= {
+        &newShrubbery,
+        &newRobotomy,
+        &newPresidential
     };
 
     this->tolower(copy);
@@ -44,7 +58,7 @@ AForm* Intern::makeForm(const std::string& form, const std::string target)
     {
         if (copy == valid_forms[i])
         {
-            return (forms[i]);
+            return (forms[i](target));
         }
     }
     return (NULL);
