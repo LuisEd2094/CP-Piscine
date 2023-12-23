@@ -7,4 +7,6 @@
 std::string remove_white_space(std::string str);
 void        get_new_input(std::string& str);
 bool        check_if_only_zeros(std::string &str);
+bool        is_phone_number(const std::string &str);
+
 #endif

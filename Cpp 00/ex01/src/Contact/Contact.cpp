@@ -18,6 +18,11 @@ std::string Contact::get_input(std::string info)
 		get_new_input(str);
 		if (std::cin.eof() == 1)
 			PhoneBook::exit_program();
+        if (info == "phone number")
+        {
+            if (!is_phone_number(str))
+                str = "";
+        }
     }
     return (str);
 }

@@ -1,5 +1,5 @@
 NAME        = phonebook
-CFLAGS      = -Wall -Wextra  -Werror -g -std=c++98 -pedantic
+CFLAGS      = -std=c++98 -pedantic -Wall -Wextra  -Werror -g 
 CC			= c++
 RM          = rm -f
 CONTACT_PATH = Contact/
@@ -34,7 +34,7 @@ CONTACT			=	Contact.cpp
 
 PHONE			=	PhoneBook.cpp
 
-FT_LIB			=	remove_white_spaces.cpp get_input.cpp check_if_zeros.cpp
+FT_LIB			=	check_if_zeros.cpp  get_input.cpp  is_phone_number.cpp  remove_white_spaces.cpp
 
 FT_LIB_FILES	=	$(addprefix $(FT_LIB_PATH), $(FT_LIB))
 

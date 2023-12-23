@@ -10,7 +10,7 @@ int main(int argc, char **argv)
 	std::string	str ="";
 
     if (argc > 1 && argv)
-        exit(EXIT_SUCCESS);
+        std::exit(EXIT_SUCCESS);
     PhoneBook.welcome_message();
     PhoneBook.instructions();
 	while (1)
@@ -23,8 +23,6 @@ int main(int argc, char **argv)
 			PhoneBook.add();
 		else if (str == "SEARCH")
 			PhoneBook.search();
-        else if (str == "EXIT")
-            break;
         else
             PhoneBook.instructions();
 	}

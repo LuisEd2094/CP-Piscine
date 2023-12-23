@@ -12,7 +12,7 @@ PhoneBook::~PhoneBook(void)
 void PhoneBook::exit_program(void)
 {
     std::cout << "Closing! See you later!" << std::endl;
-    std::exit(0);
+    std::exit(EXIT_SUCCESS);
 }
 
 void PhoneBook::instructions(void)
@@ -71,7 +71,7 @@ void PhoneBook::add(void)
     Contact new_contact;
     int contact_index;
 
-    if (this->index == 2)
+    if (this->index == 8)
     {
         contact_index = this->get_index_to_replace();
     }
