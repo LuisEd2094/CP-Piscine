@@ -1,5 +1,5 @@
-#include "Contact_class.hpp"
-#include "PhoneBook_class.hpp"
+#include "Contact.hpp"
+#include "PhoneBook.hpp"
 #include "ft_lib.hpp"
 
 
@@ -16,8 +16,9 @@ int main(int argc, char **argv)
 	while (1)
 	{
 		std::cout << "Enter a command > ";
-		std::getline(std::cin, str);
-		str = remove_white_space(str);
+		get_new_input(str);
+		if (std::cin.eof() == 1)
+			PhoneBook.exit_program();
 		if (str == "ADD")
 			PhoneBook.add();
 		else if (str == "SEARCH")
@@ -27,6 +28,5 @@ int main(int argc, char **argv)
         else
             PhoneBook.instructions();
 	}
-    PhoneBook.exit_message();
-    exit(EXIT_SUCCESS);
+    PhoneBook.exit_program();
 }

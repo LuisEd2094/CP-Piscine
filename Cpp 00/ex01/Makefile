@@ -30,11 +30,11 @@ LIGHT_GREEN = \033[1;92m
 
 SRC        		=	main.cpp
 
-CONTACT			=	Contact_class.cpp
+CONTACT			=	Contact.cpp
 
-PHONE			=	PhoneBook_class.cpp
+PHONE			=	PhoneBook.cpp
 
-FT_LIB			=	remove_white_spaces.cpp
+FT_LIB			=	remove_white_spaces.cpp get_input.cpp check_if_zeros.cpp
 
 FT_LIB_FILES	=	$(addprefix $(FT_LIB_PATH), $(FT_LIB))
 

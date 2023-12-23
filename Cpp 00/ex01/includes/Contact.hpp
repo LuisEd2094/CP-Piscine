@@ -5,6 +5,8 @@
 # include <string>
 # include "ft_lib.hpp"
 
+class PhoneBook;
+
 class Contact
 {
     private:

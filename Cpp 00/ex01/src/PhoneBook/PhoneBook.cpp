@@ -9,9 +9,10 @@ PhoneBook::~PhoneBook(void)
 {
 }
 
-void PhoneBook::exit_message(void)
+void PhoneBook::exit_program(void)
 {
     std::cout << "Closing! See you later!" << std::endl;
+    std::exit(0);
 }
 
 void PhoneBook::instructions(void)
@@ -30,17 +31,57 @@ void PhoneBook::welcome_message(void)
         << std::endl;
 }
 
+int PhoneBook::get_index_to_replace(void)
+{
+    std::string input = "";
+    int contact_index;
+    int check_index; 
+
+    std::cout << "You have reached the book limit" << std::endl;
+    this->print_ui();
+    while (input == "")
+    {
+        std::cout << "Select an index for the contact you want to replace" << std::endl;
+        get_new_input(input);
+        if (std::cin.eof() == 1)
+            this->exit_program();
+        if (check_if_only_zeros(input))
+            contact_index = 0;
+        else
+            contact_index = std::atoi(input.c_str());
+        if (contact_index > 0 && contact_index  < 9)
+        {
+            input = "";
+            std::cout << "You are about to remove" << this->contacts[contact_index].get_first_name() << std::endl;
+            std::cout << "Enter the same index to confirm" << std::endl;
+            get_new_input(input);
+            if (std::cin.eof() == 1)
+                this->exit_program();
+            check_index = std::atoi(input.c_str());
+            if (check_index == contact_index)
+                break;
+        }
+        input = ""; 
+    }
+    return (contact_index - 1);
+}
+
 void PhoneBook::add(void)
 {
     Contact new_contact;
+    int contact_index;
 
-    if (this->index > 7)
-        std::cout << "You have reached the book limit, you will overwrite " << \
-        this->contacts[0].get_first_name() << std::endl;
+    if (this->index == 2)
+    {
+        contact_index = this->get_index_to_replace();
+    }
+    else
+        contact_index = this->index;
     new_contact.create();
-    this->contacts[this->index % 8] = new_contact;
+    this->contacts[contact_index] = new_contact;
     std::cout << new_contact.get_first_name() << " added to PhoneBook!" << std::endl;
-    this->index++;
+    if (this->index < 8)
+        this->index++;
 }
 
 std::string PhoneBook::get_spaces(int size)
@@ -72,13 +113,13 @@ void PhoneBook::print_formatted_value(std::string str)
 
 }
 
-void PhoneBook::print_ui(Contact *contacts)
+void PhoneBook::print_ui(void)
 {
     int i = 0;
     Contact contact;
     std::string str;
 
-    if (!contacts)
+    if (!this->contacts)
         return;
     std::cout << " ___________________________________________ " << std::endl;
 	std::cout << "|     Index|First Name| Last Name|  Nickname|" << std::endl;
@@ -109,10 +150,11 @@ void    PhoneBook::search(void)
     }
     while (1)
     {
-        this->print_ui(this->contacts);
+        this->print_ui();
         std::cout << "Select a contact index: ";
-        std::getline(std::cin, str);
-        str = remove_white_space(str);
+        get_new_input(str);
+		if (std::cin.eof() == 1)
+			this->exit_program();
         index = atoi(str.c_str()) - 1;
         if (index >= 0 && index < this->index)
         {

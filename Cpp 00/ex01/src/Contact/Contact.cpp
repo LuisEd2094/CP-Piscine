@@ -1,4 +1,5 @@
 #include "Contact.hpp"
+#include "PhoneBook.hpp"
 
 Contact::Contact(void)
 {
@@ -14,8 +15,9 @@ std::string Contact::get_input(std::string info)
     while (str == "")
     {
         std::cout << "Enter " << info << " for your contact: ";
-        std::getline(std::cin, str);
-        str = remove_white_space(str);
+		get_new_input(str);
+		if (std::cin.eof() == 1)
+			PhoneBook::exit_program();
     }
     return (str);
 }
@@ -25,11 +27,11 @@ void Contact::create(void)
 {
     std::string str;
 
-    this->set_first_name(get_input("first name"));
-    this->set_last_name(get_input("last name"));
-    this->set_nick_name(get_input("nick name"));
-    this->set_phone_number(get_input("phone number"));
-    this->set_darkest_secret(get_input("darkest secret"));   
+    this->set_first_name(Contact::get_input("first name"));
+    this->set_last_name(Contact::get_input("last name"));
+    this->set_nick_name(Contact::get_input("nick name"));
+    this->set_phone_number(Contact::get_input("phone number"));
+    this->set_darkest_secret(Contact::get_input("darkest secret"));   
 }
 
 void    Contact::print_formatted_info(std::string prefix, std::string info)
