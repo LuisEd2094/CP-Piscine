@@ -1,7 +1,7 @@
-#ifndef PHONEBOOK_CLASS_HPP
-# define PHONEBOOK_CLASS_HPP
+#ifndef PHONEBOOK_HPP
+# define PHONEBOOK_HPP
 
-# include "Contact_class.hpp"
+# include "Contact.hpp"
 # include "ft_lib.hpp"
 # include <stdlib.h> 
 
