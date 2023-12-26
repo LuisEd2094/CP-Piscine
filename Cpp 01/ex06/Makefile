@@ -11,12 +11,16 @@
 # **************************************************************************** #
 
 NAME        = harlfilter
-CFLAGS      = -g -std=c++98 -pedantic -Wall -Wextra  -Werror  #-Wno-error=implicit-fallthrough
+CFLAGS      = -std=c++98 -pedantic -Wall -Wextra  -Werror -g 
 CC			= c++
 RM          = rm -f
+HARL_PATH = Harl/
+SRCS_PATH	= src/
 OBJS_PATH	= obj/
-MAKE_OBJ_DIR	= $(OBJS_PATH)
+MAKE_OBJ_DIR	=	$(OBJS_PATH) $(addprefix $(OBJS_PATH), $(HARL_PATH)) 
 DEPS_PATH	= deps/
+INCS        = -I./includes
+
 
 #Colors
 
@@ -34,27 +38,33 @@ LIGHT_GREEN = \033[1;92m
 
 ###
 
-SRC         =	main.cpp Harl.cpp
+SRC        		=	main.cpp
 
-DEPS		= 	$(addprefix $(DEPS_PATH), $(SRC:.cpp=.d))
+HARL			=	Harl.cpp
 
-OBJS        =	$(addprefix $(OBJS_PATH), $(SRC:.cpp=.o)) 
+HARL_FILES 	=	$(addprefix $(HARL_PATH), $(HARL))
+
+DEPS			= 	$(addprefix $(DEPS_PATH),	$(SRC:.cpp=.d) $(HARL:.cpp=.d))
+
+SRC				+=	$(HARL_FILES)
+
+OBJS 			=	$(addprefix $(OBJS_PATH), $(SRC:.cpp=.o))
 				
 all: $(NAME)
-	
-$(OBJS_PATH)%.o: %.cpp | $(MAKE_OBJ_DIR) $(DEPS_PATH)
-			@echo "$(CYAN)Compiling $< $(DEF_COLOR)"
-			@$(CC) $(CFLAGS) -MMD -MP -c $< -o $@ 
-			@mv $(basename $@).d $(DEPS_PATH)
 
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(INCS) $(OBJS) -o $(NAME)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 	@echo "$(LIGHT_GREEN)Created $(NAME) executable$(DEF_COLOR)"
+	
+$(OBJS_PATH)%.o: $(SRCS_PATH)%.cpp | $(MAKE_OBJ_DIR) $(DEPS_PATH)
+			@echo "$(CYAN)Compiling $< $(DEF_COLOR)"
+			@$(CC) $(CFLAGS) $(INCS) -MMD -MP -c $< -o $@
+			@mv $(basename $@).d $(DEPS_PATH)
 
 $(MAKE_OBJ_DIR):
 	@echo "$(GREEN)Creating $(NAME) Obj Dir $(DEF_COLOR)"
-	@mkdir -p $(OBJS_PATH)
+	@mkdir -p $(MAKE_OBJ_DIR)
 
 
 $(DEPS_PATH):
