@@ -1,10 +1,27 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lsoto-do <lsoto-do@student.42barcel>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/12/26 13:29:09 by lsoto-do          #+#    #+#              #
+#    Updated: 2023/12/26 13:29:10 by lsoto-do         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME        = a.out
-CFLAGS      = -g -std=c++98 -pedantic -Wall -Wextra  -Werror
+CFLAGS      = -std=c++98 -pedantic -Wall -Wextra  -Werror -g 
 CC			= c++
 RM          = rm -f
+FIXED_PATH	= Fixed/
+POINT_PATH	= Point/
+SRCS_PATH	= src/
 OBJS_PATH	= obj/
-MAKE_OBJ_DIR	= $(OBJS_PATH)
+MAKE_OBJ_DIR	=	$(OBJS_PATH) $(addprefix $(OBJS_PATH), $(FIXED_PATH) $(POINT_PATH)) 
 DEPS_PATH	= deps/
+INCS        = -I./includes
+
 
 #Colors
 
@@ -22,27 +39,37 @@ LIGHT_GREEN = \033[1;92m
 
 ###
 
-SRC         =	main.cpp Fixed.cpp Point.cpp bsp.cpp
+SRC        		=	 bsp.cpp  main.cpp
 
-DEPS		= 	$(addprefix $(DEPS_PATH), $(SRC:.cpp=.d))
+FIXED			=	Fixed.cpp
 
-OBJS        =	$(addprefix $(OBJS_PATH), $(SRC:.cpp=.o)) 
+POINT			=	Point.cpp
+
+FIXED_FILES 	=	$(addprefix $(FIXED_PATH), $(FIXED))
+
+POINT_FILES 	=	$(addprefix $(POINT_PATH), $(POINT))
+
+DEPS			= 	$(addprefix $(DEPS_PATH),	$(SRC:.cpp=.d) $(FIXED:.cpp=.d) $(POINT:.cpp=.d))
+
+SRC				+=	$(FIXED_FILES) $(POINT_FILES)
+
+OBJS 			=	$(addprefix $(OBJS_PATH), $(SRC:.cpp=.o))
 				
 all: $(NAME)
-	
-$(OBJS_PATH)%.o: %.cpp | $(MAKE_OBJ_DIR) $(DEPS_PATH)
-			@echo "$(CYAN)Compiling $< $(DEF_COLOR)"
-			@$(CC) $(CFLAGS) -MMD -MP -c $< -o $@ 
-			@mv $(basename $@).d $(DEPS_PATH)
 
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(INCS) $(OBJS) -o $(NAME)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 	@echo "$(LIGHT_GREEN)Created $(NAME) executable$(DEF_COLOR)"
+	
+$(OBJS_PATH)%.o: $(SRCS_PATH)%.cpp | $(MAKE_OBJ_DIR) $(DEPS_PATH)
+			@echo "$(CYAN)Compiling $< $(DEF_COLOR)"
+			@$(CC) $(CFLAGS) $(INCS) -MMD -MP -c $< -o $@
+			@mv $(basename $@).d $(DEPS_PATH)
 
 $(MAKE_OBJ_DIR):
 	@echo "$(GREEN)Creating $(NAME) Obj Dir $(DEF_COLOR)"
-	@mkdir -p $(OBJS_PATH)
+	@mkdir -p $(MAKE_OBJ_DIR)
 
 
 $(DEPS_PATH):
