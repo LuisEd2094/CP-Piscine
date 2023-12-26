@@ -55,7 +55,7 @@ $(DEPS_PATH):
 clean: clean_objects
 
 fclean:  clean_objects
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) *.replace
 	@echo "$(GREEN)$(NAME) executable cleaned!$(DEF_COLOR)"
 
 clean_objects:

@@ -64,11 +64,62 @@ void sed(char **argv)
     return;
 }
 
+void run_test(void)
+{
+    std::ifstream in_file;
+    std::string string_to_search = "hola";
+    std::string string_to_replace = "adios";
+    std::string file_name;
+
+    file_name = "empty.txt";
+    in_file.open(file_name);
+    if (in_file.is_open() && in_file.good())
+    {
+        if (in_file.peek() == std::ifstream::traits_type::eof())
+            std::cout << "Error: Empty file" << std::endl;
+        else
+            std::cout << "This should be the empty file, why is it not empty?" << std::endl;
+        in_file.close();
+    }
+
+    file_name = "goodchange.txt";
+    in_file.open(file_name);
+    if (in_file.is_open() && in_file.good())
+    {
+        if (in_file.peek() == std::ifstream::traits_type::eof())
+            std::cout << "Error: Empty file" << std::endl;
+        else
+        {
+            replace(string_to_replace, string_to_search, in_file, file_name);
+            in_file.close();
+        }
+        in_file.close();
+    }
+
+
+    file_name = "nomatchs1.txt";
+    in_file.open(file_name);
+    if (in_file.is_open() && in_file.good())
+    {
+        if (in_file.peek() == std::ifstream::traits_type::eof())
+            std::cout << "Error: Empty file" << std::endl;
+        else
+        {
+            replace(string_to_replace, string_to_search, in_file, file_name);
+            in_file.close();
+        }
+        in_file.close();
+    }
+
+}
+
 int main (int argc, char ** argv)
 {
     if (argc == 4)
         sed(argv);
+    else if (argc == 2 && static_cast<std::string>(argv[1]) == "test")
+        run_test();
     else
-        std::cout << "Wrong usage. run ./sed <filename> <string to search and reaplace> <string to be replaced>" << std::endl;
+        std::cout << "Wrong usage. run ./sed <filename> <target string to be replaced> <string to replace target with>" << std::endl;
     return (0);    
 }

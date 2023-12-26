@@ -21,7 +21,8 @@ class HumanA
 {
     private:
         std::string m_name;
-        Weapon &m_weapon;
+        Weapon      &m_weapon;
+        HumanA(void);
     public:
         HumanA(std::string name, Weapon &weapon);
         ~HumanA(void);
