@@ -1,10 +1,26 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lsoto-do <lsoto-do@student.42barcel>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/12/26 10:55:35 by lsoto-do          #+#    #+#              #
+#    Updated: 2023/12/26 10:55:36 by lsoto-do         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME        = zombieHorde
-CFLAGS      = -Wall -Wextra  -Werror -g -std=c++98 -pedantic
+CFLAGS      = -std=c++98 -pedantic -Wall -Wextra  -Werror -g 
 CC			= c++
 RM          = rm -f
+ZOMBIE_PATH = Zombie/
+SRCS_PATH	= src/
 OBJS_PATH	= obj/
-MAKE_OBJ_DIR	= $(OBJS_PATH)
+MAKE_OBJ_DIR	=	$(OBJS_PATH) $(addprefix $(OBJS_PATH), $(ZOMBIE_PATH)) 
 DEPS_PATH	= deps/
+INCS        = -I./includes
+
 
 #Colors
 
@@ -22,28 +38,33 @@ LIGHT_GREEN = \033[1;92m
 
 ###
 
-SRC         =	main.cpp Zombie.cpp zombieHorde.cpp
+SRC        		=	main.cpp
 
+ZOMBIE			=	Zombie.cpp      zombieHorde.cpp
 
-DEPS		= 	$(addprefix $(DEPS_PATH), $(SRC:.cpp=.d))
+ZOMBIE_FILES 	=	$(addprefix $(ZOMBIE_PATH), $(ZOMBIE))
 
-OBJS        =	$(addprefix $(OBJS_PATH), $(SRC:.cpp=.o)) 
+DEPS			= 	$(addprefix $(DEPS_PATH),	$(SRC:.cpp=.d) $(ZOMBIE:.cpp=.d))
+
+SRC				+=	$(ZOMBIE_FILES)
+
+OBJS 			=	$(addprefix $(OBJS_PATH), $(SRC:.cpp=.o))
 				
 all: $(NAME)
-	
-$(OBJS_PATH)%.o: %.cpp | $(MAKE_OBJ_DIR) $(DEPS_PATH)
-			@echo "$(CYAN)Compiling $< $(DEF_COLOR)"
-			@$(CC) $(CFLAGS) -MMD -MP -c $< -o $@ 
-			@mv $(basename $@).d $(DEPS_PATH)
 
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(INCS) $(OBJS) -o $(NAME)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 	@echo "$(LIGHT_GREEN)Created $(NAME) executable$(DEF_COLOR)"
+	
+$(OBJS_PATH)%.o: $(SRCS_PATH)%.cpp | $(MAKE_OBJ_DIR) $(DEPS_PATH)
+			@echo "$(CYAN)Compiling $< $(DEF_COLOR)"
+			@$(CC) $(CFLAGS) $(INCS) -MMD -MP -c $< -o $@
+			@mv $(basename $@).d $(DEPS_PATH)
 
 $(MAKE_OBJ_DIR):
 	@echo "$(GREEN)Creating $(NAME) Obj Dir $(DEF_COLOR)"
-	@mkdir -p $(OBJS_PATH)
+	@mkdir -p $(MAKE_OBJ_DIR)
 
 
 $(DEPS_PATH):

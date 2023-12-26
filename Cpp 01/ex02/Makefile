@@ -1,5 +1,5 @@
 NAME        = thisIsBrain
-CFLAGS      = -Wall -Wextra  -Werror -g -std=c++98 -pedantic
+CFLAGS      = -std=c++98 -pedantic -Wall -Wextra  -Werror -g 
 CC			= c++
 RM          = rm -f
 OBJS_PATH	= obj/

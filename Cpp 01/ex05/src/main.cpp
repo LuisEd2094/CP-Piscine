@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsoto-do <lsoto-do@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/26 10:55:41 by lsoto-do          #+#    #+#             */
-/*   Updated: 2023/12/26 10:55:45 by lsoto-do         ###   ########.fr       */
+/*   Created: 2023/12/26 10:59:26 by lsoto-do          #+#    #+#             */
+/*   Updated: 2023/12/26 10:59:31 by lsoto-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP
-
+#include "Harl.hpp"
 #include <iostream>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <cerrno>
+#include <string>
 
-class Zombie 
+int main(void)
 {
-    private:
-        std::string m_name;
-    public:
-        Zombie() : m_name("") {};
-        ~Zombie(void);
+    Harl harl;
+    std::string complains[4]  = {
+		"DEBUG",
+		"INFO",
+		"WARNING",
+		"ERROR",
+	};
 
-        void    announce(void);
-        void    setName(std::string name);
-};
+    for (int i = 0; i < 4; i++){
+        std::cout << complains[i] << ": " << std::endl;
+        harl.complain(complains[i]);
+    }
+    return (0);
 
-Zombie* zombieHorde(int N, std::string name);
+}
 
-#endif

@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lsoto-do <lsoto-do@student.42barcel>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/12/26 11:00:18 by lsoto-do          #+#    #+#              #
+#    Updated: 2023/12/26 11:00:19 by lsoto-do         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME        = harlfilter
 CFLAGS      = -g -std=c++98 -pedantic -Wall -Wextra  -Werror  #-Wno-error=implicit-fallthrough
 CC			= c++

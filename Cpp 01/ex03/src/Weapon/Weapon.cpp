@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   Weapon.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsoto-do <lsoto-do@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/26 10:55:41 by lsoto-do          #+#    #+#             */
-/*   Updated: 2023/12/26 10:55:45 by lsoto-do         ###   ########.fr       */
+/*   Created: 2023/12/26 10:57:45 by lsoto-do          #+#    #+#             */
+/*   Updated: 2023/12/26 10:57:51 by lsoto-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP
+#include "Weapon.hpp"
 
-#include <iostream>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <cerrno>
-
-class Zombie 
+Weapon::Weapon(std::string type)
 {
-    private:
-        std::string m_name;
-    public:
-        Zombie() : m_name("") {};
-        ~Zombie(void);
+    m_type = type;
+}
 
-        void    announce(void);
-        void    setName(std::string name);
-};
+Weapon::~Weapon(void)
+{
+}
 
-Zombie* zombieHorde(int N, std::string name);
+void Weapon::setType(std::string type)
+{
+    m_type = type;
+}
 
-#endif
+const std::string& Weapon::getType(void)
+{
+    return m_type;
+}
+

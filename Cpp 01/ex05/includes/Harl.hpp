@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsoto-do <lsoto-do@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/26 10:55:41 by lsoto-do          #+#    #+#             */
-/*   Updated: 2023/12/26 10:55:45 by lsoto-do         ###   ########.fr       */
+/*   Created: 2023/12/26 10:59:12 by lsoto-do          #+#    #+#             */
+/*   Updated: 2023/12/26 10:59:17 by lsoto-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP
+#ifndef HARL_HPP
+# define HARL_HPP
 
-#include <iostream>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <cerrno>
+# include <string>
+# include <iostream>
 
-class Zombie 
+
+class Harl
 {
-    private:
-        std::string m_name;
     public:
-        Zombie() : m_name("") {};
-        ~Zombie(void);
-
-        void    announce(void);
-        void    setName(std::string name);
+        Harl();
+        ~Harl();
+        void complain( std::string level );
+    
+    private:
+        void debug( void );
+        void info( void );
+        void warning( void );
+        void error( void );
 };
 
-Zombie* zombieHorde(int N, std::string name);
-
 #endif
+
