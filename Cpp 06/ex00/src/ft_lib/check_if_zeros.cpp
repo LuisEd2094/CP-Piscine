@@ -9,5 +9,5 @@ bool        check_if_only_zeros(const std::string &str)
         if (*it != '0')
             return (0);
     } 
-	return (1);
+	return (!str.empty());
 }
