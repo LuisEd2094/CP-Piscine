@@ -43,7 +43,7 @@ SRC        		=	main.cpp
 
 SCALAR			=	ScalarConverter.cpp
 
-FT_LIB			=	check_if_zeros.cpp   is_phone_number.cpp  remove_white_spaces.cpp
+FT_LIB			=	check_if_zeros.cpp   is_only_numbers.cpp  remove_white_spaces.cpp
 
 FT_LIB_FILES	=	$(addprefix $(FT_LIB_PATH), $(FT_LIB))
 

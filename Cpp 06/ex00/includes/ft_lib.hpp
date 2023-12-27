@@ -5,7 +5,7 @@
 # include <cstdlib>
 
 std::string remove_white_space(std::string str);
-bool        check_if_only_zeros(std::string &str);
-bool        is_phone_number(const std::string &str);
+bool        check_if_only_zeros(const std::string &str);
+bool        is_only_numbers(const std::string &str);
 
 #endif
