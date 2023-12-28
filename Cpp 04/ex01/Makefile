@@ -1,10 +1,29 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lsoto-do <lsoto-do@student.42barcel>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/12/28 10:17:01 by lsoto-do          #+#    #+#              #
+#    Updated: 2023/12/28 10:17:02 by lsoto-do         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME        = Brain
-CFLAGS      = -g -std=c++98 -pedantic -Wall -Wextra  -Werror
+CFLAGS      = -std=c++98 -pedantic -Wall -Wextra  -Werror -g 
 CC			= c++
 RM          = rm -f
+ANIMAL_PATH = Animal/
+CAT_PATH	= Cat/
+DOG_PATH	= Dog/
+BRAIN_PATH	= Brain/
+SRCS_PATH	= src/
 OBJS_PATH	= obj/
-MAKE_OBJ_DIR	= $(OBJS_PATH)
+MAKE_OBJ_DIR	=	$(OBJS_PATH) $(addprefix $(OBJS_PATH), $(ANIMAL_PATH) $(CAT_PATH) $(DOG_PATH) $(BRAIN_PATH)) 
 DEPS_PATH	= deps/
+INCS        = -I./includes
+
 
 #Colors
 
@@ -22,27 +41,45 @@ LIGHT_GREEN = \033[1;92m
 
 ###
 
-SRC         =	Animal.cpp  Cat.cpp  Dog.cpp  main.cpp Brain.cpp
+SRC        		=	main.cpp
 
-DEPS		= 	$(addprefix $(DEPS_PATH), $(SRC:.cpp=.d))
+ANIMAL			=	Animal.cpp
 
-OBJS        =	$(addprefix $(OBJS_PATH), $(SRC:.cpp=.o)) 
+ANIMAL_FILES 	=	$(addprefix $(ANIMAL_PATH), $(ANIMAL))
+
+CAT				=	Cat.cpp
+
+CAT_FILES 		=	$(addprefix $(CAT_PATH), $(CAT))
+
+DOG				=	Dog.cpp
+
+DOG_FILES 		=	$(addprefix $(DOG_PATH), $(DOG))
+
+BRAIN			=	Brain.cpp
+
+BRAIN_FILES 	=	$(addprefix $(BRAIN_PATH), $(BRAIN))
+
+DEPS			= 	$(addprefix $(DEPS_PATH),	$(SRC:.cpp=.d) $(ANIMAL:.cpp=.d) $(CAT:.cpp=.d) $(DOG:.cpp=.d) $(BRAIN:.cpp=.d))
+
+SRC				+=	$(ANIMAL_FILES) $(CAT_FILES) $(DOG_FILES) $(BRAIN_FILES) 
+
+OBJS 			=	$(addprefix $(OBJS_PATH), $(SRC:.cpp=.o))
 				
 all: $(NAME)
-	
-$(OBJS_PATH)%.o: %.cpp | $(MAKE_OBJ_DIR) $(DEPS_PATH)
-			@echo "$(CYAN)Compiling $< $(DEF_COLOR)"
-			@$(CC) $(CFLAGS) -MMD -MP -c $< -o $@ 
-			@mv $(basename $@).d $(DEPS_PATH)
 
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(INCS) $(OBJS) -o $(NAME)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 	@echo "$(LIGHT_GREEN)Created $(NAME) executable$(DEF_COLOR)"
+	
+$(OBJS_PATH)%.o: $(SRCS_PATH)%.cpp | $(MAKE_OBJ_DIR) $(DEPS_PATH)
+			@echo "$(CYAN)Compiling $< $(DEF_COLOR)"
+			@$(CC) $(CFLAGS) $(INCS) -MMD -MP -c $< -o $@
+			@mv $(basename $@).d $(DEPS_PATH)
 
 $(MAKE_OBJ_DIR):
 	@echo "$(GREEN)Creating $(NAME) Obj Dir $(DEF_COLOR)"
-	@mkdir -p $(OBJS_PATH)
+	@mkdir -p $(MAKE_OBJ_DIR)
 
 
 $(DEPS_PATH):
