@@ -22,11 +22,6 @@ bool check_points(int a[2], int b[2], int c[2], int point[2])
 	Point third(c[0], c[1]);
 	Point to_check(point[0], point[1]);
 
-	/*std::cout << first.getX() << first.getY() << std::endl;
-	std::cout << second.getX() << second.getY() << std::endl;
-	std::cout << third.getX() << third.getY() << std::endl;
-	std::cout << to_check.getX() << to_check.getY() << std::endl;*/
-
 	return bsp(first, second, third, to_check);
 }
 
@@ -42,5 +37,7 @@ int main(void)
 {
 	std::cout << check_points(getArray(0, 0), getArray(4, 0), getArray(2, 4),getArray(1, 1)) << std::endl;
 	std::cout << check_points(getArray(0, 0), getArray(4, 0), getArray(2, 4),getArray(50, 50)) << std::endl;
+	std::cout << check_points(getArray(0, 0), getArray(10, 30), getArray(20 , 0), getArray(10, 15)) << std::endl;
+	std::cout << check_points(getArray(0, 0), getArray(10, 30), getArray(20 , 0), getArray(30, 15)) << std::endl;
 
 }
