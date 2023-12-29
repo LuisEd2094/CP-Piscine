@@ -1,43 +1,23 @@
 #include "ScalarConverter.hpp" 
 
-ScalarConverter::ScalarConverter(void) : 
-    m_dot_pos(0),
-    m_sub_str_int(""),
-    m_str(""),
-    m_has_f(0),
-    m_has_sign(0),
-    m_int(0),
-    m_char(0),
-    m_float(0),
-    m_double(0),
-    m_type(NONE)
+std::size_t ScalarConverter::m_dot_pos = 0;
+std::string ScalarConverter::m_sub_str_int = "";
+std::string ScalarConverter::m_str = "";
+bool ScalarConverter::m_has_f = false;
+bool ScalarConverter::m_has_sign = false;
+int ScalarConverter::m_int = 0;
+unsigned char ScalarConverter::m_char = 0;
+float ScalarConverter::m_float = 0.0f;
+double ScalarConverter::m_double = 0.0;
+e_type ScalarConverter::m_type = NONE;
 
-    {}
-ScalarConverter::ScalarConverter(const ScalarConverter& src): 
-    m_dot_pos(src.m_dot_pos),
-    m_sub_str_int(src.m_sub_str_int),
-    m_str(src.m_str),
-    m_has_f(src.m_has_f),
-    m_has_sign(src.m_has_sign),
-    m_int(src.m_int),
-    m_char(src.m_char),
-    m_float(src.m_float),
-    m_double(src.m_double), 
-    m_type(src.m_type)
-    {}
+ScalarConverter::ScalarConverter(void){}
+ScalarConverter::ScalarConverter(const ScalarConverter& src)
+{
+        (void)src;
+}
 ScalarConverter& ScalarConverter::operator=(const ScalarConverter& rhs) {
-    if (this != &rhs)
-    {
-        this->m_dot_pos = rhs.m_dot_pos;
-        this->m_has_f = rhs.m_has_f;
-        this->m_sub_str_int = rhs.m_sub_str_int;
-        this->m_str = rhs.m_str;
-        this->m_has_sign = rhs.m_has_sign;
-        this->m_int = rhs.m_int;
-        this->m_char = rhs.m_char;
-        this->m_float = rhs.m_float;
-        this->m_double = rhs.m_double;
-    };
+    (void)rhs;
     return (*this);
 }
 
@@ -45,12 +25,12 @@ ScalarConverter::~ScalarConverter() {}
 
 bool ScalarConverter::is_int()
 {
-    std::string str_copy = this->m_sub_str_int;
+    std::string str_copy = m_sub_str_int;
     long int strtol_value = 0;
     char *p_end;
 
-    if (this->m_dot_pos)
-        this->m_sub_str_int = this->m_sub_str_int.substr(0, this->m_sub_str_int.find('.'));
+    if (m_dot_pos)
+        m_sub_str_int = m_sub_str_int.substr(0, m_sub_str_int.find('.'));
     if (check_if_only_zeros(str_copy))
         return (true);
     strtol_value = strtol(str_copy.c_str(), &p_end, 10);
@@ -63,52 +43,52 @@ bool ScalarConverter::is_int()
 
 bool ScalarConverter::is_char()
 {
-    if (this->m_str.length() > 1)
+    if (m_str.length() > 1)
         return (false);
-    return (std::isprint(static_cast<unsigned char>(this->m_str[0])));
+    return (std::isprint(static_cast<unsigned char>(m_str[0])));
 }
 
 bool ScalarConverter::is_double()
 {
-    return (this->m_dot_pos && !(this->m_has_f));
+    return (m_dot_pos && !(m_has_f));
 }
 
 bool ScalarConverter::is_float()
 {
-    return(this->m_has_f && this->m_dot_pos);
+    return(m_has_f && m_dot_pos);
 }
 
 bool ScalarConverter::is_valid_number()
 {
-    std::string str_copy = this->m_str;
+    std::string str_copy = m_str;
     std::ptrdiff_t dot_pos;
 
     for (std::string::iterator it = str_copy.begin(); it < str_copy.end(); it++)
     {
         if (it == str_copy.begin() && (*it == '+' || *it == '-'))
-            this->m_has_sign = 1;
+            m_has_sign = 1;
         else if (*it == '.')
         {
             if (it == str_copy.end() - 1)
                 return (false);
-            else if (!this->m_dot_pos)
+            else if (!m_dot_pos)
             {
                 dot_pos = std::distance(str_copy.begin(), it);
-                if (this->m_has_sign && dot_pos <= 1)
+                if (m_has_sign && dot_pos <= 1)
                     return (false);
                 else if (dot_pos < 1)
                     return (false);
                 else
-                    this->m_dot_pos = dot_pos;
+                    m_dot_pos = dot_pos;
             }
             else
                 return (false);
         }
         else if (it == str_copy.end() - 1 && *it == 'f')
         {
-            if (*it == 'f' && this->m_dot_pos && *(it - 1) != '.')
+            if (*it == 'f' && m_dot_pos && *(it - 1) != '.')
             {
-                this->m_has_f = 1;
+                m_has_f = 1;
                 return (true);
             }
             else
@@ -133,7 +113,7 @@ e_type ScalarConverter::check_type()
     };
 
     for (size_t i = 0; i < sizeof(valid_types) / sizeof(valid_types[0]); ++i) {
-        if ((this->*valid_types[i].f)()) {
+        if ((valid_types[i].f)()) {
             return valid_types[i].type;
         }
     }
@@ -142,15 +122,15 @@ e_type ScalarConverter::check_type()
 
 void ScalarConverter::convert(char *input)
 {
-    this->m_str = static_cast<std::string>(input);
-    this->m_sub_str_int = this->m_str;
+    m_str = static_cast<std::string>(input);
+    m_sub_str_int = m_str;
 
-    if (this->m_str.empty())
+    if (m_str.empty())
         return ;
-    //std::cout << this->is_valid_number(str) << std::endl;
-    if (!this->is_valid_number())
+    //std::cout << is_valid_number(str) << std::endl;
+    if (!is_valid_number())
         return ;
-    switch (this->check_type())
+    switch (check_type())
     {
         case CHAR:
             std::cout << "is char" << std::endl;
@@ -169,15 +149,15 @@ void ScalarConverter::convert(char *input)
 
     }
     
-    if (this->m_dot_pos)
-        this->m_sub_str_int = this->m_sub_str_int.substr(0, this->m_sub_str_int.find('.'));
-    //std::cout << "dot pos" << this->m_dot_pos << std::endl;
-    /*std::cout << this->m_sub_str_int << std::endl;
-    std::cout << this->is_int() << std::endl;
-    std::cout << this->m_int << std::endl;
-    std::cout << this->is_char() << std::endl;
-    std::cout << this->m_char << std::endl;*/
-   // std::cout << this->is_float(str) << std::endl;
+    if (m_dot_pos)
+        m_sub_str_int = m_sub_str_int.substr(0, m_sub_str_int.find('.'));
+    //std::cout << "dot pos" << m_dot_pos << std::endl;
+    /*std::cout << m_sub_str_int << std::endl;
+    std::cout << is_int() << std::endl;
+    std::cout << m_int << std::endl;
+    std::cout << is_char() << std::endl;
+    std::cout << m_char << std::endl;*/
+   // std::cout << is_float(str) << std::endl;
 
 }
 

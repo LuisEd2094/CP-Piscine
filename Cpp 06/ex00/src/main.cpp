@@ -3,13 +3,17 @@
 
 int main(int argc, char *argv[])
 {
-    ScalarConverter converter;
-
     if (argc == 1)
-        std::cout << "Give me something to convert!" << std::endl;
+    {
+        std::cerr << "Give me something to convert!" << std::endl;
+        std::exit(EXIT_FAILURE);
+    }
     else if (argc > 2)
-        std::cout << "Give just ONE thing to convert" << std::endl;
+    {
+        std::cerr << "Give just ONE thing to convert" << std::endl;
+        std::exit(EXIT_FAILURE);
+    }
     else
-        converter.convert(argv[1]);
+        ScalarConverter::convert(argv[1]);
     std::exit(EXIT_SUCCESS);
 }
