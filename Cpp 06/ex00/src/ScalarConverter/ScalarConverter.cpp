@@ -45,6 +45,7 @@ bool ScalarConverter::is_char()
 {
     if (m_str.length() > 1)
         return (false);
+    std::cout << std::isprint(static_cast<unsigned char>(m_str[0])) <<  std::endl;
     return (std::isprint(static_cast<unsigned char>(m_str[0])));
 }
 
@@ -101,6 +102,24 @@ bool ScalarConverter::is_valid_number()
 }
 
 
+bool ScalarConverter::is_literal()
+{
+    std::string literals [] = {
+        "-inff",
+        "+inff", 
+        "nanf",
+        "-inf",
+        "+inf",
+        "nan",
+    };
+    for (size_t i = 0; i < sizeof(literals) / sizeof(literals[0]); ++i)
+    {
+        if (m_str == literals[i])
+            return true;
+    }
+    return (false);
+
+}
 
 
 e_type ScalarConverter::check_type()
@@ -111,13 +130,52 @@ e_type ScalarConverter::check_type()
         {FLOAT, &ScalarConverter::is_float},
         {INT, &ScalarConverter::is_int}
     };
-
+    if (is_literal())
+        return (LITERALS);
+    if (!is_valid_number())
+        return (NONE);
     for (size_t i = 0; i < sizeof(valid_types) / sizeof(valid_types[0]); ++i) {
         if ((valid_types[i].f)()) {
-            return valid_types[i].type;
+            return (valid_types[i].type);
         }
     }
     return (NONE);
+}
+
+void ScalarConverter::print_char()
+{
+    std::cout << "print char" << std::endl;
+}
+
+
+void ScalarConverter::print_int()
+{
+        std::cout << "print int" << std::endl;
+
+}
+void ScalarConverter::print_float()
+{
+        std::cout << "print float" << std::endl;
+
+}
+void ScalarConverter::print_double()
+{    std::cout << "print double" << std::endl;
+}
+
+void ScalarConverter::literal_case()
+{
+    void (*functions[])()= {
+        &ScalarConverter::print_char,
+        &ScalarConverter::print_int,
+        &ScalarConverter::print_float,
+        &ScalarConverter::print_double
+    };
+
+    for (size_t i = 0; i < sizeof(functions) / sizeof(functions[0]); ++i){
+        functions[i]();
+    }
+
+
 }
 
 void ScalarConverter::convert(char *input)
@@ -126,12 +184,16 @@ void ScalarConverter::convert(char *input)
     m_sub_str_int = m_str;
 
     if (m_str.empty())
-        return ;
-    //std::cout << is_valid_number(str) << std::endl;
-    if (!is_valid_number())
-        return ;
+    {
+        std::cerr << "Empty argument" << std::endl;
+        std::exit(EXIT_FAILURE);
+    }
     switch (check_type())
     {
+        case LITERALS:
+            literal_case();
+            std::cout << "is literal" << std::endl;
+            break;
         case CHAR:
             std::cout << "is char" << std::endl;
             break;
@@ -146,18 +208,6 @@ void ScalarConverter::convert(char *input)
             break;
         default:
             std::cout << "error" << std::endl;
-
     }
-    
-    if (m_dot_pos)
-        m_sub_str_int = m_sub_str_int.substr(0, m_sub_str_int.find('.'));
-    //std::cout << "dot pos" << m_dot_pos << std::endl;
-    /*std::cout << m_sub_str_int << std::endl;
-    std::cout << is_int() << std::endl;
-    std::cout << m_int << std::endl;
-    std::cout << is_char() << std::endl;
-    std::cout << m_char << std::endl;*/
-   // std::cout << is_float(str) << std::endl;
-
 }
 

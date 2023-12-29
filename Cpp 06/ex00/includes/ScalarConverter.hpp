@@ -22,7 +22,7 @@ enum e_type {
 
 class ScalarConverter
 {
-    protected:
+    private:
         static std::size_t m_dot_pos;
         static std::string m_sub_str_int ;
         static std::string m_str;
@@ -39,6 +39,15 @@ class ScalarConverter
         static bool is_char();
         static bool is_float();
         static bool is_double();
+        static bool is_literal();
+        static void print_char();
+        static void print_int();
+        static void print_float();
+        static void print_double();
+        static void literal_case();
+
+
+        
         ScalarConverter();
         ScalarConverter(const ScalarConverter & other);
         ScalarConverter& operator=(const ScalarConverter& rhs);
