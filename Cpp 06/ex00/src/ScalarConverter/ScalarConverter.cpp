@@ -3,6 +3,7 @@
 std::size_t ScalarConverter::m_dot_pos = 0;
 std::string ScalarConverter::m_sub_str_int = "";
 std::string ScalarConverter::m_str = "";
+std::string ScalarConverter::m_literal = "";
 bool ScalarConverter::m_has_f = false;
 bool ScalarConverter::m_has_sign = false;
 int ScalarConverter::m_int = 0;
@@ -115,7 +116,10 @@ bool ScalarConverter::is_literal()
     for (size_t i = 0; i < sizeof(literals) / sizeof(literals[0]); ++i)
     {
         if (m_str == literals[i])
+        {
+            m_literal = literals[i];
             return true;
+        }
     }
     return (false);
 
@@ -142,40 +146,35 @@ e_type ScalarConverter::check_type()
     return (NONE);
 }
 
-void ScalarConverter::print_char()
+void ScalarConverter::print_char(std::string str)
 {
-    std::cout << "print char" << std::endl;
+    std::cout << "char: " << str << std::endl;
 }
 
 
-void ScalarConverter::print_int()
+void ScalarConverter::print_int(std::string str)
 {
-        std::cout << "print int" << std::endl;
+    std::cout << "int: " << str << std::endl;
 
 }
-void ScalarConverter::print_float()
+void ScalarConverter::print_float(std::string str)
 {
-        std::cout << "print float" << std::endl;
+    std::cout << "float: " << str<< std::endl;
 
 }
-void ScalarConverter::print_double()
-{    std::cout << "print double" << std::endl;
+void ScalarConverter::print_double(std::string str)
+{    
+    std::cout << "double: " << str << std::endl;
 }
 
 void ScalarConverter::literal_case()
 {
-    void (*functions[])()= {
-        &ScalarConverter::print_char,
-        &ScalarConverter::print_int,
-        &ScalarConverter::print_float,
-        &ScalarConverter::print_double
-    };
+    std::string to_pass;
 
-    for (size_t i = 0; i < sizeof(functions) / sizeof(functions[0]); ++i){
-        functions[i]();
-    }
-
-
+    print_char("imposible");
+    print_int("imposible");
+    print_float((m_str.back() == 'f' && m_str.back() - 1 == 'f') ? m_str : m_str + "f");
+    print_double((m_str.back() == 'f' && m_str.back() - 1 == 'f') ? m_str.substr(0, m_str.size() - 1) : m_str);
 }
 
 void ScalarConverter::convert(char *input)

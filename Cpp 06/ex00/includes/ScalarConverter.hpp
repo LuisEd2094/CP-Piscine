@@ -26,6 +26,7 @@ class ScalarConverter
         static std::size_t m_dot_pos;
         static std::string m_sub_str_int ;
         static std::string m_str;
+        static std::string  m_literal;
         static bool        m_has_f;
         static bool        m_has_sign;
         static int         m_int;
@@ -40,10 +41,12 @@ class ScalarConverter
         static bool is_float();
         static bool is_double();
         static bool is_literal();
-        static void print_char();
-        static void print_int();
-        static void print_float();
-        static void print_double();
+
+
+        static void print_char(std::string str);
+        static void print_int(std::string str);
+        static void print_float(std::string str);
+        static void print_double(std::string str);
         static void literal_case();
 
 
