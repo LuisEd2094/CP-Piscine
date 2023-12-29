@@ -173,8 +173,11 @@ void ScalarConverter::literal_case()
 
     print_char("imposible");
     print_int("imposible");
-    print_float((m_str.back() == 'f' && m_str.back() - 1 == 'f') ? m_str : m_str + "f");
-    print_double((m_str.back() == 'f' && m_str.back() - 1 == 'f') ? m_str.substr(0, m_str.size() - 1) : m_str);
+    print_float((m_str.back() == 'f' && m_str.back() - 1 == 'f') ? \
+                m_str : m_str + "f");
+
+    print_double((m_str.back() == 'f' && m_str.back() - 1 == 'f') ? \
+                m_str.substr(0, m_str.size() - 1) : m_str);
 }
 
 void ScalarConverter::convert(char *input)
