@@ -6,7 +6,7 @@ Data::Data(void) :
     m_name("Default"),
     m_age(0)
 {
-    m_data_total += 1
+    m_data_total += 1;
 }
 Data::Data(const Data& src) :
     m_name(src.m_name),

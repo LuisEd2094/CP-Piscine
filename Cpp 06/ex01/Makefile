@@ -18,7 +18,7 @@ SERIAL_PATH = Serializer/
 DATA_PATH 	= Data/
 SRCS_PATH	= src/
 OBJS_PATH	= obj/
-MAKE_OBJ_DIR	=	$(OBJS_PATH) $(addprefix $(OBJS_PATH), $(SERIAL_PATH)  $(DATA)) 
+MAKE_OBJ_DIR	=	$(OBJS_PATH) $(addprefix $(OBJS_PATH), $(SERIAL_PATH)  $(DATA_PATH)) 
 DEPS_PATH	= deps/
 INCS        = -I./includes
 
@@ -51,7 +51,7 @@ SERIAL_FILES 	=	$(addprefix $(SERIAL_PATH), $(SERIAL))
 
 DEPS			= 	$(addprefix $(DEPS_PATH),	$(SRC:.cpp=.d) $(SERIAL:.cpp=.d) $(DATA:.cpp=.d))
 
-SRC				+=	$(SERIAL_FILES)  $(SERIAL_FILES)
+SRC				+=	$(SERIAL_FILES)  $(DATA_FILES)
 
 OBJS 			=	$(addprefix $(OBJS_PATH), $(SRC:.cpp=.o))
 				

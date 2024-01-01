@@ -1,8 +1,9 @@
 #include "Serializer.hpp" 
 
 Serializer::Serializer(void) {}
-Serializer::Serializer(const Serializer& src) {}
+Serializer::Serializer(const Serializer& src) {(void)src;}
 Serializer& Serializer::operator=(const Serializer& rhs) {
+    (void)rhs;
     return (*this);
 }
 
