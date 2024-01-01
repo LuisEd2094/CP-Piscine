@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lsoto-do <lsoto-do@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/01 10:45:38 by lsoto-do          #+#    #+#             */
+/*   Updated: 2024/01/01 10:45:39 by lsoto-do         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Bureaucrat.hpp" 
 #include "Form.hpp"
 
@@ -72,3 +84,4 @@ std::ostream& operator<<(std::ostream& os, const Bureaucrat& rhs)
 
     return (os);
 }
+
