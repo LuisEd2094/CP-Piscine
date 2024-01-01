@@ -6,18 +6,17 @@
 #    By: lsoto-do <lsoto-do@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/26 10:55:00 by lsoto-do          #+#    #+#              #
-#    Updated: 2023/12/26 10:55:01 by lsoto-do         ###   ########.fr        #
+#    Updated: 2024/01/01 11:34:04 by lsoto-do         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME        = Identifier
+NAME        = Array
 CFLAGS      = -std=c++98 -pedantic -Wall -Wextra  -Werror -g 
 CC			= c++
 RM          = rm -f
-BASE_PATH	= Base/
 SRCS_PATH	= src/
 OBJS_PATH	= obj/
-MAKE_OBJ_DIR	=	$(OBJS_PATH) $(addprefix $(OBJS_PATH), $(BASE_PATH)) 
+MAKE_OBJ_DIR	=	$(OBJS_PATH)
 DEPS_PATH	= deps/
 INCS        = -I./includes
 
@@ -38,17 +37,12 @@ LIGHT_GREEN = \033[1;92m
 
 ###
 
-SRC        		=	main.cpp identify.cpp
+SRC        		=	main.cpp 
 
-BASE			=	A.cpp    B.cpp    Base.cpp C.cpp
-
-BASE_FILES 		=	$(addprefix $(BASE_PATH), $(BASE))
-
-DEPS			= 	$(addprefix $(DEPS_PATH),	$(SRC:.cpp=.d) $(BASE:.cpp=.d))
-
-SRC				+=	$(BASE_FILES)
+DEPS			= 	$(addprefix $(DEPS_PATH), $(SRC:.cpp=.d))
 
 OBJS 			=	$(addprefix $(OBJS_PATH), $(SRC:.cpp=.o))
+
 				
 all: $(NAME)
 

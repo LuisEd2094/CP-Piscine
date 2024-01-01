@@ -19,11 +19,20 @@ void add_one(int &a) {a++;}
 int main()
 {
     int int_array[] = {1, 2, 3, 4, 5};
+    std::string str[] = {
+        "Hola",
+        "Cara", 
+        "de perola"
+    };
     size_t int_length = sizeof(int_array) / sizeof(int_array[0]);
+    size_t str_length = sizeof(str) / sizeof(str[0]);
+
 
     std::cout << "OG int array" << std::endl;
     for (size_t i = 0; i < int_length; ++i)
         std::cout << int_array[i] << std::endl;
+    for (size_t i = 0; i < str_length; ++i)
+        std::cout << str[i] << std::endl;
     std::cout << std::endl;
 
     std::cout << "Calling iter template with add_one function" << std::endl;
@@ -35,4 +44,7 @@ int main()
     for (size_t i = 0; i < int_length; ++i)
         std::cout << int_array[i] << std::endl;
     std::cout << std::endl;
+
+
+    iter(str, str_length, print_element<std::string>);
 }
