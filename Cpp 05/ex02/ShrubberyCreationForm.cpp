@@ -14,10 +14,10 @@
 
 ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) : AForm("ShrubberyCreationForm", 145, 137),  m_target(target) {}
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) : AForm("ShrubberyCreationForm", 145, 137),  _target(target) {}
 
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm & other): AForm(other), m_target(other.m_target) {}
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm & other): AForm(other), _target(other._target) {}
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm & rhs) {
     (void)rhs;
@@ -26,9 +26,9 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 
 void ShrubberyCreationForm::execute(const Bureaucrat & executor) const
 {  
-    this->checkValidExecution(executor);
+    checkValidExecution(executor);
     
-    std::string file = this->m_target + "_shrubbery";
+    std::string file = _target + "_shrubbery";
     const char *file_name = file.c_str();
     std::ofstream output_file(file_name);
 

@@ -24,9 +24,9 @@ class Data
         Data(const Data & other);
         Data& operator=(const Data& rhs);
 
-        std::string m_name;
-        int         m_age;
-        static int  m_data_total;
+        std::string _name;
+        int         _age;
+        static int  _data_total;
 };
 
 #endif

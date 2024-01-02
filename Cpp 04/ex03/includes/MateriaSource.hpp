@@ -30,7 +30,7 @@ class MateriaSource : public IMateriaSource
 	    AMateria* createMateria(const std::string& type);
 
     private:
-        AMateria*   m_materia[4];
+        AMateria*   _materia[4];
 };
 
 #endif

@@ -72,7 +72,7 @@ void pdfTest(void)
     delete src;
 }
 
-void testM_type(void)
+void test_type(void)
 {
     /*
     Ice ice;
@@ -83,16 +83,16 @@ void testM_type(void)
     AMateria* clone = ice3.clone();
 
 
-    std::cout << &ice.m_type << " " << &ice2.m_type << " " << &ice3.m_type << std::endl;
+    std::cout << &ice._type << " " << &ice2._type << " " << &ice3._type << std::endl;
 
     std::cout << ice.getType() << " " << ice2.getType() <<  " " << ice3.getType() << std::endl;
 
-    std::cout << &clone->m_type << std::endl;*/
+    std::cout << &clone->_type << std::endl;*/
 }
 
 int main(void)
 {
     testMateria();
     //pdfTest();
-    //testM_type();
+    //test_type();
 }

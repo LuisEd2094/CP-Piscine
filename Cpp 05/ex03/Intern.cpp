@@ -65,7 +65,7 @@ AForm* Intern::makeForm(const std::string& form, const std::string target)
         &newPresidential
     };
 
-    this->tolower(copy);
+    tolower(copy);
     for (int i = 0; i < 3; i++)
     {
         if (copy == valid_forms[i])

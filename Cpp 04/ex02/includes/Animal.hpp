@@ -18,7 +18,7 @@
 class Animal
 {
     protected:
-        std::string m_type;
+        std::string _type;
         Animal(void);
         Animal(std::string type);
 

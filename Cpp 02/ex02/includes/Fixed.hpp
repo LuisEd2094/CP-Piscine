@@ -60,7 +60,7 @@ class Fixed
     
     private:
         static int const fraction = 8;
-        int m_fixedPoint;
+        int _fixedPoint;
 };
 
 std::ostream& operator<<(std::ostream& os, const Fixed& fixed);

@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRESIDENTIALPARDONFORM_HPP
-# define PRESIDENTIALPARDONFORM_HPP
+#ifndef PRESIDENTIALPARDONFOR_HPP
+# define PRESIDENTIALPARDONFOR_HPP
 
 # include <iostream>
 # include "AForm.hpp"
@@ -20,7 +20,7 @@
 class PresidentialPardonForm : public AForm 
 {
     private:
-        const std::string m_target;
+        const std::string _target;
         PresidentialPardonForm();
     public:
         PresidentialPardonForm(const std::string& target);

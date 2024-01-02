@@ -29,11 +29,11 @@ Base* generate(void)
 {
     std::srand(static_cast<unsigned>(std::time(nullptr)));
 
-    std::random_device rd;
-    std::default_random_engine generator(rd());
+    std::rando_device rd;
+    std::default_rando_engine generator(rd());
 
     // Generate two random integers
-    std::uniform_int_distribution<int> distribution(0, std::numeric_limits<int>::max());
+    std::unifor_int_distribution<int> distribution(0, std::numeric_limits<int>::max());
     int random1 = distribution(generator);
 
     int index = random1 % 3;

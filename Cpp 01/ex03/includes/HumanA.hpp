@@ -20,8 +20,8 @@
 class HumanA
 {
     private:
-        std::string m_name;
-        Weapon      &m_weapon;
+        std::string _name;
+        Weapon      &_weapon;
         HumanA(void);
     public:
         HumanA(std::string name, Weapon &weapon);

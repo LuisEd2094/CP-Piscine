@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ROBOTOMYREQUESTFORM_HPP
-# define ROBOTOMYREQUESTFORM_HPP
+#ifndef ROBOTOMYREQUESTFOR_HPP
+# define ROBOTOMYREQUESTFOR_HPP
 
 # include <iostream>
 # include <cstdlib>
@@ -22,7 +22,7 @@
 class RobotomyRequestForm : public AForm 
 {
     private:
-        const std::string m_target;
+        const std::string _target;
         RobotomyRequestForm();
     public:
         RobotomyRequestForm(const std::string& target);

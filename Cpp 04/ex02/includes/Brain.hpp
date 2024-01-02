@@ -26,7 +26,7 @@ class Brain
 
         const std::string& getIdea(int index) const;
     private:
-        std::string m_ideas[100];
+        std::string _ideas[100];
 };
 
 #endif

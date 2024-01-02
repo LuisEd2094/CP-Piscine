@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHRUBBERYCREATIONFORM_HPP
-# define SHRUBBERYCREATIONFORM_HPP
+#ifndef SHRUBBERYCREATIONFOR_HPP
+# define SHRUBBERYCREATIONFOR_HPP
 
 # include <iostream>
 # include <fstream>
@@ -22,7 +22,7 @@
 class ShrubberyCreationForm : public AForm 
 {
     private:
-        const std::string m_target;
+        const std::string _target;
         ShrubberyCreationForm();
     public:
         ShrubberyCreationForm(const std::string& target);

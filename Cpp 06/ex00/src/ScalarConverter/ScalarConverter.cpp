@@ -12,17 +12,17 @@
 
 #include "ScalarConverter.hpp" 
 
-std::size_t ScalarConverter::m_dot_pos = 0;
-std::string ScalarConverter::m_sub_str_int = "";
-std::string ScalarConverter::m_str = "";
-std::string ScalarConverter::m_literal = "";
-bool ScalarConverter::m_has_f = false;
-bool ScalarConverter::m_has_sign = false;
-int ScalarConverter::m_int = 0;
-unsigned char ScalarConverter::m_char = 0;
-float ScalarConverter::m_float = 0.0f;
-double ScalarConverter::m_double = 0.0;
-e_type ScalarConverter::m_type = NONE;
+std::size_t ScalarConverter::_dot_pos = 0;
+std::string ScalarConverter::_sub_str_int = "";
+std::string ScalarConverter::_str = "";
+std::string ScalarConverter::_literal = "";
+bool ScalarConverter::_has_f = false;
+bool ScalarConverter::_has_sign = false;
+int ScalarConverter::_int = 0;
+unsigned char ScalarConverter::_char = 0;
+float ScalarConverter::_float = 0.0f;
+double ScalarConverter::_double = 0.0;
+e_type ScalarConverter::_type = NONE;
 
 ScalarConverter::ScalarConverter(void){}
 ScalarConverter::ScalarConverter(const ScalarConverter& src)
@@ -38,12 +38,12 @@ ScalarConverter::~ScalarConverter() {}
 
 bool ScalarConverter::is_int()
 {
-    std::string str_copy = m_sub_str_int;
+    std::string str_copy = _sub_str_int;
     long int strtol_value = 0;
     char *p_end;
 
-    if (m_dot_pos)
-        m_sub_str_int = m_sub_str_int.substr(0, m_sub_str_int.find('.'));
+    if (_dot_pos)
+        _sub_str_int = _sub_str_int.substr(0, _sub_str_int.find('.'));
     if (check_if_only_zeros(str_copy))
         return (true);
     strtol_value = strtol(str_copy.c_str(), &p_end, 10);
@@ -56,53 +56,53 @@ bool ScalarConverter::is_int()
 
 bool ScalarConverter::is_char()
 {
-    if (m_str.length() > 1)
+    if (_str.length() > 1)
         return (false);
-    std::cout << std::isprint(static_cast<unsigned char>(m_str[0])) <<  std::endl;
-    return (std::isprint(static_cast<unsigned char>(m_str[0])));
+    std::cout << std::isprint(static_cast<unsigned char>(_str[0])) <<  std::endl;
+    return (std::isprint(static_cast<unsigned char>(_str[0])));
 }
 
 bool ScalarConverter::is_double()
 {
-    return (m_dot_pos && !(m_has_f));
+    return (_dot_pos && !(_has_f));
 }
 
 bool ScalarConverter::is_float()
 {
-    return(m_has_f && m_dot_pos);
+    return(_has_f && _dot_pos);
 }
 
 bool ScalarConverter::is_valid_number()
 {
-    std::string str_copy = m_str;
+    std::string str_copy = _str;
     std::ptrdiff_t dot_pos;
 
     for (std::string::iterator it = str_copy.begin(); it < str_copy.end(); it++)
     {
         if (it == str_copy.begin() && (*it == '+' || *it == '-'))
-            m_has_sign = 1;
+            _has_sign = 1;
         else if (*it == '.')
         {
             if (it == str_copy.end() - 1)
                 return (false);
-            else if (!m_dot_pos)
+            else if (!_dot_pos)
             {
                 dot_pos = std::distance(str_copy.begin(), it);
-                if (m_has_sign && dot_pos <= 1)
+                if (_has_sign && dot_pos <= 1)
                     return (false);
                 else if (dot_pos < 1)
                     return (false);
                 else
-                    m_dot_pos = dot_pos;
+                    _dot_pos = dot_pos;
             }
             else
                 return (false);
         }
         else if (it == str_copy.end() - 1 && *it == 'f')
         {
-            if (*it == 'f' && m_dot_pos && *(it - 1) != '.')
+            if (*it == 'f' && _dot_pos && *(it - 1) != '.')
             {
-                m_has_f = 1;
+                _has_f = 1;
                 return (true);
             }
             else
@@ -127,9 +127,9 @@ bool ScalarConverter::is_literal()
     };
     for (size_t i = 0; i < sizeof(literals) / sizeof(literals[0]); ++i)
     {
-        if (m_str == literals[i])
+        if (_str == literals[i])
         {
-            m_literal = literals[i];
+            _literal = literals[i];
             return true;
         }
     }
@@ -185,19 +185,19 @@ void ScalarConverter::literal_case()
 
     print_char("imposible");
     print_int("imposible");
-    print_float((m_str.back() == 'f' && m_str.back() - 1 == 'f') ? \
-                m_str : m_str + "f");
+    print_float((_str.back() == 'f' && _str.back() - 1 == 'f') ? \
+                _str : _str + "f");
 
-    print_double((m_str.back() == 'f' && m_str.back() - 1 == 'f') ? \
-                m_str.substr(0, m_str.size() - 1) : m_str);
+    print_double((_str.back() == 'f' && _str.back() - 1 == 'f') ? \
+                _str.substr(0, _str.size() - 1) : _str);
 }
 
 void ScalarConverter::convert(char *input)
 {
-    m_str = static_cast<std::string>(input);
-    m_sub_str_int = m_str;
+    _str = static_cast<std::string>(input);
+    _sub_str_int = _str;
 
-    if (m_str.empty())
+    if (_str.empty())
     {
         std::cerr << "Empty argument" << std::endl;
         std::exit(EXIT_FAILURE);

@@ -24,7 +24,7 @@ Brain::Brain(void)
         "I am",
     };
     for (int i = 0; i < 100; i++)
-        this->m_ideas[i] = examples[rand() % (sizeof(examples) / sizeof(examples[0]))];
+        _ideas[i] = examples[rand() % (sizeof(examples) / sizeof(examples[0]))];
     std::cout << "Brain(void) called" << std::endl;
 }
 
@@ -33,7 +33,7 @@ Brain& Brain::operator=(const Brain& rhs)
 	if (this != &rhs)
 	{
 		for (int i = 0; i < 100; i++)
-			this->m_ideas[i] = rhs.m_ideas[i];
+			_ideas[i] = rhs._ideas[i];
 	}
     std::cout << "Brain = operator called" << std::endl;
 	return (*this);
@@ -54,7 +54,7 @@ Brain::~Brain(void)
 const std::string& Brain::getIdea(int index) const
 {
     if (index < 100 && index >= 0)
-        return (this->m_ideas[index]);
+        return (_ideas[index]);
     else
     {
         std::cout << "Invalid index, provide a 0-99 index" << std::endl;

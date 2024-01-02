@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FORM_HPP
-# define FORM_HPP
+#ifndef FOR_HPP
+# define FOR_HPP
 
 # include <iostream>
 # include "Bureaucrat.hpp"
@@ -53,10 +53,10 @@ class Form
                 }
         };
     private:
-        const std::string m_name;
-        bool m_is_signed;
-        const int m_grade_to_sign;
-        const int m_grade_to_execute;
+        const std::string _name;
+        bool _is_signed;
+        const int _grade_to_sign;
+        const int _grade_to_execute;
         void checkValidGrade(int grade);
 };
 

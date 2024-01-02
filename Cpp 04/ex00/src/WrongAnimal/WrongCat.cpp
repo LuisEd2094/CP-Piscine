@@ -27,18 +27,18 @@ WrongCat::WrongCat(std::string type)
 WrongCat::WrongCat(const WrongCat& other)
 	: WrongAnimal(other)
 {
-	std::cout << "WrongCat copy constructor called on " << other.m_type << std::endl;
+	std::cout << "WrongCat copy constructor called on " << other._type << std::endl;
 }
 
 WrongCat& WrongCat::operator=(const WrongCat& rhs)
 {
-	this->m_type = rhs.m_type;
+	_type = rhs._type;
 	return *this;
 }
 
 WrongCat::~WrongCat(void)
 {
-	std::cout << "WrongCat destructor called for " << this->m_type << std::endl;
+	std::cout << "WrongCat destructor called for " << _type << std::endl;
 }
 
 void WrongCat::makeSound(void) const

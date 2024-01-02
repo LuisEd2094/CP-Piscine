@@ -22,7 +22,7 @@ Cure& Cure::operator=(const Cure& rhs)
 {
     if (this != &rhs)
     {
-        this->m_type = rhs.m_type;
+        _type = rhs._type;
     } 
     return (*this);
 }

@@ -27,18 +27,18 @@ Cat::Cat(std::string type)
 Cat::Cat(const Cat& other)
 	: Animal(other)
 {
-	std::cout << "Cat copy constructor called on " << other.m_type << std::endl;
+	std::cout << "Cat copy constructor called on " << other._type << std::endl;
 }
 
 Cat& Cat::operator=(const Cat& rhs)
 {
-	this->m_type = rhs.m_type;
+	_type = rhs._type;
 	return *this;
 }
 
 Cat::~Cat(void)
 {
-	std::cout << "Cat destructor called for " << this->m_type << std::endl;
+	std::cout << "Cat destructor called for " << _type << std::endl;
 }
 
 void Cat::makeSound(void) const

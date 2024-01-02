@@ -16,11 +16,11 @@ CC			= c++
 RM          = rm -f
 AMATERIA_PATH = AMateria/
 CHARACTER_PATH	= Character/
-M_SOURCE_PATH	= MateriaSource/
+_SOURCE_PATH	= MateriaSource/
 SPELLS_PATH	= Spells/
 SRCS_PATH	= src/
 OBJS_PATH	= obj/
-MAKE_OBJ_DIR	=	$(OBJS_PATH) $(addprefix $(OBJS_PATH), $(AMATERIA_PATH) $(CHARACTER_PATH) $(M_SOURCE_PATH) $(SPELLS_PATH)) 
+MAKE_OBJ_DIR	=	$(OBJS_PATH) $(addprefix $(OBJS_PATH), $(AMATERIA_PATH) $(CHARACTER_PATH) $(_SOURCE_PATH) $(SPELLS_PATH)) 
 DEPS_PATH	= deps/
 INCS        = -I./includes
 
@@ -51,17 +51,17 @@ CHARACTER		=	Character.cpp
 
 CHARACTER_FILES =	$(addprefix $(CHARACTER_PATH), $(CHARACTER))
 
-M_SOURCE		=	MateriaSource.cpp
+_SOURCE		=	MateriaSource.cpp
 
-M_SOURCE_FILES 	=	$(addprefix $(M_SOURCE_PATH), $(M_SOURCE))
+_SOURCE_FILES 	=	$(addprefix $(_SOURCE_PATH), $(_SOURCE))
 
 SPELLS			=	Cure.cpp Ice.cpp
 
 SPELLS_FILES 	=	$(addprefix $(SPELLS_PATH), $(SPELLS))
 
-DEPS			= 	$(addprefix $(DEPS_PATH),	$(SRC:.cpp=.d) $(AMATERIA:.cpp=.d) $(CHARACTER:.cpp=.d) $(M_SOURCE:.cpp=.d) $(SPELLS:.cpp=.d))
+DEPS			= 	$(addprefix $(DEPS_PATH),	$(SRC:.cpp=.d) $(AMATERIA:.cpp=.d) $(CHARACTER:.cpp=.d) $(_SOURCE:.cpp=.d) $(SPELLS:.cpp=.d))
 
-SRC				+=	$(AMATERIA_FILES) $(CHARACTER_FILES) $(M_SOURCE_FILES) $(SPELLS_FILES) 
+SRC				+=	$(AMATERIA_FILES) $(CHARACTER_FILES) $(_SOURCE_FILES) $(SPELLS_FILES) 
 
 OBJS 			=	$(addprefix $(OBJS_PATH), $(SRC:.cpp=.o))
 				

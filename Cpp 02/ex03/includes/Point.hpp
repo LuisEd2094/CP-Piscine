@@ -28,8 +28,8 @@ class Point
         Fixed const getY(void) const;
     
     private:
-        Fixed const m_x;
-        Fixed const m_y;
+        Fixed const _x;
+        Fixed const _y;
 
 };
 

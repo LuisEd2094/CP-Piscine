@@ -18,7 +18,7 @@
 class WrongAnimal
 {
 protected:
-    std::string m_type;
+    std::string _type;
 
 public:
     WrongAnimal(void);

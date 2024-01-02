@@ -12,7 +12,7 @@
 
 #include "Ice.hpp"
 
-std::string Ice::m_type = "ice";
+std::string Ice::_type = "ice";
 
 Ice::Ice(void) : AMateria("ice") {}
 Ice::~Ice(void){}
@@ -23,7 +23,7 @@ Ice& Ice::operator=(const Ice& rhs)
 {
     if (this != &rhs)
     {
-        this->m_type = rhs.m_type;
+        _type = rhs._type;
     } 
     return (*this);
 }

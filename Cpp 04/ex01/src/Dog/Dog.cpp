@@ -13,13 +13,13 @@
 #include "Dog.hpp"
 
 Dog::Dog(void)
-	: Animal("Dog"), m_brain(new Brain())
+	: Animal("Dog"), _brain(new Brain())
 {
 	std::cout << "Dog(void) constructor called" << std::endl;
 }
 
 Dog::Dog(std::string type)
-	: Animal(type), m_brain(new Brain())
+	: Animal(type), _brain(new Brain())
 {
 	std::cout << "Dog(\"" << type << "\") constructor called" << std::endl;
 }
@@ -27,26 +27,26 @@ Dog::Dog(std::string type)
 Dog::Dog(const Dog& other)
 	: Animal(other)
 {
-	std::cout << "Dog copy constructor called on " << other.m_type << std::endl;
+	std::cout << "Dog copy constructor called on " << other._type << std::endl;
 }
 
 Dog& Dog::operator=(const Dog& rhs)
 {
-	this->m_brain = rhs.m_brain;
-	this->m_type = rhs.m_type;
+	_brain = rhs._brain;
+	_type = rhs._type;
 	std::cout << "Dog = operator called" << std::endl;
 	return (*this);
 }
 
 Dog::~Dog(void)
 {
-	delete m_brain;
-	std::cout << "Dog destructor called for " << this->m_type << std::endl;
+	delete _brain;
+	std::cout << "Dog destructor called for " << _type << std::endl;
 }
 
 Brain* Dog::getBrain() const
 {
-	return (this->m_brain);
+	return (_brain);
 }
 
 void Dog::makeSound(void) const

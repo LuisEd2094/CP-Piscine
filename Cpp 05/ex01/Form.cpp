@@ -16,18 +16,18 @@
 //Constructor and Deconstructor
 
 Form::Form()
-    : m_name("Default"), 
-    m_is_signed(false), 
-    m_grade_to_sign(1), 
-    m_grade_to_execute(1)
+    : _name("Default"), 
+    _is_signed(false), 
+    _grade_to_sign(1), 
+    _grade_to_execute(1)
     {}
 Form::~Form() {}
 
 Form::Form(const Form & other)
-    : m_name(other.m_name),
-    m_is_signed(other.m_grade_to_sign),
-    m_grade_to_sign(other.m_grade_to_sign),
-    m_grade_to_execute(other.m_grade_to_execute)
+    : _name(other._name),
+    _is_signed(other._grade_to_sign),
+    _grade_to_sign(other._grade_to_sign),
+    _grade_to_execute(other._grade_to_execute)
     {}
 
 Form& Form::operator=(const Form & rhs) {
@@ -36,48 +36,48 @@ Form& Form::operator=(const Form & rhs) {
 }
 
 Form::Form(std::string name, const int grade_to_sign, const int grade_to_execute)
-    : m_name(name),
-    m_is_signed(false),
-    m_grade_to_sign(grade_to_sign),
-    m_grade_to_execute(grade_to_execute)
+    : _name(name),
+    _is_signed(false),
+    _grade_to_sign(grade_to_sign),
+    _grade_to_execute(grade_to_execute)
 {
-    Form::checkValidGrade(this->m_grade_to_execute);
-    Form::checkValidGrade(this->m_grade_to_sign);
+    Form::checkValidGrade(_grade_to_execute);
+    Form::checkValidGrade(_grade_to_sign);
 }
 
 //Getters
 
 std::string Form::getName() const
 {
-    return (this->m_name);
+    return (_name);
 }
 bool Form::getIsSigned() const
 {
-    return (this->m_is_signed);
+    return (_is_signed);
 }
 int Form::getGradeToSign() const
 {
-    return (this->m_grade_to_sign);
+    return (_grade_to_sign);
 }
 int Form::getGradeToExecute() const
 {
-    return (this->m_grade_to_execute);
+    return (_grade_to_execute);
 }
 
 /// Signing operations
 
 bool Form::beSigned(const Bureaucrat& signee)
 {
-    if (this->m_is_signed)
+    if (_is_signed)
     {
-        std::cout << this->m_name << " form is already signed!" << std::endl;
+        std::cout << _name << " form is already signed!" << std::endl;
         return  (false);
     }
-    else if (this->m_grade_to_sign < signee.getGrade())
+    else if (_grade_to_sign < signee.getGrade())
         throw Form::GradeTooLowException();
     else
     {
-        this->m_is_signed = true;
+        _is_signed = true;
         return (true);
     }
 }

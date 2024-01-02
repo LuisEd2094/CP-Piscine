@@ -19,24 +19,24 @@
 
 int main()
 {
-    Base* random_1 = generate(); 
-    Base* random_2 = generate();
-    Base* random_3 = generate();
+    Base* rando_1 = generate(); 
+    Base* rando_2 = generate();
+    Base* rando_3 = generate();
     Base* base = new Base;
 
-    identify(random_1);
-    identify(random_2);
-    identify(random_3);
+    identify(rando_1);
+    identify(rando_2);
+    identify(rando_3);
     identify(base);
 
-    identify(*random_1);
-    identify(*random_2);
-    identify(*random_3);
+    identify(*rando_1);
+    identify(*rando_2);
+    identify(*rando_3);
     identify(*base);
 
-    delete random_1;
-    delete random_2;
-    delete random_3;
+    delete rando_1;
+    delete rando_2;
+    delete rando_3;
     delete base;
 
 

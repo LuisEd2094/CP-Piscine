@@ -19,7 +19,7 @@
 class AMateria
 {
     protected:
-        std::string m_type;
+        std::string _type;
 
     public:
         AMateria(void);

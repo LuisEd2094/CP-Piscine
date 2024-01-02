@@ -2,7 +2,7 @@
 
 PhoneBook::PhoneBook(void)
 {
-    this->index = 0;
+    index = 0;
 }
 
 PhoneBook::~PhoneBook(void)
@@ -38,13 +38,13 @@ int PhoneBook::get_index_to_replace(void)
     int check_index; 
 
     std::cout << "You have reached the book limit" << std::endl;
-    this->print_ui();
+    print_ui();
     while (input == "")
     {
         std::cout << "Select an index for the contact you want to replace" << std::endl;
         get_new_input(input);
         if (std::cin.eof() == 1)
-            this->exit_program();
+            exit_program();
         if (check_if_only_zeros(input))
             contact_index = 0;
         else
@@ -52,11 +52,11 @@ int PhoneBook::get_index_to_replace(void)
         if (contact_index > 0 && contact_index  < 9)
         {
             input = "";
-            std::cout << "You are about to remove" << this->contacts[contact_index].get_first_name() << std::endl;
+            std::cout << "You are about to remove" << contacts[contact_index].get_first_name() << std::endl;
             std::cout << "Enter the same index to confirm" << std::endl;
             get_new_input(input);
             if (std::cin.eof() == 1)
-                this->exit_program();
+                exit_program();
             check_index = std::atoi(input.c_str());
             if (check_index == contact_index)
                 break;
@@ -71,17 +71,17 @@ void PhoneBook::add(void)
     Contact new_contact;
     int contact_index;
 
-    if (this->index == 8)
+    if (index == 8)
     {
-        contact_index = this->get_index_to_replace();
+        contact_index = get_index_to_replace();
     }
     else
-        contact_index = this->index;
+        contact_index = index;
     new_contact.create();
-    this->contacts[contact_index] = new_contact;
+    contacts[contact_index] = new_contact;
     std::cout << new_contact.get_first_name() << " added to PhoneBook!" << std::endl;
-    if (this->index < 8)
-        this->index++;
+    if (index < 8)
+        index++;
 }
 
 std::string PhoneBook::get_spaces(int size)
@@ -119,14 +119,14 @@ void PhoneBook::print_ui(void)
     Contact contact;
     std::string str;
 
-    if (!this->contacts)
+    if (!contacts)
         return;
     std::cout << " ___________________________________________ " << std::endl;
 	std::cout << "|     Index|First Name| Last Name|  Nickname|" << std::endl;
 	std::cout << "|----------|----------|----------|----------|" << std::endl;
-    while (i < this->index)
+    while (i < index)
     {
-        contact = this->contacts[i];
+        contact = contacts[i];
         std::cout << "|" << get_spaces(9) << i + 1;
         print_formatted_value(contact.get_first_name());
         print_formatted_value(contact.get_last_name());
@@ -143,22 +143,22 @@ void    PhoneBook::search(void)
     std::string str;
     int index;
 
-    if (this->index == 0)
+    if (index == 0)
     {
         std::cout << "Phonebook is empty!" << std::endl;
         return; 
     }
     while (1)
     {
-        this->print_ui();
+        print_ui();
         std::cout << "Select a contact index: ";
         get_new_input(str);
 		if (std::cin.eof() == 1)
-			this->exit_program();
+			exit_program();
         index = atoi(str.c_str()) - 1;
-        if (index >= 0 && index < this->index)
+        if (index >= 0 && index < index)
         {
-            this->contacts[index].print_info();
+            contacts[index].print_info();
             break;
         }
     }

@@ -12,12 +12,12 @@
 
 #include "Bureaucrat.hpp" 
 
-Bureaucrat::Bureaucrat() : m_name("default"), m_grade(150){}
+Bureaucrat::Bureaucrat() : _name("default"), _grade(150){}
 Bureaucrat::~Bureaucrat() {}
-Bureaucrat::Bureaucrat(std::string name, int grade) : m_name(name)
+Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name)
 {
     if (grade > 0 && grade <= 150)
-        this->m_grade = grade;
+        _grade = grade;
     else
     {
         if (grade <= 0)
@@ -27,37 +27,37 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : m_name(name)
     }
 
 }
-Bureaucrat::Bureaucrat(const Bureaucrat & other) : m_name(other.m_name), m_grade(other.m_grade) {}
+Bureaucrat::Bureaucrat(const Bureaucrat & other) : _name(other._name), _grade(other._grade) {}
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat & rhs) {
     if (this != &rhs)
     {
-        this->m_grade = rhs.m_grade;
+        _grade = rhs._grade;
     }
     return (*this);
 }
 
 void Bureaucrat::incrementGrade()
 {
-    if (this->m_grade <= 1)
+    if (_grade <= 1)
         throw Bureaucrat::GradeTooHighException();
     else 
-        this->m_grade--;
+        _grade--;
 }
 
 void Bureaucrat::decrementGrade()
 {
-    if (this->m_grade >= 150)
+    if (_grade >= 150)
         throw Bureaucrat::GradeTooLowException();
     else 
-        this->m_grade++;
+        _grade++;
 }
 
 std::string Bureaucrat::getName() const{
-    return (this->m_name);
+    return (_name);
 }
 
 int Bureaucrat::getGrade() const{
-    return (this->m_grade);
+    return (_grade);
 }
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& rhs)

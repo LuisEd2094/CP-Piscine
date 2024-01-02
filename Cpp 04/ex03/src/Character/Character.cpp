@@ -14,27 +14,27 @@
 #include "AMateria.hpp"
 
 Character::Character(void) 
-	: m_name("Default")
+	: _name("Default")
 {
 	for (int i = 0; i < 4; i++)
-		this->m_inventory[i] = NULL;
+		_inventory[i] = NULL;
 }
 
 Character::Character(const std::string& name)
-	: m_name(name)
+	: _name(name)
 {
 	for (int i = 0; i < 4; i++)
-		this->m_inventory[i] = NULL;
+		_inventory[i] = NULL;
 }
 
 Character::Character(const Character& other)
-	: m_name(other.m_name)
+	: _name(other._name)
 {
 	for (int i = 0; i < 4; i++)
 	{
-		if (this->m_inventory[i])
-			delete this->m_inventory[i];
-		this->m_inventory[i] = (other.m_inventory[i]) ? other.m_inventory[i]->clone() : NULL;
+		if (_inventory[i])
+			delete _inventory[i];
+		_inventory[i] = (other._inventory[i]) ? other._inventory[i]->clone() : NULL;
 	}
 }
 
@@ -42,12 +42,12 @@ Character& Character::operator=(const Character& rhs)
 {
     if (this != &rhs)
     {
-        this->m_name = rhs.m_name;
+        _name = rhs._name;
         for (int i = 0; i < 4; i++)
 		{
-				if (this->m_inventory[i])
-					delete this->m_inventory[i];
-				this->m_inventory[i] = (rhs.m_inventory[i]) ? rhs.m_inventory[i]->clone() : NULL;
+				if (_inventory[i])
+					delete _inventory[i];
+				_inventory[i] = (rhs._inventory[i]) ? rhs._inventory[i]->clone() : NULL;
 		}
     }
     return *this;
@@ -57,10 +57,10 @@ Character::~Character(void)
 {
         for (int i = 0; i < 4; i++)
 		{
-			if (this->m_inventory[i])
+			if (_inventory[i])
 			{
-				delete this->m_inventory[i];
-				this->m_inventory[i] = NULL;
+				delete _inventory[i];
+				_inventory[i] = NULL;
 			}
 		}
 
@@ -68,7 +68,7 @@ Character::~Character(void)
 
 std::string const & Character::getName(void) const
 {
-	return (this->m_name);
+	return (_name);
 }
 
 void Character::equip(AMateria* m)
@@ -77,9 +77,9 @@ void Character::equip(AMateria* m)
 	{
 		for (int i = 0; i < 4; i++)
 		{
-			if (!this->m_inventory[i])
+			if (!_inventory[i])
 			{
-				this->m_inventory[i] = m;
+				_inventory[i] = m;
 				break;
 			}
 		}
@@ -88,13 +88,13 @@ void Character::equip(AMateria* m)
 
 void Character::unequip(int idx)
 {
-	if (this->m_inventory[idx])
-		this->m_inventory[idx] = NULL;
+	if (_inventory[idx])
+		_inventory[idx] = NULL;
 }
 
 
 void Character::use(int idx, ICharacter& target)
 {
-	if (this->m_inventory[idx])
-		this->m_inventory[idx]->use(target);
+	if (_inventory[idx])
+		_inventory[idx]->use(target);
 }

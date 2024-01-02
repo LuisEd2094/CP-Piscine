@@ -14,10 +14,10 @@
 
 RobotomyRequestForm::~RobotomyRequestForm() {}
 
-RobotomyRequestForm::RobotomyRequestForm(const std::string& target) : AForm("RobotomyRequestForm", 72, 45),  m_target(target) {}
+RobotomyRequestForm::RobotomyRequestForm(const std::string& target) : AForm("RobotomyRequestForm", 72, 45),  _target(target) {}
 
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm & other): AForm(other), m_target(other.m_target) {}
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm & other): AForm(other), _target(other._target) {}
 
 RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm & rhs) {
     (void)rhs;
@@ -26,19 +26,19 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm & 
 
 void RobotomyRequestForm::execute(const Bureaucrat & executor) const
 {   
-    this->checkValidExecution(executor);
+    checkValidExecution(executor);
     
     std::srand(std::time(0));
-    int random_value = std::rand();
+    int rando_value = std::rand();
 
     std::cout << "** DRILLING NOISES **" << std::endl;
 
 
-    if (random_value % 2 == 0) 
+    if (rando_value % 2 == 0) 
     {
-        std::cout << this->m_target << " has been robotomized successfully" << std::endl;
+        std::cout << _target << " has been robotomized successfully" << std::endl;
     } else {
         
-        std::cout << this->m_target << " was not robotomized!" << std::endl;
+        std::cout << _target << " was not robotomized!" << std::endl;
     }
 }

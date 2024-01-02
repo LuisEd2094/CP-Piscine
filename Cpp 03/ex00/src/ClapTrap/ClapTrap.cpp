@@ -13,13 +13,13 @@
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap(void) 
-	: m_name("Default"), m_hp(10), m_energy(10),  m_dmg(0)
+	: _name("Default"), _hp(10), _energy(10),  _dmg(0)
 {
 	std::cout << "Default constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name) 
-	: m_name(name), m_hp(10), m_energy(10),  m_dmg(0)
+	: _name(name), _hp(10), _energy(10),  _dmg(0)
 {
 	std::cout << "Constructor with name called, created " << name << std::endl;
 }
@@ -35,31 +35,31 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& toCopy)
 {
 	if (this != &toCopy)
 	{
-		this->m_name = toCopy.m_name;
-		this->m_hp = toCopy.m_hp;
-		this->m_energy = toCopy.m_energy;
-		this->m_dmg = toCopy.m_dmg;
+		_name = toCopy._name;
+		_hp = toCopy._hp;
+		_energy = toCopy._energy;
+		_dmg = toCopy._dmg;
 	}
 	return (*this);
 }
 
 ClapTrap::~ClapTrap(void)
 {
-	std::cout << "Destructor called on " << this->m_name << std::endl;
+	std::cout << "Destructor called on " << _name << std::endl;
 }
 
 bool	ClapTrap::canTakeAction(void)
 {
 	bool canTake = 1;
 
-	if (this->m_energy <= 0 || this->m_hp <= 0)
+	if (_energy <= 0 || _hp <= 0)
 	{
 		canTake = 0;
-		if (this->m_energy <= 0 && this->m_hp <= 0)
+		if (_energy <= 0 && _hp <= 0)
 			std::cout << " is out of energy AND he is dead! ";
-		else if (this->m_energy <= 0)
+		else if (_energy <= 0)
 			std::cout << " is out of energy! ";
-		else if (this->m_hp <= 0)
+		else if (_hp <= 0)
 			std::cout << " is out of hp! " ;
 	}
 	return (canTake);
@@ -68,38 +68,38 @@ bool	ClapTrap::canTakeAction(void)
 
 void    ClapTrap::attack(std::string const& target)
 {
-	std::cout << "ClapTrap " << this->m_name;
+	std::cout << "ClapTrap " << _name;
 	if (!canTakeAction())
 		std::cout << "He can't attack!" << std::endl;
 	else
 	{
-		this->m_energy -= 1;
-		std::cout << " attacks " << target << ", causing " << this->m_dmg << " points of damage!" << std::endl;
+		_energy -= 1;
+		std::cout << " attacks " << target << ", causing " << _dmg << " points of damage!" << std::endl;
 
 	}
 }
 void    ClapTrap::beRepaired(unsigned int amount)
 {
-	std::cout << "ClapTrap " << this->m_name;
+	std::cout << "ClapTrap " << _name;
 	if (!canTakeAction())
 		std::cout << "He can't repair himself!" << std::endl;
 	else
 	{
-		this->m_energy -= 1;
-		this->m_hp += amount;
-		std::cout << " healed himself for " << amount << " points! " << "He has now " << this->m_hp << " HP!" << std::endl;
+		_energy -= 1;
+		_hp += amount;
+		std::cout << " healed himself for " << amount << " points! " << "He has now " << _hp << " HP!" << std::endl;
 	}
 }
 
 
 void    ClapTrap::takeDamage(unsigned int amount)
 {
-	if (this->m_hp <= amount)
-		this->m_hp = 0;
+	if (_hp <= amount)
+		_hp = 0;
 	else
-		this->m_hp -= amount;
+		_hp -= amount;
 
-	std::cout << this->m_name << " took " << amount << " points of damage!" << std::endl;	
-	if (this->m_hp <= 0)
-		std::cout << this->m_name << " died!" << std::endl;
+	std::cout << _name << " took " << amount << " points of damage!" << std::endl;	
+	if (_hp <= 0)
+		std::cout << _name << " died!" << std::endl;
 }

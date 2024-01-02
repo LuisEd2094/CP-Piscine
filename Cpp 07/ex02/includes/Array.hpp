@@ -20,45 +20,45 @@ template <typename T>
 class Array
 {
     private:
-        T*  m_array;
-        unsigned int m_size;
+        T*  _array;
+        unsigned int _size;
     public:
-        Array() : m_array( new T[0] ), m_size(0) {};
+        Array() : _array( new T[0] ), _size(0) {};
 
-        Array(unsigned int n) : m_array(new T[n]), m_size(n)
+        Array(unsigned int n) : _array(new T[n]), _size(n)
         {
-            for (unsigned int i = 0; i < m_size; ++i) {
-                m_array[i] = T(); // Default initialization
+            for (unsigned int i = 0; i < _size; ++i) {
+                _array[i] = T(); // Default initialization
         };
         }
 
-        ~Array() { delete [] m_array;};
+        ~Array() { delete [] _array;};
 
-        Array(const Array & other) : m_array(new T(other.m_size)), m_size(other.m_size) {
-            for (unsigned int i = 0; i < m_size; ++i)
-                m_array[i] = other.m_array[i];
+        Array(const Array & other) : _array(new T(other._size)), _size(other._size) {
+            for (unsigned int i = 0; i < _size; ++i)
+                _array[i] = other._array[i];
         };
 
         Array& operator=(const Array& rhs){
             if (this != &rhs)
             {
-                delete [] m_array;
-                m_array = new T[rhs.m_size];
-                m_size = rhs.m_size;
-                for (unsigned int i = 0; i < m_size; ++i)
-                    m_array[i] = rhs.m_array[i];
+                delete [] _array;
+                _array = new T[rhs._size];
+                _size = rhs._size;
+                for (unsigned int i = 0; i < _size; ++i)
+                    _array[i] = rhs._array[i];
             }
             return *this;
         };
 
         T& operator[] (unsigned int i) const{
-            if (i >= m_size)
+            if (i >= _size)
                 throw OutOfBounds();
-            return m_array[i];
+            return _array[i];
         };
 
         unsigned int size(void) const{
-            return m_size;
+            return _size;
         };
         class OutOfBounds : public std::exception
         {

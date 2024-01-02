@@ -35,17 +35,17 @@ enum e_type {
 class ScalarConverter
 {
     private:
-        static std::size_t m_dot_pos;
-        static std::string m_sub_str_int ;
-        static std::string m_str;
-        static std::string  m_literal;
-        static bool        m_has_f;
-        static bool        m_has_sign;
-        static int         m_int;
-        static unsigned char m_char;
-        static float       m_float;
-        static double      m_double;
-        static e_type      m_type;
+        static std::size_t _dot_pos;
+        static std::string _sub_str_int ;
+        static std::string _str;
+        static std::string  _literal;
+        static bool        _has_f;
+        static bool        _has_sign;
+        static int         _int;
+        static unsigned char _char;
+        static float       _float;
+        static double      _double;
+        static e_type      _type;
         static e_type      check_type();
         static bool is_valid_number();
         static bool is_int();

@@ -22,9 +22,9 @@
 class Zombie 
 {
     private:
-        std::string m_name;
+        std::string _name;
     public:
-        Zombie() : m_name("") {};
+        Zombie() : _name("") {};
         ~Zombie(void);
 
         void    announce(void);

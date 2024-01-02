@@ -49,8 +49,8 @@ class Bureaucrat
         };
 
     private:
-        const std::string m_name;
-        int m_grade;
+        const std::string _name;
+        int _grade;
 };
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& rhs);

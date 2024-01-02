@@ -27,18 +27,18 @@ Dog::Dog(std::string type)
 Dog::Dog(const Dog& other)
 	: Animal(other)
 {
-	std::cout << "Dog copy constructor called on " << other.m_type << std::endl;
+	std::cout << "Dog copy constructor called on " << other._type << std::endl;
 }
 
 Dog& Dog::operator=(const Dog& rhs)
 {
-	this->m_type = rhs.m_type;
+	_type = rhs._type;
 	return *this;
 }
 
 Dog::~Dog(void)
 {
-	std::cout << "Dog destructor called for " << this->m_type << std::endl;
+	std::cout << "Dog destructor called for " << _type << std::endl;
 }
 
 void Dog::makeSound(void) const

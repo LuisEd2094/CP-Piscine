@@ -20,7 +20,7 @@ void Harl::complain(std::string level)
     {
         if (levels[i] == level)
         {
-            (this->*f[i])();
+            (*f[i])();
             break ;
         }
     }    
