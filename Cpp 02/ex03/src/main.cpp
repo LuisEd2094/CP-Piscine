@@ -35,9 +35,20 @@ int *getArray(int a, int b)
 
 int main(void)
 {
-	std::cout << check_points(getArray(0, 0), getArray(4, 0), getArray(2, 4),getArray(1, 1)) << std::endl;
-	std::cout << check_points(getArray(0, 0), getArray(4, 0), getArray(2, 4),getArray(50, 50)) << std::endl;
-	std::cout << check_points(getArray(0, 0), getArray(10, 30), getArray(20 , 0), getArray(10, 15)) << std::endl;
-	std::cout << check_points(getArray(0, 0), getArray(10, 30), getArray(20 , 0), getArray(30, 15)) << std::endl;
-
+	if (check_points(getArray(0, 0), getArray(4, 0), getArray(2, 4),getArray(1, 1)))
+		std::cout << "Is inside triangle" << std::endl;
+	else
+		std::cout << "Is outside trianble" << std::endl;
+	if (check_points(getArray(0, 0), getArray(4, 0), getArray(2, 4),getArray(50, 50)))
+		std::cout << "Is inside triangle" << std::endl;
+	else
+		std::cout << "Is outside trianble" << std::endl;
+	if (check_points(getArray(0, 0), getArray(10, 30), getArray(20 , 0), getArray(10, 15)))
+		std::cout << "Is inside triangle" << std::endl;
+	else
+		std::cout << "Is outside trianble" << std::endl;
+	if (check_points(getArray(0, 0), getArray(10, 30), getArray(20 , 0), getArray(30, 15)))
+		std::cout << "Is inside triangle" << std::endl;
+	else
+		std::cout << "Is outside trianble" << std::endl;	
 }
