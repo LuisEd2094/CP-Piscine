@@ -11,26 +11,25 @@
 /* ************************************************************************** */
 
 #ifndef POINT_HPP
-# define POINT_HPP
+#define POINT_HPP
 
-# include "Fixed.hpp"
+#include "Fixed.hpp"
 class Point
 {
-    public:
-        Point(void);
-        Point(const float x, const float y);
-        Point(const Point& point);
-        ~Point(void);
+public:
+    Point(void);
+    Point(const float, const float);
+    Point(const Point &);
+    ~Point(void);
 
-        Point& operator=(const Point& point);
+    Point &operator=(const Point &);
 
-        Fixed const getX(void) const;
-        Fixed const getY(void) const;
-    
-    private:
-        Fixed const _x;
-        Fixed const _y;
+    Fixed const getX(void) const;
+    Fixed const getY(void) const;
 
+private:
+    Fixed const _x;
+    Fixed const _y;
 };
 
 bool bsp(Point const a, Point const b, Point const c, Point const point);

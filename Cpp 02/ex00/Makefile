@@ -14,7 +14,7 @@ NAME        = a.out
 CFLAGS      = -std=c++98 -pedantic -Wall -Wextra  -Werror -g 
 CC			= c++
 RM          = rm -f
-FIXED_PATH = Fixed/
+FIXED_PATH  = Fixed/
 SRCS_PATH	= src/
 OBJS_PATH	= obj/
 MAKE_OBJ_DIR	=	$(OBJS_PATH) $(addprefix $(OBJS_PATH), $(FIXED_PATH)) 

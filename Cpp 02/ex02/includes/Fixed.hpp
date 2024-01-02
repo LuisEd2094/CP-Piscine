@@ -11,58 +11,57 @@
 /* ************************************************************************** */
 
 #ifndef FIXED_HPP
-# define FIXED_HPP
+#define FIXED_HPP
 
-# include <string>
-# include <cmath>
-# include <iostream>
-
+#include <string>
+#include <cmath>
+#include <iostream>
 
 class Fixed
 {
-    public:
-        Fixed();
-        Fixed(int const val);
-        Fixed(float const val);
-        Fixed(const Fixed& toCopy);
+public:
+    Fixed(void);
+    Fixed(const int);
+    Fixed(const float);
+    Fixed(const Fixed &);
 
-        ~Fixed();
+    ~Fixed(void);
 
-        Fixed&  operator=(const Fixed& toCopy);
+    Fixed &operator=(const Fixed &);
 
-        bool    operator<(const Fixed& fixed);
-        bool    operator>(const Fixed& fixed);		
-        bool    operator>=(const Fixed& fixed);		
-        bool    operator<=(const Fixed& fixed);		
-        bool    operator==(const Fixed& fixed);		
-        bool    operator!=(const Fixed& fixed);
+    bool operator<(const Fixed &);
+    bool operator>(const Fixed &);
+    bool operator>=(const Fixed &);
+    bool operator<=(const Fixed &);
+    bool operator==(const Fixed &);
+    bool operator!=(const Fixed &);
 
-        Fixed   operator+(const Fixed& fixed);		
-        Fixed   operator-(const Fixed& fixed);		
-        Fixed   operator*(const Fixed& fixed);		
-        Fixed   operator/(const Fixed& fixed);		
+    Fixed operator+(const Fixed &);
+    Fixed operator-(const Fixed &);
+    Fixed operator*(const Fixed &);
+    Fixed operator/(const Fixed &);
 
-        Fixed&  operator++();					 
-        Fixed&  operator--();					 
-        Fixed   operator++(int);					 
-        Fixed   operator--(int);					 
+    Fixed &operator++(void);
+    Fixed &operator--(void);
+    Fixed operator++(int);
+    Fixed operator--(int);
 
-        int     getRawBits(void) const;
-        void    setRawBits(int const raw);
+    int getRawBits(void) const;
+    void setRawBits(int const);
 
-        float   toFloat(void) const;
-        int     toInt(void) const;
+    float toFloat(void) const;
+    int toInt(void) const;
 
-        static          Fixed&  min(Fixed& a, Fixed& b);
-        static const    Fixed&  min(const Fixed&a, const Fixed& b);
-        static          Fixed&  max(Fixed& a, Fixed& b);
-        static const    Fixed&  max(const Fixed& a, const Fixed& b);
-    
-    private:
-        static int const fraction = 8;
-        int _fixedPoint;
+    static Fixed &min(Fixed &, Fixed &);
+    static const Fixed &min(const Fixed &, const Fixed &);
+    static Fixed &max(Fixed &, Fixed &);
+    static const Fixed &max(const Fixed &, const Fixed &);
+
+private:
+    static int const fraction = 8;
+    int _fixedPoint;
 };
 
-std::ostream& operator<<(std::ostream& os, const Fixed& fixed);
+std::ostream &operator<<(std::ostream &os, const Fixed &fixed);
 
 #endif

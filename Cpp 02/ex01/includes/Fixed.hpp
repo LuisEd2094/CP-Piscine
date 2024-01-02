@@ -11,37 +11,35 @@
 /* ************************************************************************** */
 
 #ifndef FIXED_HPP
-# define FIXED_HPP
+#define FIXED_HPP
 
-# include <string>
-# include <cmath>
-# include <iostream>
-
+#include <string>
+#include <cmath>
+#include <iostream>
 
 class Fixed
 {
-    public:
-        Fixed();
-        Fixed(int const val);
-        Fixed(float const val);
-        Fixed(const Fixed& toCopy);
+public:
+    Fixed(void);
+    Fixed(const int);
+    Fixed(const float);
+    Fixed(const Fixed &);
 
-        ~Fixed();
+    ~Fixed(void);
 
-        Fixed& operator=(const Fixed& toCopy);
+    Fixed &operator=(const Fixed &);
 
-        int     getRawBits(void) const;
+    int getRawBits(void) const;
+    void setRawBits(const int);
 
-        void    setRawBits(int const raw);
+    float toFloat(void) const;
+    int toInt(void) const;
 
-        float   toFloat(void) const;
-        int     toInt(void) const;
-    
-    private:
-        static int const fraction = 8;
-        int _fixedPoint;
+private:
+    static int const fraction = 8;
+    int _fixedPoint;
 };
 
-std::ostream& operator<<(std::ostream& os, const Fixed& fixed);
+std::ostream &operator<<(std::ostream &os, const Fixed &fixed);
 
 #endif

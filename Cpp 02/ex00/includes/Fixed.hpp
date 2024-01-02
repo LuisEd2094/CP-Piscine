@@ -11,29 +11,27 @@
 /* ************************************************************************** */
 
 #ifndef FIXED_HPP
-# define FIXED_HPP
+#define FIXED_HPP
 
-# include <string>
-# include <iostream>
+#include <string>
+#include <iostream>
 
 class Fixed
 {
-    public:
-        Fixed();
-        Fixed(const Fixed& toCopy);
+public:
+    Fixed(void);
+    Fixed(const Fixed &);
 
-        Fixed& operator=(const Fixed& toCopy);
+    Fixed &operator=(const Fixed &);
 
-        ~Fixed();
+    ~Fixed(void);
 
-        int     getRawBits(void) const;
+    int getRawBits(void) const;
+    void setRawBits(const int);
 
-        void    setRawBits(int const raw);
-    
-    private:
-        static int const fraction = 8;
-        int _fixedPoint;
+private:
+    static const int fraction = 8;
+    int _fixedPoint;
 };
 
 #endif
-
