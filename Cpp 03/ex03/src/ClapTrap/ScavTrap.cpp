@@ -22,21 +22,21 @@ ScavTrap::ScavTrap(void)
 }
 
 ScavTrap::ScavTrap(std::string name)
-	: ClapTrap(name)
+    : ClapTrap(name)
 {
-	std::cout << "ScavTrap(name) constructor called, created ScavTrap" << _name << std::endl;
+    std::cout << "ScavTrap(name) constructor called, created ScavTrap" << _name << std::endl;
     _hp = 100;
     _energy = 50;
     _dmg = 20;
 }
 
-ScavTrap::ScavTrap(const ScavTrap& toCocpy)
+ScavTrap::ScavTrap(const ScavTrap &toCocpy)
     : ClapTrap(toCocpy)
 {
-    std::cout << "ScavTrap copy constructor called for " << _name << std::endl; 
+    std::cout << "ScavTrap copy constructor called for " << _name << std::endl;
 }
 
-ScavTrap& ScavTrap::operator=(const ScavTrap& scavtrap)
+ScavTrap &ScavTrap::operator=(const ScavTrap &scavtrap)
 {
     ClapTrap::operator=(scavtrap);
 
@@ -49,8 +49,7 @@ ScavTrap::~ScavTrap(void)
     std::cout << "ScavTrap deconstructor called for " << _name << std::endl;
 }
 
-
-void ScavTrap::attack(std::string const& target)
+void ScavTrap::attack(std::string const &target)
 {
     std::cout << _name;
     if (!ClapTrap::canTakeAction())
@@ -59,7 +58,6 @@ void ScavTrap::attack(std::string const& target)
     {
         _energy -= 1;
         std::cout << " attacks " << target << ", causing " << _dmg << " points of damage!" << std::endl;
-
     }
 }
 
@@ -71,6 +69,6 @@ void ScavTrap::guardGate()
     else
     {
         _energy -= 1;
-	    std::cout << "ScavTrap " << _name << " has entered Gate keeper mode!" << std::endl;
+        std::cout << "ScavTrap " << _name << " has entered Gate keeper mode!" << std::endl;
     }
 }

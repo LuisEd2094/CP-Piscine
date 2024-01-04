@@ -22,23 +22,24 @@ DiamondTrap::DiamondTrap(void)
 }
 
 DiamondTrap::DiamondTrap(std::string name)
-	: ClapTrap(name) , FragTrap(name) , ScavTrap(name)
+    : ClapTrap(name), FragTrap(name), ScavTrap(name), _hp(FragTrap::_hp)
 {
-	std::cout << "DiamondTrap(name) constructor called, created DiamondTrap" << _name << std::endl;
+    std::cout << "DiamondTrap(name) constructor called, created DiamondTrap" << _name << std::endl;
+    std::cout << ">" << _hp << "<" << std::endl;
+
     _name = name;
     ClapTrap::_name = name + "_clap_name";
-    FragTrap::_hp = 100;
     ScavTrap::_energy = 50;
     FragTrap::_dmg = 30;
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap& toCocpy)
-    : ClapTrap(toCocpy) , FragTrap(toCocpy) , ScavTrap(toCocpy)
+DiamondTrap::DiamondTrap(const DiamondTrap &toCocpy)
+    : ClapTrap(toCocpy), FragTrap(toCocpy), ScavTrap(toCocpy)
 {
-    std::cout << "DiamondTrap copy constructor called for " << _name << std::endl; 
+    std::cout << "DiamondTrap copy constructor called for " << _name << std::endl;
 }
 
-DiamondTrap& DiamondTrap::operator=(const DiamondTrap& DiamondTrap)
+DiamondTrap &DiamondTrap::operator=(const DiamondTrap &DiamondTrap)
 {
     std::cout << "DiamondTrap operator = called for " << _name << std::endl;
     if (this != &DiamondTrap)
@@ -64,6 +65,6 @@ void DiamondTrap::whoAmI()
     else
     {
         _energy -= 1;
-	    std::cout << "whoAmI(): I am DiamondTrap " << _name << " and my ClapTrap name is " << ClapTrap::_name << std::endl;
+        std::cout << "whoAmI(): I am DiamondTrap " << _name << " and my ClapTrap name is " << ClapTrap::_name << std::endl;
     }
 }

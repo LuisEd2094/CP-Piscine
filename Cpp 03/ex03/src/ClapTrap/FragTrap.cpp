@@ -22,21 +22,21 @@ FragTrap::FragTrap(void)
 }
 
 FragTrap::FragTrap(std::string name)
-	: ClapTrap(name)
+    : ClapTrap(name)
 {
-	std::cout << "FragTrap(name) constructor called, created FragTrap" << _name << std::endl;
+    std::cout << "FragTrap(name) constructor called, created FragTrap" << _name << std::endl;
     _hp = 100;
     _energy = 100;
     _dmg = 30;
 }
 
-FragTrap::FragTrap(const FragTrap& toCocpy)
+FragTrap::FragTrap(const FragTrap &toCocpy)
     : ClapTrap(toCocpy)
 {
-    std::cout << "FragTrap copy constructor called for " << _name << std::endl; 
+    std::cout << "FragTrap copy constructor called for " << _name << std::endl;
 }
 
-FragTrap& FragTrap::operator=(const FragTrap& FragTrap)
+FragTrap &FragTrap::operator=(const FragTrap &FragTrap)
 {
     ClapTrap::operator=(FragTrap);
 
@@ -49,8 +49,7 @@ FragTrap::~FragTrap(void)
     std::cout << "FragTrap deconstructor called for " << _name << std::endl;
 }
 
-
-void FragTrap::attack(std::string const& target)
+void FragTrap::attack(std::string const &target)
 {
     std::cout << "FragTrap " << _name;
     if (!ClapTrap::canTakeAction())
@@ -59,7 +58,6 @@ void FragTrap::attack(std::string const& target)
     {
         _energy -= 1;
         std::cout << " attacks " << target << ", causing " << _dmg << " points of damage!" << std::endl;
-
     }
 }
 
@@ -71,6 +69,6 @@ void FragTrap::highFivesGuys()
     else
     {
         _energy -= 1;
-	    std::cout << " high fives everyone!" << std::endl;
+        std::cout << " high fives everyone!" << std::endl;
     }
 }

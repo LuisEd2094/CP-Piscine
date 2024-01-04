@@ -54,5 +54,4 @@ int main()
 	john.attack("Marge");
 	john.attack("Marge");
 	john.beRepaired(10);
-
 }

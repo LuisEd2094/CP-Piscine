@@ -11,27 +11,27 @@
 /* ************************************************************************** */
 
 #ifndef DIAMONDTRAP_HPP
-# define DIAMONDTRAP_HPP
+#define DIAMONDTRAP_HPP
 
-# include "FragTrap.hpp"
-# include "ScavTrap.hpp"
-# include <iostream>
+#include "FragTrap.hpp"
+#include "ScavTrap.hpp"
+#include <iostream>
 
-class DiamondTrap : public FragTrap, public ScavTrap
+class DiamondTrap : public virtual ClapTrap, public FragTrap, public ScavTrap
 {
-    public:
-        DiamondTrap(void);
-        DiamondTrap(std::string name);
-        DiamondTrap(const DiamondTrap& toCocpy);
+public:
+    DiamondTrap(std::string name);
+    DiamondTrap(const DiamondTrap &toCocpy);
 
-        DiamondTrap& operator=(const DiamondTrap& DiamondTrap);
+    DiamondTrap &operator=(const DiamondTrap &DiamondTrap);
 
-        ~DiamondTrap();
+    ~DiamondTrap(void);
 
-        using   ScavTrap::attack;
-	    void    whoAmI();
+    using ScavTrap::attack;
+    void whoAmI(void);
 
-    private:
-        std::string _name;
+private:
+    DiamondTrap(void);
+    std::string _name;
 };
 #endif

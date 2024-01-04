@@ -12,26 +12,25 @@
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(void) 
-	: _name("Default"), _hp(10), _energy(10),  _dmg(0)
+ClapTrap::ClapTrap(void)
+	: _name("Default"), _hp(10), _energy(10), _dmg(0)
 {
 	std::cout << "Default ClapTrap constructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string name) 
-	: _name(name), _hp(10), _energy(10),  _dmg(0)
+ClapTrap::ClapTrap(std::string name)
+	: _name(name), _hp(10), _energy(10), _dmg(0)
 {
 	std::cout << "ClapTrap(name) called, created " << name << std::endl;
 }
 
-
-ClapTrap::ClapTrap(const ClapTrap& toCopy) 
+ClapTrap::ClapTrap(const ClapTrap &toCopy)
 {
 	std::cout << "ClapTrap copy constructor called" << std::endl;
-	*this = toCopy; 
+	*this = toCopy;
 }
 
-ClapTrap& ClapTrap::operator=(const ClapTrap& toCopy)
+ClapTrap &ClapTrap::operator=(const ClapTrap &toCopy)
 {
 	if (this != &toCopy)
 	{
@@ -48,7 +47,7 @@ ClapTrap::~ClapTrap(void)
 	std::cout << "ClapTrap Destructor called on " << _name << std::endl;
 }
 
-bool	ClapTrap::canTakeAction(void)
+bool ClapTrap::canTakeAction(void)
 {
 	bool canTake = 1;
 
@@ -60,13 +59,12 @@ bool	ClapTrap::canTakeAction(void)
 		else if (_energy <= 0)
 			std::cout << " is out of energy! ";
 		else if (_hp <= 0)
-			std::cout << " is out of hp! " ;
+			std::cout << " is out of hp! ";
 	}
 	return (canTake);
 }
- 
 
-void    ClapTrap::attack(std::string const& target)
+void ClapTrap::attack(std::string const &target)
 {
 	std::cout << "ClapTrap " << _name;
 	if (!canTakeAction())
@@ -75,10 +73,9 @@ void    ClapTrap::attack(std::string const& target)
 	{
 		_energy -= 1;
 		std::cout << " attacks " << target << ", causing " << _dmg << " points of damage!" << std::endl;
-
 	}
 }
-void    ClapTrap::beRepaired(unsigned int amount)
+void ClapTrap::beRepaired(unsigned int amount)
 {
 	std::cout << _name;
 	if (!canTakeAction())
@@ -87,19 +84,19 @@ void    ClapTrap::beRepaired(unsigned int amount)
 	{
 		_energy -= 1;
 		_hp += amount;
-		std::cout << " healed himself for " << amount << " points! " << "He has now " << _hp << " HP!" << std::endl;
+		std::cout << " healed himself for " << amount << " points! "
+				  << "He has now " << _hp << " HP!" << std::endl;
 	}
 }
 
-
-void    ClapTrap::takeDamage(unsigned int amount)
+void ClapTrap::takeDamage(unsigned int amount)
 {
 	if (_hp <= amount)
 		_hp = 0;
 	else
 		_hp -= amount;
 
-	std::cout << _name << " took " << amount << " points of damage!" << std::endl;	
+	std::cout << _name << " took " << amount << " points of damage!" << std::endl;
 	if (_hp <= 0)
 		std::cout << _name << " died!" << std::endl;
 }
