@@ -25,7 +25,7 @@ public:
 
     ~ClapTrap(void);
 
-    bool canTakeAction();
+    bool canTakeAction(void);
     void attack(std::string const &target);
     void takeDamage(unsigned int amount);
     void beRepaired(unsigned int amount);

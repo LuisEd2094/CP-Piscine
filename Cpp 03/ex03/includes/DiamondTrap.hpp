@@ -17,7 +17,7 @@
 #include "ScavTrap.hpp"
 #include <iostream>
 
-class DiamondTrap : public virtual ClapTrap, public FragTrap, public ScavTrap
+class DiamondTrap : virtual public ClapTrap, virtual public FragTrap, virtual public ScavTrap
 {
 public:
     DiamondTrap(std::string name);
@@ -28,10 +28,16 @@ public:
     ~DiamondTrap(void);
 
     using ScavTrap::attack;
-    void whoAmI(void);
+    using FragTrap::_hp;
+    using ScavTrap::_energy;
+    using FragTrap::_dmg;
 
-private:
+    void whoAmI(void);
+protected:
     DiamondTrap(void);
+private:
     std::string _name;
 };
+
+std::ostream& operator<< (std::ostream& stream, const DiamondTrap& DiamondTrap);
 #endif

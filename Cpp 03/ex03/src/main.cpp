@@ -18,6 +18,11 @@
 int main()
 {
 	DiamondTrap daniel("Daniel");
+
+	std::cout << daniel << std::endl;
+
+	daniel.ScavTrap::attack("Pedro");
+	daniel.FragTrap::attack("Maria");
 	daniel.attack("Ned");
 	daniel.takeDamage(5);
 	daniel.beRepaired(3);

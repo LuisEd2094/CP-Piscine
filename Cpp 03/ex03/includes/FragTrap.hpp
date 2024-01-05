@@ -29,7 +29,10 @@ public:
     void attack(std::string const &target);
     void highFivesGuys(void);
 
-private:
+protected:
     FragTrap(void);
+    unsigned int _hp;
+    unsigned int _energy;
+    unsigned int _dmg;
 };
 #endif

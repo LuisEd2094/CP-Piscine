@@ -1,5 +1,5 @@
 NAME        = DiamondTrap
-CFLAGS      = -std=c++98 -pedantic -Wall -Wextra  -Werror -g 
+CFLAGS      = -std=c++98 -pedantic -Wshadow -Wno-shadow -Wall -Wextra  -Werror -g 
 CC			= c++
 RM          = rm -f
 CLAPTRAP_PATH = ClapTrap/

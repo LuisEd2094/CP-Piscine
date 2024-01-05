@@ -13,21 +13,15 @@
 #include "FragTrap.hpp"
 
 FragTrap::FragTrap(void)
-    : ClapTrap()
+    : ClapTrap(), _hp(100), _energy(100), _dmg(30)
 {
     std::cout << "Default FragTrap constructor called" << std::endl;
-    _hp = 100;
-    _energy = 100;
-    _dmg = 30;
 }
 
 FragTrap::FragTrap(std::string name)
-    : ClapTrap(name)
+    : ClapTrap(name), _hp(100), _energy(100), _dmg(30)
 {
-    std::cout << "FragTrap(name) constructor called, created FragTrap" << _name << std::endl;
-    _hp = 100;
-    _energy = 100;
-    _dmg = 30;
+    std::cout << "FragTrap(name) constructor called, created FragTrap " << _name << std::endl;
 }
 
 FragTrap::FragTrap(const FragTrap &toCocpy)
@@ -52,7 +46,7 @@ FragTrap::~FragTrap(void)
 void FragTrap::attack(std::string const &target)
 {
     std::cout << "FragTrap " << _name;
-    if (!ClapTrap::canTakeAction())
+    if (!canTakeAction())
         std::cout << "He can't attack!" << std::endl;
     else
     {
@@ -64,7 +58,7 @@ void FragTrap::attack(std::string const &target)
 void FragTrap::highFivesGuys()
 {
     std::cout << "FragTrap " << _name;
-    if (!ClapTrap::canTakeAction())
+    if (!canTakeAction())
         std::cout << "He can't give you a high five!" << std::endl;
     else
     {

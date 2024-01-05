@@ -16,21 +16,12 @@ DiamondTrap::DiamondTrap(void)
     : ClapTrap("default_clap_name"), FragTrap("default"), ScavTrap("default"), _name("default")
 {
     std::cout << "Default DiamondTrap constructor called" << std::endl;
-    FragTrap::_hp = 100;
-    ScavTrap::_energy = 50;
-    FragTrap::_dmg = 30;
 }
 
 DiamondTrap::DiamondTrap(std::string name)
-    : ClapTrap(name), FragTrap(name), ScavTrap(name), _hp(FragTrap::_hp)
+    : ClapTrap(name + "_clap_name" ), FragTrap(), ScavTrap(), _name(name)
 {
     std::cout << "DiamondTrap(name) constructor called, created DiamondTrap" << _name << std::endl;
-    std::cout << ">" << _hp << "<" << std::endl;
-
-    _name = name;
-    ClapTrap::_name = name + "_clap_name";
-    ScavTrap::_energy = 50;
-    FragTrap::_dmg = 30;
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap &toCocpy)
@@ -60,11 +51,17 @@ DiamondTrap::~DiamondTrap(void)
 void DiamondTrap::whoAmI()
 {
     std::cout << "DiamondTrap " << _name;
-    if (!ClapTrap::canTakeAction())
-        std::cout << "He can't guard the gates!" << std::endl;
-    else
-    {
-        _energy -= 1;
-        std::cout << "whoAmI(): I am DiamondTrap " << _name << " and my ClapTrap name is " << ClapTrap::_name << std::endl;
-    }
+    std::cout << " whoAmI(): I am DiamondTrap " << _name << " and my ClapTrap name is " << ClapTrap::_name << std::endl;
 }
+
+
+std::ostream& operator<< (std::ostream& stream, const DiamondTrap& DiamondTrap)
+{
+    stream << "Diamond hp=" << DiamondTrap._hp << std::endl;
+    stream << "Diamond energy=" << DiamondTrap._energy << std::endl;
+    stream << "Diamond dmg=" << DiamondTrap._dmg << std::endl;
+
+    return stream;
+
+}
+

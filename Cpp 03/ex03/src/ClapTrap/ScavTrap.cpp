@@ -13,21 +13,15 @@
 #include "ScavTrap.hpp"
 
 ScavTrap::ScavTrap(void)
-    : ClapTrap()
+    : ClapTrap(), _hp(100), _energy(50), _dmg(20)
 {
     std::cout << "Default ScavTrap constructor called" << std::endl;
-    _hp = 100;
-    _energy = 50;
-    _dmg = 20;
 }
 
 ScavTrap::ScavTrap(std::string name)
-    : ClapTrap(name)
+    : ClapTrap(name), _hp(100), _energy(50), _dmg(20)
 {
-    std::cout << "ScavTrap(name) constructor called, created ScavTrap" << _name << std::endl;
-    _hp = 100;
-    _energy = 50;
-    _dmg = 20;
+    std::cout << "ScavTrap(name) constructor called, created ScavTrap " << _name << std::endl;
 }
 
 ScavTrap::ScavTrap(const ScavTrap &toCocpy)
@@ -51,8 +45,8 @@ ScavTrap::~ScavTrap(void)
 
 void ScavTrap::attack(std::string const &target)
 {
-    std::cout << _name;
-    if (!ClapTrap::canTakeAction())
+    std::cout << "Scavtrap "  << _name;
+    if (!canTakeAction())
         std::cout << "He can't attack!" << std::endl;
     else
     {
@@ -64,7 +58,7 @@ void ScavTrap::attack(std::string const &target)
 void ScavTrap::guardGate()
 {
     std::cout << "ScavTrap " << _name;
-    if (!ClapTrap::canTakeAction())
+    if (!canTakeAction())
         std::cout << "He can't guard the gates!" << std::endl;
     else
     {
