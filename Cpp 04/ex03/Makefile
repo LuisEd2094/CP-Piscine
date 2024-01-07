@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME        = a.out
-CFLAGS      = -std=c++98 -pedantic -Wall -Wextra  -Werror -g 
+CFLAGS      = -std=c++98 -pedantic -Wall -Wextra  -Werror -ggdb 
 CC			= c++
 RM          = rm -f
 AMATERIA_PATH = AMateria/

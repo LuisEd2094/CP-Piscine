@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Ice.hpp"
+#include <Ice.hpp>
 #include "AMateria.hpp"
 #include "Character.hpp"
 #include "ICharacter.hpp"
@@ -144,31 +144,51 @@ void character_test(void)
     Character * daniel = new Character("Daniel");
     Character * juan =  new Character("Juan");
     Character target("target");
+    Cure * cure = new Cure();
     Ice * ice = new Ice();
 
     daniel->equip(ice);
-
     std::cout << daniel->getName() << std::endl;
     std::cout << juan->getName() << std::endl;
     daniel->use(0, *juan);
 
-    juan = daniel;
+    *juan = *daniel;
+    daniel->equip(cure);
     std::cout << daniel->getName() << std::endl;
     std::cout << juan->getName() << std::endl;
 
     juan->use(0, target);
    
     juan->use(0, target);
-    delete daniel;
     juan->use(0, target);
-    
+    juan->unequip(0);
+    daniel->unequip(1);
+    daniel->unequip(0);
     std::cout << juan->getName() << std::endl;
 
+    Node * list = AMateria::getMateriaList();
+    while (list)
+    {
+        std::cout << list->materia->getType() << std::endl;
+        list = list->next;
+    }
+
+    delete juan;
+    delete daniel;
+
+   // delete ice;
 
 }
 
 int main(void)
 {
+    /*Node * list = AMateria::getMateriaList();
+    while (list)
+    {
+        std::cout << list->materia->getType() << std::endl;
+        list = list->next;
+    }*/
+
     //testMateria();
     //pdfTest();
 
@@ -176,6 +196,9 @@ int main(void)
     //ice_test_create();
     //cure_test_create();
     character_test();
+    AMateria::cleanList();
     
+
+
 
 }

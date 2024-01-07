@@ -15,7 +15,7 @@
 Ice::Ice(void) : AMateria("ice") {}
 Ice::~Ice(void){}
 
-Ice::Ice(const Ice& other) : AMateria(other.getType()) {}
+Ice::Ice(const Ice& other) : AMateria(other) {}
 
 Ice& Ice::operator=(const Ice& rhs)
 {

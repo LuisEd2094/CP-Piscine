@@ -16,6 +16,11 @@
 # include <iostream>
 # include "ICharacter.hpp"
 
+
+struct Node {
+        AMateria *materia;
+        Node *next;
+        };
 class AMateria
 {
     protected:
@@ -24,6 +29,8 @@ class AMateria
         AMateria(std::string const& type);
         AMateria(const AMateria& src);
         AMateria& operator=(const AMateria& rhs);
+        static Node* list;
+        static Node* curr;
     public:
         std::string const& getType(void) const;
 
@@ -31,6 +38,15 @@ class AMateria
         virtual ~AMateria(void);
         virtual void use(ICharacter& target);
 
+        static Node *getMateriaList(void);
+        static void addMateria(AMateria *materia);
+        static void cleanList(void);
+
+private:
+
+    // Static member to keep track of all created AMateria instances
 };
+
+
 
 #endif
