@@ -20,17 +20,17 @@ class AMateria
 {
     protected:
         std::string _type;
-
-    public:
         AMateria(void);
         AMateria(std::string const& type);
         AMateria(const AMateria& src);
         AMateria& operator=(const AMateria& rhs);
+    public:
         std::string const& getType(void) const;
 
         virtual AMateria* clone(void) const = 0;
-        virtual ~AMateria(void) = 0;
-        virtual void use(ICharacter& target) = 0;
+        virtual ~AMateria(void);
+        virtual void use(ICharacter& target);
+
 };
 
 #endif

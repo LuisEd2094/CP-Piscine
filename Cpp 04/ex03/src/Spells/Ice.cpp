@@ -12,19 +12,14 @@
 
 #include "Ice.hpp"
 
-std::string Ice::_type = "ice";
-
 Ice::Ice(void) : AMateria("ice") {}
 Ice::~Ice(void){}
 
-Ice::Ice(const Ice& other) : AMateria(other) {}
+Ice::Ice(const Ice& other) : AMateria(other.getType()) {}
 
 Ice& Ice::operator=(const Ice& rhs)
 {
-    if (this != &rhs)
-    {
-        _type = rhs._type;
-    } 
+    (void)(rhs);
     return (*this);
 }
 

@@ -13,17 +13,13 @@
 #include "Cure.hpp"
 
 Cure::Cure(void) : AMateria("cure") {}
-Cure::Cure(std::string const& type) : AMateria(type) {}
 Cure::~Cure(void){}
 
-Cure::Cure(const Cure& other) : AMateria(other) {}
+Cure::Cure(const Cure& other) : AMateria(other.getType()) {}
 
 Cure& Cure::operator=(const Cure& rhs)
 {
-    if (this != &rhs)
-    {
-        _type = rhs._type;
-    } 
+    (void)(rhs);
     return (*this);
 }
 

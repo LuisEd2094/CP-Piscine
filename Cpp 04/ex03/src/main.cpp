@@ -90,9 +90,81 @@ void test_type(void)
     std::cout << &clone->_type << std::endl;*/
 }
 
+void ice_test_create(void)
+{
+    Ice ic1;
+    Ice ic2 = ic1;
+    Ice ic3(ic1);
+    Ice ice4 = ic2  = ic3;
+    Character *target = new Character("Target");
+
+    Ice test;
+    Ice test2;
+
+    test2 = test;
+
+    std::cout << test.getType() << std::endl;
+    std::cout << test2.getType() << std::endl;
+    
+
+    ic1.use(*target);
+
+    ic2.use(*target);
+
+    ic3.use(*target);
+    ice4.use(*target);
+
+    std::cout << ic1.getType() << std::endl;
+    std::cout << ic2.getType() << std::endl;
+    std::cout << ic3.getType() << std::endl;
+    std::cout << ice4.getType() << std::endl;
+
+    delete target;
+
+}
+
+void cure_test_create(void)
+{
+    Character *target = new Character("Target");
+    Cure cure1;
+    Cure cure2 = cure1;
+    Cure cure3(cure1);
+    Cure cure4 = cure2  = cure3;
+
+    Cure curetest;
+    Cure curetest2;
+
+    curetest2 = curetest;
+
+    std::cout << curetest.getType() << std::endl;
+    std::cout << curetest2.getType() << std::endl;
+    
+
+    cure1.use(*target);
+
+    cure2.use(*target);
+
+    cure3.use(*target);
+    cure4.use(*target);
+    std::cout << cure1.getType() << std::endl;
+    std::cout << cure2.getType() << std::endl;
+    std::cout << cure3.getType() << std::endl;
+    std::cout << cure4.getType() << std::endl;
+
+
+    delete target;
+}
+
 int main(void)
 {
-    testMateria();
+    //testMateria();
     //pdfTest();
     //test_type();
+
+
+    ice_test_create();
+    cure_test_create();
+
+
+    
 }
