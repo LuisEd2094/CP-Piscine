@@ -72,23 +72,6 @@ void pdfTest(void)
     delete src;
 }
 
-void test_type(void)
-{
-    /*
-    Ice ice;
-    Ice ice4;
-    Ice ice2;
-    ice2 = ice;
-    Ice ice3(ice);
-    AMateria* clone = ice3.clone();
-
-
-    std::cout << &ice._type << " " << &ice2._type << " " << &ice3._type << std::endl;
-
-    std::cout << ice.getType() << " " << ice2.getType() <<  " " << ice3.getType() << std::endl;
-
-    std::cout << &clone->_type << std::endl;*/
-}
 
 void ice_test_create(void)
 {
@@ -155,16 +138,44 @@ void cure_test_create(void)
     delete target;
 }
 
+
+void character_test(void)
+{
+    Character * daniel = new Character("Daniel");
+    Character * juan =  new Character("Juan");
+    Character target("target");
+    Ice * ice = new Ice();
+
+    daniel->equip(ice);
+
+    std::cout << daniel->getName() << std::endl;
+    std::cout << juan->getName() << std::endl;
+    daniel->use(0, *juan);
+
+    juan = daniel;
+    std::cout << daniel->getName() << std::endl;
+    std::cout << juan->getName() << std::endl;
+
+    juan->use(0, target);
+   
+    juan->use(0, target);
+    delete daniel;
+    juan->use(0, target);
+    
+    std::cout << juan->getName() << std::endl;
+
+
+}
+
 int main(void)
 {
     //testMateria();
     //pdfTest();
-    //test_type();
 
 
-    ice_test_create();
-    cure_test_create();
-
-
+    //ice_test_create();
+    //cure_test_create();
+    character_test();
     
+
 }

@@ -14,7 +14,8 @@
 
 AMateria::AMateria(void) : _type("default") {}
 AMateria::AMateria(std::string const& type) : _type(type) {}
-AMateria::AMateria(const AMateria& src) {*this = src;}
+AMateria::AMateria(const AMateria& src): _type(src._type) {}
+
 AMateria& AMateria::operator=(const AMateria& rhs)
 {
     (void)rhs;
