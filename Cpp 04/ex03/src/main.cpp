@@ -147,36 +147,32 @@ void character_test(void)
     Cure * cure = new Cure();
     Ice * ice = new Ice();
 
+
+    std::cout << "*---- TEST EQUIP AND USE ---*" << std::endl;
     daniel->equip(ice);
     std::cout << daniel->getName() << std::endl;
     std::cout << juan->getName() << std::endl;
-    daniel->use(0, *juan);
+    daniel->use(0, target);
 
+
+    std::cout << "*--- TEST = OPERATOR ---*" << std::endl;
     *juan = *daniel;
-    daniel->equip(cure);
     std::cout << daniel->getName() << std::endl;
     std::cout << juan->getName() << std::endl;
-
     juan->use(0, target);
    
-    juan->use(0, target);
-    juan->use(0, target);
+
+    daniel->equip(cure);
+
+    std::cout << "*--- UNEQUIP MATERIA  --*" << std::endl;
     juan->unequip(0);
     daniel->unequip(1);
     daniel->unequip(0);
     std::cout << juan->getName() << std::endl;
-
-    Node * list = AMateria::getMateriaList();
-    while (list)
-    {
-        std::cout << list->materia->getType() << std::endl;
-        list = list->next;
-    }
-
     delete juan;
     delete daniel;
-
-   // delete ice;
+    delete ice;
+    delete cure;
 
 }
 
@@ -190,13 +186,15 @@ int main(void)
     }*/
 
     //testMateria();
-    //pdfTest();
+    pdfTest();
 
 
     //ice_test_create();
     //cure_test_create();
-    character_test();
-    AMateria::cleanList();
+    //character_test();
+
+
+    AMateria::cleanList();// Need to call this to make sure all dropped materias are deleted.
     
 
 

@@ -42,7 +42,7 @@ Character& Character::operator=(const Character& rhs)
 		{
 				if (_inventory[i])
 					delete _inventory[i];
-				_inventory[i] = ((rhs._inventory[i]) ? rhs._inventory[i] : NULL);
+				_inventory[i] = ((rhs._inventory[i]) ? rhs._inventory[i]->clone() : NULL);
 		}
     }
     return *this;
@@ -74,7 +74,7 @@ void Character::equip(AMateria* m)
 		{
 			if (!_inventory[i])
 			{
-				_inventory[i] = m;
+				_inventory[i] = m->clone();
 				break;
 			}
 		}

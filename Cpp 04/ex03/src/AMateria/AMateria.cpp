@@ -12,15 +12,36 @@
 
 #include "AMateria.hpp"
 
+Node *AMateria::list = NULL;
+Node *AMateria::curr = NULL;
 
-Node* AMateria::list = NULL;
-Node* AMateria::curr = NULL;
+AMateria::AMateria(void) : _type("default") {}
+AMateria::AMateria(std::string const &type) : _type(type) {}
+AMateria::AMateria(const AMateria &src) : _type(src._type) {}
 
+AMateria &AMateria::operator=(const AMateria &rhs)
+{
+    (void)rhs;
+    return (*this);
+}
+
+AMateria::~AMateria() {}
+
+std::string const &AMateria::getType(void) const
+{
+    return (_type);
+}
+
+void AMateria::use(ICharacter &target)
+{
+    std::cout << "Used default Materia against " << target.getName() << std::endl;
+}
 
 void AMateria::addToDropped(AMateria *materia)
 {
     Node *temp;
 
+    //Init list if first add
     if (!list)
     {
         list = new Node;
@@ -28,13 +49,15 @@ void AMateria::addToDropped(AMateria *materia)
         list->materia = NULL;
         curr = list;
     }
+    //Check if materia already on the list
     temp = list->next;
-    while(temp)
+    while (temp)
     {
         if (temp->materia == materia)
             return;
         temp = temp->next;
     }
+    //Create node and add pointer to list
     curr->next = new Node;
     curr = curr->next;
     curr->materia = materia;
@@ -43,14 +66,15 @@ void AMateria::addToDropped(AMateria *materia)
 
 Node *AMateria::getMateriaList()
 {
-    return list->next;
+    return list ? list->next : NULL;
 }
 
-void AMateria::cleanList(void) {
+void AMateria::cleanList(void)
+{
 
     Node *head = getMateriaList();
     Node *temp;
-    while (head) 
+    while (head)
     {
         temp = head->next;
         delete head->materia;
@@ -58,26 +82,4 @@ void AMateria::cleanList(void) {
         head = temp;
     }
     delete AMateria::list;
-}
-
-AMateria::AMateria(void) : _type("default") {}
-AMateria::AMateria(std::string const& type) : _type(type) {}
-AMateria::AMateria(const AMateria& src): _type(src._type) {}
-
-AMateria& AMateria::operator=(const AMateria& rhs)
-{
-    (void)rhs;
-    return (*this);
-}
-
-AMateria::~AMateria() {}
-
-std::string const& AMateria::getType(void) const
-{
-    return (_type);
-}
-
-void AMateria::use(ICharacter& target)
-{
-    std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
 }
