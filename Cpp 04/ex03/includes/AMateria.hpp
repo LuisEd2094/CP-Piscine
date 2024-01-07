@@ -39,7 +39,7 @@ class AMateria
         virtual void use(ICharacter& target);
 
         static Node *getMateriaList(void);
-        static void addMateria(AMateria *materia);
+        static void addToDropped(AMateria *materia);
         static void cleanList(void);
 
 private:

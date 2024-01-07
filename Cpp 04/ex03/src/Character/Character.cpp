@@ -85,7 +85,7 @@ void Character::unequip(int idx)
 {
 	if (_inventory[idx])
 	{
-		AMateria::addMateria(_inventory[idx]);
+		AMateria::addToDropped(_inventory[idx]);
 		_inventory[idx] = NULL;
 	}
 }

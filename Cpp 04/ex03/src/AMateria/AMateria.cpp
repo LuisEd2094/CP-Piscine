@@ -17,16 +17,18 @@ Node* AMateria::list = NULL;
 Node* AMateria::curr = NULL;
 
 
-void AMateria::addMateria(AMateria *materia)
+void AMateria::addToDropped(AMateria *materia)
 {
+    Node *temp;
+
     if (!list)
     {
         list = new Node;
+        list->next = NULL;
+        list->materia = NULL;
         curr = list;
     }
-
-    Node *temp = list->next;
-
+    temp = list->next;
     while(temp)
     {
         if (temp->materia == materia)
@@ -34,8 +36,9 @@ void AMateria::addMateria(AMateria *materia)
         temp = temp->next;
     }
     curr->next = new Node;
-    curr->next->materia = materia;
     curr = curr->next;
+    curr->materia = materia;
+    curr->next = NULL;
 }
 
 Node *AMateria::getMateriaList()
@@ -50,6 +53,7 @@ void AMateria::cleanList(void) {
     while (head) 
     {
         temp = head->next;
+        delete head->materia;
         delete head;
         head = temp;
     }
