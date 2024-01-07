@@ -11,26 +11,25 @@
 /* ************************************************************************** */
 
 #ifndef ANIMAL_HPP
-# define ANIMAL_HPP
+#define ANIMAL_HPP
 
 #include <iostream>
 
 class Animal
 {
-    protected:
-        std::string _type;
-        Animal(void);
-        Animal(std::string type);
+protected:
+    std::string _type;
+    Animal(void);
+    Animal(std::string type);
 
-        Animal(const Animal& src);
-        Animal& operator=(const Animal& rhs);
+    Animal(const Animal &src);
+    Animal &operator=(const Animal &rhs);
 
+public:
+    virtual ~Animal(void);
 
-    public:
-        virtual ~Animal(void);
-
-        virtual void    makeSound(void) const;
-        std::string     getType(void) const; 
+    virtual void makeSound(void) const;
+    std::string getType(void) const;
 };
 
 #endif

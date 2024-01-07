@@ -12,13 +12,12 @@
 
 #include "Brain.hpp"
 
-
 Brain::Brain(void)
 {
     const std::string examples[] = {
         "I want to eat",
         "I want to sleep",
-        "I want to run", 
+        "I want to run",
         "I want to poop",
         "I want to pee",
         "I am",
@@ -28,22 +27,21 @@ Brain::Brain(void)
     std::cout << "Brain(void) called" << std::endl;
 }
 
-Brain& Brain::operator=(const Brain& rhs)
+Brain &Brain::operator=(const Brain &rhs)
 {
-	if (this != &rhs)
-	{
-		for (int i = 0; i < 100; i++)
-			_ideas[i] = rhs._ideas[i];
-	}
+    if (this != &rhs)
+    {
+        for (int i = 0; i < 100; i++)
+            _ideas[i] = rhs._ideas[i];
+    }
     std::cout << "Brain = operator called" << std::endl;
-	return (*this);
+    return (*this);
 }
 
-
-Brain::Brain(const Brain& copy)
+Brain::Brain(const Brain &copy)
 {
     *this = copy;
-	std::cout << "Brain copy constructor called" << std::endl;
+    std::cout << "Brain copy constructor called" << std::endl;
 }
 
 Brain::~Brain(void)
@@ -51,7 +49,7 @@ Brain::~Brain(void)
     std::cout << "Brain deconstructor called" << std::endl;
 }
 
-const std::string& Brain::getIdea(int index) const
+const std::string &Brain::getIdea(int index) const
 {
     if (index < 100 && index >= 0)
         return (_ideas[index]);

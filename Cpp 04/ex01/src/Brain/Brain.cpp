@@ -50,7 +50,7 @@ Brain::~Brain(void)
 {
     std::cout << "Brain deconstructor called" << std::endl;
 }
-
+ 
 const std::string& Brain::getIdea(int index) const
 {
     if (index < 100 && index >= 0)

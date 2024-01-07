@@ -18,22 +18,16 @@ Cat::Cat(void)
 	std::cout << "Cat(void) constructor called" << std::endl;
 }
 
-Cat::Cat(std::string type)
-	: Animal(type), _brain(new Brain())
-{
-	std::cout << "Cat(\"" << type << "\") constructor called" << std::endl;
-}
-
-Cat::Cat(const Cat& other)
-	: Animal(other), _brain(new Brain())
+Cat::Cat(const Cat &other)
+	: Animal(other), _brain(new Brain(*other._brain))
 {
 	std::cout << "Cat copy constructor called on " << other._type << std::endl;
 }
 
-Cat& Cat::operator=(const Cat& rhs)
+Cat &Cat::operator=(const Cat &rhs)
 {
+	Animal::operator=(rhs);
 	_brain = rhs._brain;
-	_type = rhs._type;
 	std::cout << "Cat = operator called" << std::endl;
 	return (*this);
 }
@@ -44,7 +38,7 @@ Cat::~Cat(void)
 	std::cout << "Cat destructor called for " << _type << std::endl;
 }
 
-Brain* Cat::getBrain() const
+Brain *Cat::getBrain() const
 {
 	return (_brain);
 }

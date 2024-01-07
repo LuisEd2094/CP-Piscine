@@ -18,22 +18,17 @@ Dog::Dog(void)
 	std::cout << "Dog(void) constructor called" << std::endl;
 }
 
-Dog::Dog(std::string type)
-	: Animal(type), _brain(new Brain())
-{
-	std::cout << "Dog(\"" << type << "\") constructor called" << std::endl;
-}
 
 Dog::Dog(const Dog& other)
-	: Animal(other)
+	: Animal(other), _brain(new Brain(*other._brain))
 {
 	std::cout << "Dog copy constructor called on " << other._type << std::endl;
 }
 
 Dog& Dog::operator=(const Dog& rhs)
 {
+	Animal::operator=(rhs);
 	_brain = rhs._brain;
-	_type = rhs._type;
 	std::cout << "Dog = operator called" << std::endl;
 	return (*this);
 }

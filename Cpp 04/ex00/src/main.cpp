@@ -37,10 +37,25 @@ int main()
 	wrongAnimal->makeSound();
 	wrongCat->makeSound();
 
+	Cat		catOperator = *newCat;
+
+	std::cout << "catOperator Cat Type: " << catOperator.getType() << std::endl;
+	catOperator.makeSound();
+
+	Cat copyCat(*newCat);
+
+	std::cout << "copyCat Cat Type: " << copyCat.getType() << std::endl;
+	copyCat.makeSound();
+
+
 	delete newAnimal;
 	delete newCat;
 	delete newDog;
 	delete wrongAnimal;
 	delete wrongCat;
 
+	std::cout << "copyCat Cat Type: " << copyCat.getType() << std::endl;
+	copyCat.makeSound();
+	std::cout << "catOperator Cat Type: " << catOperator.getType() << std::endl;
+	catOperator.makeSound();
 }

@@ -20,7 +20,6 @@ class Dog : public Animal
 {
     public:
         Dog(void);
-        Dog(std::string type);
         Dog(const Dog& other);
         Dog& operator=(const Dog& rhs);
         ~Dog(void);
@@ -28,7 +27,7 @@ class Dog : public Animal
         void makeSound(void) const;
         Brain* getBrain() const;
     private:
-        Brain * _brain;
+        Brain *_brain;
 };
 
 #endif

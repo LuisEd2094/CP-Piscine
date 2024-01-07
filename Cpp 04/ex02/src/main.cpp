@@ -15,11 +15,10 @@
 #include "Dog.hpp"
 #include "Brain.hpp"
 
-
 void anotherTest(void)
 {
-	Animal* animals[10];
-	
+	Animal *animals[10];
+
 	for (int i = 0; i < 10; i++)
 	{
 		if (i >= 5)
@@ -39,7 +38,8 @@ void anotherTest(void)
 		{
 			std::cout << copyCat->getBrain()->getIdea(j) << std::endl;
 		}
-		std::cout << "DONE WITH A CAT " << std::endl << std::endl;
+		std::cout << "DONE WITH A CAT " << std::endl
+				  << std::endl;
 	}
 
 	std::cout << std::endl;
@@ -49,11 +49,10 @@ void anotherTest(void)
 	}
 }
 
-int main()
+void basic_test(void)
 {
-	//Animal		*newAnimal = new Animal();
-	Cat			*newCat = new Cat();
-	Cat			*anotherCat = new Cat(*newCat);
+	Cat *newCat = new Cat();
+	Cat *anotherCat = new Cat(*newCat);
 
 	for (int i = 0; i < 100; i++)
 		std::cout << newCat->getBrain()->getIdea(i) << std::endl;
@@ -62,7 +61,8 @@ int main()
 	for (int i = 0; i < 100; i++)
 		std::cout << anotherCat->getBrain()->getIdea(i) << std::endl;
 
-	std::cout << newCat << std::endl << anotherCat << std::endl;
+	std::cout << newCat << std::endl
+			  << anotherCat << std::endl;
 
 	delete anotherCat;
 
@@ -82,8 +82,19 @@ int main()
 
 	delete animalCat;
 	delete animalDog;
+}
 
+/*void error_test(void)
+{
+	Animal animal;
 
+}
+*/
+int main()
+{
+	// Animal		*newAnimal = new Animal();
+	basic_test();
 
-	//anotherTest();
+	// anotherTest();
+	// error_test();
 }

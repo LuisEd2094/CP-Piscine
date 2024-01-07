@@ -11,23 +11,22 @@
 /* ************************************************************************** */
 
 #ifndef CAT_HPP
-# define CAT_HPP
+#define CAT_HPP
 
-# include "Animal.hpp"
-# include "Brain.hpp"
+#include "Animal.hpp"
+#include "Brain.hpp"
 class Cat : public Animal
 {
-    public:
-        Cat(void);
-        Cat(std::string type);
-        Cat(const Cat& other);
-        Cat& operator=(const Cat& rhs);
-        ~Cat(void);
+public:
+    Cat(void);
+    Cat(const Cat &other);
+    Cat &operator=(const Cat &rhs);
+    ~Cat(void);
 
-        void makeSound(void) const;
-        Brain *getBrain(void) const;
-    private:
-        Brain *_brain;
+    void makeSound(void) const;
+    Brain *getBrain(void) const;
+
+private:
+    Brain *_brain;
 };
-
 #endif

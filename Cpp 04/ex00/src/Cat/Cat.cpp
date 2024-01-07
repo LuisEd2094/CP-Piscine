@@ -18,11 +18,6 @@ Cat::Cat(void)
 	std::cout << "Cat(void) constructor called" << std::endl;
 }
 
-Cat::Cat(std::string type)
-	: Animal(type)
-{
-	std::cout << "Cat(\"" << type << "\") constructor called" << std::endl;
-}
 
 Cat::Cat(const Cat& other)
 	: Animal(other)
@@ -32,7 +27,7 @@ Cat::Cat(const Cat& other)
 
 Cat& Cat::operator=(const Cat& rhs)
 {
-	_type = rhs._type;
+	Animal::operator=(rhs);
 	return *this;
 }
 

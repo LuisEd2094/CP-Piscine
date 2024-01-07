@@ -18,12 +18,6 @@ Dog::Dog(void)
 	std::cout << "Dog(void) constructor called" << std::endl;
 }
 
-Dog::Dog(std::string type)
-	: Animal(type)
-{
-	std::cout << "Dog(\"" << type << "\") constructor called" << std::endl;
-}
-
 Dog::Dog(const Dog& other)
 	: Animal(other)
 {
@@ -32,7 +26,8 @@ Dog::Dog(const Dog& other)
 
 Dog& Dog::operator=(const Dog& rhs)
 {
-	_type = rhs._type;
+
+	Animal::operator=(rhs);
 	return *this;
 }
 

@@ -20,7 +20,6 @@ class Cat : public Animal
 {
     public:
         Cat(void);
-        Cat(std::string type);
         Cat(const Cat& other);
         Cat& operator=(const Cat& rhs);
         ~Cat(void);
