@@ -22,7 +22,7 @@ void testMateria(void)
 {
     Ice *iceMateria = new Ice();
     Ice *anotherice = new Ice();
-    //Cure *cure = new Cure();
+    Cure *cure = new Cure();
     Character *myChar = new Character("My char");
     Character *target = new Character("Target");
 
@@ -32,7 +32,7 @@ void testMateria(void)
     myChar->equip(anotherice);
     myChar->equip(anotherice);
 
-    //myChar->equip(cure);
+    myChar->equip(cure);
 
     myChar->use(0, *target);
     myChar->use(1, *target);
@@ -44,13 +44,16 @@ void testMateria(void)
     myChar->use(2,*target);
 
     myChar->unequip(2);
-    //myChar->equip(cure);
+    myChar->equip(cure);
     myChar->use(0, *target);
     myChar->use(2, *target);
     myChar->use(2,*target);
 
     delete myChar;
     delete target;
+    delete iceMateria;
+    delete anotherice;
+    delete cure;
 }
 
 void pdfTest(void)
@@ -185,13 +188,13 @@ int main(void)
         list = list->next;
     }*/
 
-    //testMateria();
+    testMateria();
     pdfTest();
 
 
-    //ice_test_create();
-    //cure_test_create();
-    //character_test();
+    ice_test_create();
+    cure_test_create();
+    character_test();
 
 
     AMateria::cleanList();// Need to call this to make sure all dropped materias are deleted.
