@@ -31,8 +31,9 @@ public:
 
 protected:
     ScavTrap(void);
-    unsigned int _hp;
-    unsigned int _energy;
-    unsigned int _dmg;
+    const static unsigned int _base_hp = 100;
+    const static unsigned int _base_energy = 50;
+    const static unsigned int _base_dmg = 20;
 };
+
 #endif

@@ -13,20 +13,28 @@
 #include "DiamondTrap.hpp"
 
 DiamondTrap::DiamondTrap(void)
-    : ClapTrap("default_clap_name"), FragTrap("default"), ScavTrap("default"), _name("default")
+    : ClapTrap(), FragTrap(), ScavTrap(), _name("default")
 {
     std::cout << "Default DiamondTrap constructor called" << std::endl;
+    ClapTrap::_name = ClapTrap::_name + "_clap_name";
+    _hp = FragTrap::_base_hp;
+    _energy = ScavTrap::_base_energy;
+    _dmg = FragTrap::_base_dmg;
 }
 
 DiamondTrap::DiamondTrap(std::string name)
     : ClapTrap(name + "_clap_name" ), FragTrap(), ScavTrap(), _name(name)
 {
-    std::cout << "DiamondTrap(name) constructor called, created DiamondTrap" << _name << std::endl;
+    std::cout << "DiamondTrap(name) constructor called, created DiamondTrap " << _name << std::endl;
+    _hp = FragTrap::_base_hp;
+    _energy = ScavTrap::_base_energy;
+    _dmg = FragTrap::_base_dmg;
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap &toCocpy)
     : ClapTrap(toCocpy), FragTrap(toCocpy), ScavTrap(toCocpy)
 {
+    *this = toCocpy;
     std::cout << "DiamondTrap copy constructor called for " << _name << std::endl;
 }
 
@@ -36,8 +44,7 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &DiamondTrap)
     if (this != &DiamondTrap)
     {
         ClapTrap::operator=(DiamondTrap);
-        ScavTrap::operator=(DiamondTrap);
-        FragTrap::operator=(DiamondTrap);
+        ClapTrap::_name = DiamondTrap._name + "_clap_name";
         std::cout << "Operator = done" << std::endl;
     }
     return (*this);
@@ -53,15 +60,3 @@ void DiamondTrap::whoAmI()
     std::cout << "DiamondTrap " << _name;
     std::cout << " whoAmI(): I am DiamondTrap " << _name << " and my ClapTrap name is " << ClapTrap::_name << std::endl;
 }
-
-
-std::ostream& operator<< (std::ostream& stream, const DiamondTrap& DiamondTrap)
-{
-    stream << "Diamond hp=" << DiamondTrap._hp << std::endl;
-    stream << "Diamond energy=" << DiamondTrap._energy << std::endl;
-    stream << "Diamond dmg=" << DiamondTrap._dmg << std::endl;
-
-    return stream;
-
-}
-

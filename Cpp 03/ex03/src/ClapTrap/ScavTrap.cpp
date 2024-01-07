@@ -13,15 +13,21 @@
 #include "ScavTrap.hpp"
 
 ScavTrap::ScavTrap(void)
-    : ClapTrap(), _hp(100), _energy(50), _dmg(20)
+    : ClapTrap()
 {
     std::cout << "Default ScavTrap constructor called" << std::endl;
+    _hp = ScavTrap::_base_hp;
+    _energy = ScavTrap::_base_energy;
+    _dmg = ScavTrap::_base_dmg;
 }
 
 ScavTrap::ScavTrap(std::string name)
-    : ClapTrap(name), _hp(100), _energy(50), _dmg(20)
+    : ClapTrap(name)
 {
     std::cout << "ScavTrap(name) constructor called, created ScavTrap " << _name << std::endl;
+    _hp = ScavTrap::_base_hp;
+    _energy = ScavTrap::_base_energy;
+    _dmg = ScavTrap::_base_dmg;
 }
 
 ScavTrap::ScavTrap(const ScavTrap &toCocpy)
@@ -63,6 +69,6 @@ void ScavTrap::guardGate()
     else
     {
         _energy -= 1;
-        std::cout << "ScavTrap " << _name << " has entered Gate keeper mode!" << std::endl;
+        std::cout << " has entered Gate keeper mode!" << std::endl;
     }
 }

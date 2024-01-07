@@ -13,15 +13,22 @@
 #include "FragTrap.hpp"
 
 FragTrap::FragTrap(void)
-    : ClapTrap(), _hp(100), _energy(100), _dmg(30)
+    : ClapTrap()
 {
     std::cout << "Default FragTrap constructor called" << std::endl;
+    _hp = FragTrap::_base_hp;
+    _energy = FragTrap::_base_energy;
+    _dmg = FragTrap::_base_dmg;
+
 }
 
 FragTrap::FragTrap(std::string name)
-    : ClapTrap(name), _hp(100), _energy(100), _dmg(30)
+    : ClapTrap(name)
 {
     std::cout << "FragTrap(name) constructor called, created FragTrap " << _name << std::endl;
+    _hp = FragTrap::_base_hp;
+    _energy = FragTrap::_base_energy;
+    _dmg = FragTrap::_base_dmg;
 }
 
 FragTrap::FragTrap(const FragTrap &toCocpy)

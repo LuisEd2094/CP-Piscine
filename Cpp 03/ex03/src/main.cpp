@@ -18,15 +18,21 @@
 int main()
 {
 	DiamondTrap daniel("Daniel");
-
-	std::cout << daniel << std::endl;
-
-	daniel.ScavTrap::attack("Pedro");
-	daniel.FragTrap::attack("Maria");
+	
 	daniel.attack("Ned");
 	daniel.takeDamage(5);
 	daniel.beRepaired(3);
 	daniel.guardGate();
 	daniel.highFivesGuys();
 	daniel.whoAmI();
+
+	DiamondTrap copy(daniel);
+	DiamondTrap equal("Equal");
+
+	DiamondTrap to_test = equal;
+
+	copy.beRepaired(10);
+	daniel.beRepaired(0);
+	to_test.attack("Maria");
+	copy.attack("Pedro");
 }

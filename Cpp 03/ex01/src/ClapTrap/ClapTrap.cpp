@@ -97,6 +97,7 @@ void ClapTrap::takeDamage(unsigned int amount)
 		_hp -= amount;
 
 	std::cout << _name << " took " << amount << " points of damage!" << std::endl;
+	std::cout << "He has now " << _hp << std::endl;
 	if (_hp <= 0)
 		std::cout << _name << " died!" << std::endl;
 }

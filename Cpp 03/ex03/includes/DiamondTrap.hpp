@@ -28,9 +28,6 @@ public:
     ~DiamondTrap(void);
 
     using ScavTrap::attack;
-    using FragTrap::_hp;
-    using ScavTrap::_energy;
-    using FragTrap::_dmg;
 
     void whoAmI(void);
 protected:

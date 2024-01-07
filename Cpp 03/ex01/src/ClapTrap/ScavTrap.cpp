@@ -68,6 +68,6 @@ void ScavTrap::guardGate()
     else
     {
         _energy -= 1;
-        std::cout << "ScavTrap " << _name << " has entered Gate keeper mode!" << std::endl;
+        std::cout << " has entered Gate keeper mode!" << std::endl;
     }
 }
