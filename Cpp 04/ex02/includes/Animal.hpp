@@ -6,7 +6,7 @@
 /*   By: lsoto-do <lsoto-do@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 10:25:57 by lsoto-do          #+#    #+#             */
-/*   Updated: 2023/12/28 10:25:58 by lsoto-do         ###   ########.fr       */
+/*   Updated: 2024/01/15 10:32:43 by lsoto-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ protected:
     Animal &operator=(const Animal &rhs);
 
 public:
-    virtual ~Animal(void);
+    virtual ~Animal(void) = 0;
 
-    virtual void makeSound(void) const;
+    virtual void makeSound(void) const = 0;
     std::string getType(void) const;
 };
 
