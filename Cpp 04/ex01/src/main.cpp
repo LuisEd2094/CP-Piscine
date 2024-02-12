@@ -55,6 +55,21 @@ void dog_test(void)
 	Dog *copyDog = new Dog(*newDog2);
 	Dog DogOperator = *copyDog;
 
+	Dog * dog = new Dog();
+	Dog dog2;
+
+	dog2 = *dog;
+	
+	std::cout << dog->getBrain()->getIdea(0) << std::endl;
+	std::cout << dog2.getBrain()->getIdea(0) << std::endl;
+
+		std::cout << std::endl;
+
+
+	delete dog;
+
+	std::cout << dog2.getBrain()->getIdea(0) << std::endl;
+
 	Dog cpyDog(*newDog2);
 
 	delete newDog2;
@@ -73,6 +88,20 @@ void cat_test(void)
 	Cat *newCat2 = new Cat();
 	Cat *copyCat = new Cat(*newCat2);
 	Cat catOperator = *copyCat;
+	Cat * cat = new Cat();
+	Cat cat2;
+
+	cat2 = *cat;
+	
+	std::cout << cat->getBrain()->getIdea(0) << std::endl;
+	std::cout << cat2.getBrain()->getIdea(0) << std::endl;
+
+	delete cat;
+
+	std::cout << cat2.getBrain()->getIdea(0) << std::endl;
+
+
+
 
 	Cat cpy(*newCat2);
 
@@ -143,8 +172,8 @@ int main()
 {
 	//Animal		*newAnimal = new Animal();
 	array_test();
-	//basic_test();
-	//anotherTest();
-	//cat_test();
-	//dog_test();
+	basic_test();
+	anotherTest();
+	cat_test();
+	dog_test();
 }

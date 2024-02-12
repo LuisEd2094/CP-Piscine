@@ -31,6 +31,7 @@ class Character : public ICharacter
 	    void unequip(int idx);
 	    void use(int idx, ICharacter& target);
     private:
+        bool valid_index(int idx);
         Character(void);
         AMateria*   _inventory[4];
         std::string _name;

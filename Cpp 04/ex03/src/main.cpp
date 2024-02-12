@@ -48,6 +48,12 @@ void testMateria(void)
     myChar->use(0, *target);
     myChar->use(2, *target);
     myChar->use(2,*target);
+    myChar->use(-1, *target);
+    myChar->use(4, *target);
+    myChar->use(3, *target);
+    myChar->unequip(-1);
+    myChar->unequip(4);
+    myChar->unequip(3);
 
     delete myChar;
     delete target;
@@ -70,6 +76,13 @@ void pdfTest(void)
     ICharacter* bob = new Character("bob");
     me->use(0, *bob);
     me->use(1, *bob);
+
+
+    me->equip(src->createMateria("asdas"));
+    me->use(0, *bob);
+    me->use(1, *bob);
+    me->use(2, *bob);
+
     delete bob;
     delete me;
     delete src;
@@ -129,7 +142,6 @@ void cure_test_create(void)
     cure1.use(*target);
 
     cure2.use(*target);
-
     cure3.use(*target);
     cure4.use(*target);
     std::cout << cure1.getType() << std::endl;
@@ -190,8 +202,6 @@ int main(void)
 
     testMateria();
     pdfTest();
-
-
     ice_test_create();
     cure_test_create();
     character_test();

@@ -29,7 +29,7 @@ Cat::Cat(const Cat& other)
 Cat& Cat::operator=(const Cat& rhs)
 {
 	Animal::operator=(rhs);
-	_brain = rhs._brain;
+	*_brain = *rhs._brain;
 	std::cout << "Cat = operator called" << std::endl;
 	return (*this);
 }

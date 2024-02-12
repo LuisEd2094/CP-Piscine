@@ -23,6 +23,7 @@ int main()
 	Dog			*newDog = new Dog();
 	WrongAnimal	*wrongAnimal = new WrongAnimal();
 	WrongCat	*wrongCat = new WrongCat();
+	WrongAnimal *wrongCat2 = new WrongCat();
 
 
 	std::cout << "Animal Type: " << newAnimal->getType() << std::endl;
@@ -36,6 +37,8 @@ int main()
 	newDog->makeSound();
 	wrongAnimal->makeSound();
 	wrongCat->makeSound();
+	wrongCat2->makeSound();
+
 
 	Cat		catOperator = *newCat;
 
@@ -53,6 +56,7 @@ int main()
 	delete newDog;
 	delete wrongAnimal;
 	delete wrongCat;
+	delete wrongCat2;
 
 	std::cout << "copyCat Cat Type: " << copyCat.getType() << std::endl;
 	copyCat.makeSound();

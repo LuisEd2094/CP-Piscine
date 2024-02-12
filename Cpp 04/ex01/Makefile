@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME        = Brain
-CFLAGS      = -std=c++98 -pedantic -Wall -Wextra  -Werror -g 
+CFLAGS      = -std=c++98 -pedantic -Wall -Wextra  -Werror -g  #-fsanitize=address
 CC			= c++
 RM          = rm -f
 ANIMAL_PATH = Animal/

@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME        = a.out
-CFLAGS      = -std=c++98 -pedantic -Wall -Wextra  -Werror -ggdb 
+CFLAGS      = -std=c++98 -pedantic -Wall -Wextra  -Werror -ggdb  -fsanitize=address
 CC			= c++
 RM          = rm -f
 AMATERIA_PATH = AMateria/
@@ -68,7 +68,7 @@ OBJS 			=	$(addprefix $(OBJS_PATH), $(SRC:.cpp=.o))
 all: $(NAME)
 
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) 
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 	@echo "$(LIGHT_GREEN)Created $(NAME) executable$(DEF_COLOR)"
 	

@@ -64,7 +64,7 @@ AMateria* MateriaSource::createMateria(const std::string& type)
     {
         for (int i = 0; i < 4; i++)
         {
-            if (_materia[i]->getType() == type)
+            if (_materia[i] && _materia[i]->getType() == type)
                 return (_materia[i]);
         }
     }

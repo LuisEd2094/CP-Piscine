@@ -81,8 +81,16 @@ void Character::equip(AMateria* m)
 	}
 }
 
+bool Character::valid_index(int idx)
+{
+	return (idx >= 0 && idx <= 3);
+}
+
+
 void Character::unequip(int idx)
 {
+	if (!valid_index(idx))
+		return ;
 	if (_inventory[idx])
 	{
 		AMateria::addToDropped(_inventory[idx]);
@@ -93,6 +101,8 @@ void Character::unequip(int idx)
 
 void Character::use(int idx, ICharacter& target)
 {
+	if (!valid_index(idx))
+		return ;
 	if (_inventory[idx])
 		_inventory[idx]->use(target);
 }
