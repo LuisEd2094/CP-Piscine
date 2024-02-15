@@ -19,6 +19,10 @@
 # include <sstream>
 # include <string>
 # include <functional>
+# include <cstring>
+#include <iomanip>
+#include <string>
+
 
 
 # include "ft_lib.hpp"
@@ -35,18 +39,18 @@ enum e_type {
 class ScalarConverter
 {
     private:
-        static std::size_t _dot_pos;
-        static std::string _sub_str_int ;
-        static std::string _str;
-        static std::string  _literal;
-        static bool        _has_f;
-        static bool        _has_sign;
-        static int         _int;
-        static unsigned char _char;
-        static float       _float;
-        static double      _double;
-        static e_type      _type;
-        static e_type      check_type();
+        static std::size_t      _dot_pos;
+        static std::string      _sub_str_int ;
+        static std::string      _str;
+        static std::string      _literal;
+        static bool             _has_f;
+        static bool             _has_sign;
+        static int              _int;
+        static unsigned char    _char;
+        static float            _float;
+        static double           _double;
+        static e_type           _type;
+        static e_type           check_type();
         static bool is_valid_number();
         static bool is_int();
         static bool is_char();
@@ -59,18 +63,22 @@ class ScalarConverter
         static void print_int(std::string str);
         static void print_float(std::string str);
         static void print_double(std::string str);
-        static void literal_case();
 
+        static void literal_case();
+        static void char_case();
+        static void float_case();
+
+
+        static unsigned int get_presicion();
 
         
         ScalarConverter();
         ScalarConverter(const ScalarConverter & other);
         ScalarConverter& operator=(const ScalarConverter& rhs);
-
-    public:
         ~ScalarConverter();
 
-        
+
+    public:
         static void convert(char *str);
 };
 

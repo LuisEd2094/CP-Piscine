@@ -25,6 +25,7 @@ double ScalarConverter::_double = 0.0;
 e_type ScalarConverter::_type = NONE;
 
 ScalarConverter::ScalarConverter(void){}
+
 ScalarConverter::ScalarConverter(const ScalarConverter& src)
 {
         (void)src;
@@ -58,17 +59,38 @@ bool ScalarConverter::is_char()
 {
     if (_str.length() > 1)
         return (false);
-    std::cout << std::isprint(static_cast<unsigned char>(_str[0])) <<  std::endl;
-    return (std::isprint(static_cast<unsigned char>(_str[0])));
+    _char = _str[0];
+    return (std::isprint((_char)));
 }
 
 bool ScalarConverter::is_double()
 {
+
+    // need to check valid double max and min
+    if (_dot_pos && !(_has_f))
+    {
+        _double = std::stof(_str);
+    }
     return (_dot_pos && !(_has_f));
 }
 
+unsigned int ScalarConverter::get_presicion()
+{
+    if (_has_f)
+        return (_str.length() - _dot_pos - 2);
+    else if (!_dot_pos)
+        return (1);
+    else
+        return (_str.length() - _dot_pos - 1);
+}
+
+
 bool ScalarConverter::is_float()
 {
+    // need to check valid float max and min
+
+    if (_has_f && _dot_pos)
+        _float = std::stof(_str);
     return(_has_f && _dot_pos);
 }
 
@@ -141,10 +163,11 @@ bool ScalarConverter::is_literal()
 e_type ScalarConverter::check_type()
 {
     type_info valid_types [] = {
-        {CHAR, &ScalarConverter::is_char},
         {DOUBLE, &ScalarConverter::is_double},
         {FLOAT, &ScalarConverter::is_float},
-        {INT, &ScalarConverter::is_int}
+        {INT, &ScalarConverter::is_int},
+        {CHAR, &ScalarConverter::is_char},
+
     };
     if (is_literal())
         return (LITERALS);
@@ -152,7 +175,8 @@ e_type ScalarConverter::check_type()
         return (NONE);
     for (size_t i = 0; i < sizeof(valid_types) / sizeof(valid_types[0]); ++i) {
         if ((valid_types[i].f)()) {
-            return (valid_types[i].type);
+           std::cout << std::fixed << std::setprecision(get_presicion()); 
+           return (valid_types[i].type);
         }
     }
     return (NONE);
@@ -160,29 +184,44 @@ e_type ScalarConverter::check_type()
 
 void ScalarConverter::print_char(std::string str)
 {
-    std::cout << "char: " << str << std::endl;
+    std::cout << "char: ";
+    if (!str.empty())
+        std::cout << str << std::endl;
+    else
+        std::cout << _char << std::endl;
 }
 
 
 void ScalarConverter::print_int(std::string str)
 {
-    std::cout << "int: " << str << std::endl;
-
+    std::cout << "int: ";
+    if (!str.empty())
+        std::cout << str << std::endl;
+    else
+        std::cout << _int << std::endl;
 }
 void ScalarConverter::print_float(std::string str)
 {
-    std::cout << "float: " << str<< std::endl;
+    std::cout << "float: ";
+    if (!str.empty())
+        std::cout << str << std::endl;
+    else{
+        std::cout << _float << "f" << std::endl;
+
+    }
 
 }
 void ScalarConverter::print_double(std::string str)
 {    
-    std::cout << "double: " << str << std::endl;
+    std::cout << "double: ";
+    if (!str.empty())
+        std::cout << str << std::endl;
+    else
+        std::cout << _double << std::endl;
 }
 
 void ScalarConverter::literal_case()
 {
-    std::string to_pass;
-
     print_char("imposible");
     print_int("imposible");
     print_float((_str.back() == 'f' && _str.back() - 1 == 'f') ? \
@@ -191,6 +230,32 @@ void ScalarConverter::literal_case()
     print_double((_str.back() == 'f' && _str.back() - 1 == 'f') ? \
                 _str.substr(0, _str.size() - 1) : _str);
 }
+
+
+void ScalarConverter::float_case()
+{
+    _char = static_cast<char>(_float);
+    _int = static_cast<int>(_float);
+    _double = static_cast<double>(_float);
+    
+    print_char("");
+    print_int("");
+    print_float("");
+    print_double("");
+}
+
+
+void ScalarConverter::char_case()
+{
+    _int = static_cast<int>(_char);
+    _float = static_cast<float>(_char);
+    _double = static_cast<double>(_char);
+    print_char("");
+    print_int("");
+    print_float("");
+    print_double("");
+}
+
 
 void ScalarConverter::convert(char *input)
 {
@@ -206,15 +271,17 @@ void ScalarConverter::convert(char *input)
     {
         case LITERALS:
             literal_case();
-            std::cout << "is literal" << std::endl;
             break;
         case CHAR:
+            char_case();
             std::cout << "is char" << std::endl;
             break;
         case DOUBLE:
+            double_case();
             std::cout << "is double" << std::endl;
             break;
         case FLOAT:
+            float_case();
             std::cout << "is float" << std::endl;
             break;
         case INT:
