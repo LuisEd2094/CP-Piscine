@@ -33,7 +33,7 @@ Base* generate(void)
     std::default_rando_engine generator(rd());
 
     // Generate two random integers
-    std::unifor_int_distribution<int> distribution(0, std::numeric_limits<int>::max());
+    std::unifor_distribution<int> distribution(0, std::numeric_limits<int>::max());
     int random1 = distribution(generator);
 
     int index = random1 % 3;

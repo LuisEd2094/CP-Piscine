@@ -22,6 +22,7 @@ int ScalarConverter::_int = 0;
 unsigned char ScalarConverter::_char = 0;
 float ScalarConverter::_float = 0.0f;
 double ScalarConverter::_double = 0.0;
+long int    ScalarConverter::_strtol_value = 0;
 e_type ScalarConverter::_type = NONE;
 
 ScalarConverter::ScalarConverter(void){}
@@ -40,19 +41,18 @@ ScalarConverter::~ScalarConverter() {}
 bool ScalarConverter::is_int()
 {
     std::string str_copy = _sub_str_int;
-    long int strtol_value = 0;
     char *p_end;
 
     if (_dot_pos)
         _sub_str_int = _sub_str_int.substr(0, _sub_str_int.find('.'));
     if (check_if_only_zeros(str_copy))
         return (true);
-    strtol_value = strtol(str_copy.c_str(), &p_end, 10);
-    if (strtol_value > std::numeric_limits<int>::max())
+    _strtol_value = strtol(str_copy.c_str(), &p_end, 10);
+    if (_strtol_value > std::numeric_limits<int>::max())
         return (false);
-    else if (strtol_value < std::numeric_limits<int>::min())
+    else if (_strtol_value < std::numeric_limits<int>::min())
         return (false);
-    return (strtol_value);
+    return (_strtol_value);
 }
 
 bool ScalarConverter::is_char()
@@ -250,6 +250,35 @@ void ScalarConverter::char_case()
     _int = static_cast<int>(_char);
     _float = static_cast<float>(_char);
     _double = static_cast<double>(_char);
+
+    print_char("");
+    print_int("");
+    print_float("");
+    print_double("");
+}
+
+
+void ScalarConverter::double_case()
+{
+    _char = static_cast<char>(_double);
+    _int = static_cast<int>(_double);
+    _float = static_cast<float>(_double);
+
+    print_char("");
+    print_int("");
+    print_float("");
+    print_double("");
+}
+
+
+void ScalarConverter::int_case()
+{
+    _int = static_cast<int>(_strtol_value);
+    _char = static_cast<char>(_strtol_value);
+    _float = static_cast<float>(_strtol_value);
+    _double = static_cast<double>(_strtol_value);
+
+    
     print_char("");
     print_int("");
     print_float("");
@@ -285,6 +314,7 @@ void ScalarConverter::convert(char *input)
             std::cout << "is float" << std::endl;
             break;
         case INT:
+            int_case();
             std::cout << "is int" << std::endl;
             break;
         default:

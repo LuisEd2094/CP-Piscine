@@ -43,6 +43,7 @@ class ScalarConverter
         static std::string      _sub_str_int ;
         static std::string      _str;
         static std::string      _literal;
+        static long int         _strtol_value;
         static bool             _has_f;
         static bool             _has_sign;
         static int              _int;
@@ -67,6 +68,8 @@ class ScalarConverter
         static void literal_case();
         static void char_case();
         static void float_case();
+        static void double_case();
+        static void int_case();
 
 
         static unsigned int get_presicion();
