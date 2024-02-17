@@ -27,7 +27,5 @@ int main(int argc, char *argv[])
     }
     else
         ScalarConverter::convert(argv[1]);
-
-    std::cout << std::numeric_limits<int>::max() << std::endl;
     std::exit(EXIT_SUCCESS);
 }

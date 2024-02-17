@@ -12,18 +12,21 @@
 
 #include "ScalarConverter.hpp" 
 
-std::size_t ScalarConverter::_dot_pos = 0;
-std::string ScalarConverter::_sub_str_int = "";
-std::string ScalarConverter::_str = "";
-std::string ScalarConverter::_literal = "";
-bool ScalarConverter::_has_f = false;
-bool ScalarConverter::_has_sign = false;
-int ScalarConverter::_int = 0;
-unsigned char ScalarConverter::_char = 0;
-float ScalarConverter::_float = 0.0f;
-double ScalarConverter::_double = 0.0;
-long int    ScalarConverter::_strtol_value = 0;
-e_type ScalarConverter::_type = NONE;
+std::size_t     ScalarConverter::_dot_pos = 0;
+std::string     ScalarConverter::_str = "";
+std::string     ScalarConverter::_literal = "";
+bool            ScalarConverter::_has_f = false;
+bool            ScalarConverter::_has_sign = false;
+int             ScalarConverter::_int = 0;
+unsigned char   ScalarConverter::_char = 0;
+float           ScalarConverter::_float = 0.0f;
+double          ScalarConverter::_double = 0.0;
+long int        ScalarConverter::_strtol_value = 0;
+e_type          ScalarConverter::_type = NONE;
+char*           ScalarConverter::_p_end = NULL;
+
+std::streamsize ScalarConverter::_og_precision = std::cout.precision();
+
 
 ScalarConverter::ScalarConverter(void){}
 
@@ -38,21 +41,66 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& rhs) {
 
 ScalarConverter::~ScalarConverter() {}
 
+
+bool ScalarConverter::is_literal()
+{
+    std::string literals [] = {
+        "-inff",
+        "+inff", 
+        "nanf",
+        "-inf",
+        "+inf",
+        "nan",
+    };
+    for (size_t i = 0; i < sizeof(literals) / sizeof(literals[0]); ++i)
+    {
+        if (_str == literals[i])
+        {
+            _literal = literals[i];
+            return true;
+        }
+    }
+    return (false);
+
+}
+
+/*strtod sets errno to ERANGE if it goes beyond the limit. there are issues with the precision of the conversion
+so large numbers are rounded to the nearest double*/
+
+bool ScalarConverter::is_double()
+{
+    if (_dot_pos && !(_has_f))
+    {
+        _double = std::strtod(_str.c_str(), &_p_end);
+        return (errno != ERANGE);
+    }
+    return (false);
+}
+
+bool ScalarConverter::is_float()
+{
+    if (_has_f && _dot_pos)
+    {
+        _double = std::strtof(_str.c_str(), &_p_end);
+        if (errno == ERANGE)
+            return (false);
+        if (_double > std::numeric_limits<float>::max() || _double < std::numeric_limits<float>::max() * -1)
+            return (false);
+        _float = std::atof(_str.c_str());
+        return (true);
+    }
+    return (false);
+}
+
 bool ScalarConverter::is_int()
 {
-    std::string str_copy = _sub_str_int;
-    char *p_end;
-
-    if (_dot_pos)
-        _sub_str_int = _sub_str_int.substr(0, _sub_str_int.find('.'));
-    if (check_if_only_zeros(str_copy))
+    if (check_if_only_zeros(_str))
         return (true);
-    _strtol_value = strtol(str_copy.c_str(), &p_end, 10);
-    if (_strtol_value > std::numeric_limits<int>::max())
+    _strtol_value = strtol(_str.c_str(), &_p_end, 10);
+    if (_strtol_value > std::numeric_limits<int>::max() || _strtol_value < std::numeric_limits<int>::min())
         return (false);
-    else if (_strtol_value < std::numeric_limits<int>::min())
-        return (false);
-    return (_strtol_value);
+    _int = std::atoi(_str.c_str());
+    return (true);
 }
 
 bool ScalarConverter::is_char()
@@ -61,37 +109,6 @@ bool ScalarConverter::is_char()
         return (false);
     _char = _str[0];
     return (std::isprint((_char)));
-}
-
-bool ScalarConverter::is_double()
-{
-
-    // need to check valid double max and min
-    if (_dot_pos && !(_has_f))
-    {
-        _double = std::stof(_str);
-    }
-    return (_dot_pos && !(_has_f));
-}
-
-unsigned int ScalarConverter::get_presicion()
-{
-    if (_has_f)
-        return (_str.length() - _dot_pos - 2);
-    else if (!_dot_pos)
-        return (1);
-    else
-        return (_str.length() - _dot_pos - 1);
-}
-
-
-bool ScalarConverter::is_float()
-{
-    // need to check valid float max and min
-
-    if (_has_f && _dot_pos)
-        _float = std::stof(_str);
-    return(_has_f && _dot_pos);
 }
 
 bool ScalarConverter::is_valid_number()
@@ -136,37 +153,23 @@ bool ScalarConverter::is_valid_number()
     return (true);
 }
 
-
-bool ScalarConverter::is_literal()
+unsigned int ScalarConverter::get_presicion()
 {
-    std::string literals [] = {
-        "-inff",
-        "+inff", 
-        "nanf",
-        "-inf",
-        "+inf",
-        "nan",
-    };
-    for (size_t i = 0; i < sizeof(literals) / sizeof(literals[0]); ++i)
-    {
-        if (_str == literals[i])
-        {
-            _literal = literals[i];
-            return true;
-        }
-    }
-    return (false);
-
+    if (_has_f)
+        return (_str.length() - _dot_pos - 2);
+    else if (!_dot_pos)
+        return (1);
+    else
+        return (_str.length() - _dot_pos - 1);
 }
-
 
 e_type ScalarConverter::check_type()
 {
     type_info valid_types [] = {
         {DOUBLE, &ScalarConverter::is_double},
         {FLOAT, &ScalarConverter::is_float},
-        {INT, &ScalarConverter::is_int},
         {CHAR, &ScalarConverter::is_char},
+        {INT, &ScalarConverter::is_int}
 
     };
     if (is_literal())
@@ -182,24 +185,16 @@ e_type ScalarConverter::check_type()
     return (NONE);
 }
 
-void ScalarConverter::print_char(std::string str)
-{
-    std::cout << "char: ";
+
+void ScalarConverter::print_double(std::string str)
+{    
+    std::cout << "double: ";
     if (!str.empty())
         std::cout << str << std::endl;
     else
-        std::cout << _char << std::endl;
+        std::cout << _double << std::endl;
 }
 
-
-void ScalarConverter::print_int(std::string str)
-{
-    std::cout << "int: ";
-    if (!str.empty())
-        std::cout << str << std::endl;
-    else
-        std::cout << _int << std::endl;
-}
 void ScalarConverter::print_float(std::string str)
 {
     std::cout << "float: ";
@@ -211,85 +206,119 @@ void ScalarConverter::print_float(std::string str)
     }
 
 }
-void ScalarConverter::print_double(std::string str)
-{    
-    std::cout << "double: ";
+
+void ScalarConverter::print_int(std::string str)
+{
+    std::cout << "int: ";
     if (!str.empty())
         std::cout << str << std::endl;
     else
-        std::cout << _double << std::endl;
+        std::cout << _int << std::endl;
+}
+
+void ScalarConverter::print_char(std::string str)
+{
+    std::cout << "char: ";
+    if (!str.empty())
+        std::cout << str << std::endl;
+    else
+        std::cout << _char << std::endl;
 }
 
 void ScalarConverter::literal_case()
 {
     print_char("imposible");
     print_int("imposible");
-    print_float((_str.back() == 'f' && _str.back() - 1 == 'f') ? \
-                _str : _str + "f");
-
-    print_double((_str.back() == 'f' && _str.back() - 1 == 'f') ? \
-                _str.substr(0, _str.size() - 1) : _str);
+    print_float(((*(_str.rbegin()) == 'f' && *(_str.rbegin() + 1) == 'f') || _str == "nanf") ? _str : _str + "f");
+    print_double(((*(_str.rbegin()) == 'f' && *(_str.rbegin() + 1) == 'f') || _str == "nanf")? (_str.substr(0, _str.size() - 1)) : _str);
 }
 
-
-void ScalarConverter::float_case()
+std::string ScalarConverter::get_float_val()
 {
-    _char = static_cast<char>(_float);
-    _int = static_cast<int>(_float);
-    _double = static_cast<double>(_float);
-    
-    print_char("");
-    print_int("");
-    print_float("");
-    print_double("");
+    if (_double > std::numeric_limits<float>::max() || _double < std::numeric_limits<float>::max() * -1)
+        return ("Value out of bounds");
+    else
+    {
+        _float = static_cast<float>(_double);
+        return ("");
+    }
+
 }
-
-
-void ScalarConverter::char_case()
+std::string ScalarConverter::get_int_val()
 {
-    _int = static_cast<int>(_char);
-    _float = static_cast<float>(_char);
-    _double = static_cast<double>(_char);
-
-    print_char("");
-    print_int("");
-    print_float("");
-    print_double("");
+    if (_double > std::numeric_limits<int>::max() || _double < std::numeric_limits<int>::min())
+        return ("Value out of bounds");
+    else
+    {
+        _int = static_cast<int>(_double);
+        return ("");
+    }
 }
 
+std::string ScalarConverter::get_char_val()
+{
+    if (_int < 33 || _int > 126)
+        return ("Non displayable");
+    else
+    {
+        _char = static_cast<char>(_int);
+        return ("");
+    }
+
+}
 
 void ScalarConverter::double_case()
 {
-    _char = static_cast<char>(_double);
-    _int = static_cast<int>(_double);
-    _float = static_cast<float>(_double);
-
-    print_char("");
-    print_int("");
-    print_float("");
     print_double("");
+    print_float(get_float_val());
+    print_int(get_int_val());
+    print_char(get_char_val());
+}
+
+void ScalarConverter::float_case()
+{
+    _double = static_cast<double>(_float);
+
+    print_double("");
+    print_float("");
+    print_int(get_int_val());
+    print_char(get_char_val());
 }
 
 
 void ScalarConverter::int_case()
 {
-    _int = static_cast<int>(_strtol_value);
-    _char = static_cast<char>(_strtol_value);
-    _float = static_cast<float>(_strtol_value);
-    _double = static_cast<double>(_strtol_value);
+    _double = static_cast<double>(_int);
+    _float  = static_cast<float>(_int);
 
-    
-    print_char("");
-    print_int("");
-    print_float("");
     print_double("");
+    print_float("");
+    print_int("");
+    print_char(get_char_val());
 }
+
+
+void ScalarConverter::char_case()
+{
+    _double = static_cast<double>(_char);
+    _float = static_cast<float>(_char);
+    _int = static_cast<int>(_char);
+
+    print_double("");
+    print_float("");
+    print_int("");
+    print_char("");
+}
+
+
+
+
+
 
 
 void ScalarConverter::convert(char *input)
 {
     _str = static_cast<std::string>(input);
-    _sub_str_int = _str;
 
     if (_str.empty())
     {
@@ -300,10 +329,6 @@ void ScalarConverter::convert(char *input)
     {
         case LITERALS:
             literal_case();
-            break;
-        case CHAR:
-            char_case();
-            std::cout << "is char" << std::endl;
             break;
         case DOUBLE:
             double_case();
@@ -317,8 +342,13 @@ void ScalarConverter::convert(char *input)
             int_case();
             std::cout << "is int" << std::endl;
             break;
+        case CHAR:
+            char_case();
+            std::cout << "is char" << std::endl;
+            break;
         default:
             std::cout << "error" << std::endl;
     }
+    std::cout.precision(_og_precision);
 }
 

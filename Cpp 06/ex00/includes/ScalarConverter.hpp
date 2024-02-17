@@ -20,8 +20,9 @@
 # include <string>
 # include <functional>
 # include <cstring>
-#include <iomanip>
-#include <string>
+# include <iomanip>
+# include <string>
+# include <cerrno>
 
 
 
@@ -40,7 +41,6 @@ class ScalarConverter
 {
     private:
         static std::size_t      _dot_pos;
-        static std::string      _sub_str_int ;
         static std::string      _str;
         static std::string      _literal;
         static long int         _strtol_value;
@@ -51,7 +51,10 @@ class ScalarConverter
         static float            _float;
         static double           _double;
         static e_type           _type;
+        static char             *_p_end;
         static e_type           check_type();
+        static std::streamsize  _og_precision;
+
         static bool is_valid_number();
         static bool is_int();
         static bool is_char();
@@ -59,6 +62,10 @@ class ScalarConverter
         static bool is_double();
         static bool is_literal();
 
+
+        static std::string get_float_val();
+        static std::string get_int_val();
+        static std::string get_char_val();
 
         static void print_char(std::string str);
         static void print_int(std::string str);
