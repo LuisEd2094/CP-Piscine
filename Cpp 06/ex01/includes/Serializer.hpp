@@ -15,7 +15,12 @@
 
 # include <iostream>
 # include "Data.hpp"
-# include <cstdint>
+
+#ifdef _WIN32
+    typedef unsigned __int32 uintptr_t; // Assuming 32-bit Windows
+#else
+    typedef unsigned long uintptr_t; // Assuming 32-bit Unix-like system
+#endif
 
 
 class Serializer

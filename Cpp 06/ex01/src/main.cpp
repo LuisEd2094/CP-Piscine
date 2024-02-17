@@ -13,7 +13,6 @@
 #include <iostream>
 #include "Serializer.hpp"
 #include "Data.hpp"
-#include <cstdint>
 
 
 int main()
@@ -21,7 +20,7 @@ int main()
     Data data;
 
 
-    std::cout << data._age << " " << data._name << " " << Data::_data_total << std::endl;
+    std::cout << "Data. Age: " << data._age << " Name: " << data._name << " Total: " << Data::_data_total << std::endl;
     std::cout << "data address :" <<  &data << std::endl;
 
     uintptr_t ptr = Serializer::serialize(&data);
@@ -30,7 +29,7 @@ int main()
 
     Data * data_d = Serializer::deserialize(ptr);
 
-    std::cout << data_d->_age << " " << data_d->_name << " " << Data::_data_total << std::endl;
+    std::cout << "Data_d. Age: " << data_d->_age << " Name: " << data_d->_name << " Total: " << Data::_data_total << std::endl;
     std::cout << "data_d dereference address :" << &*data_d << std::endl;
 
     std::cout << " are they equal? = " << (&*data_d == &data) << std::endl;
