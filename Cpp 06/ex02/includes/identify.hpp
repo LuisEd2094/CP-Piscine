@@ -18,8 +18,9 @@
 # include "B.hpp"
 # include "C.hpp"
 # include <iostream>
-# include <random>
+# include <cstdlib>
 # include <ctime>
+# include <typeinfo>
 
 Base* generate(void);
 void identify(Base* p);

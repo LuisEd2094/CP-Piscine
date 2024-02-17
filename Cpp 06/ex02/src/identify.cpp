@@ -27,14 +27,9 @@ Base* createC() {
 
 Base* generate(void)
 {
-    std::srand(static_cast<unsigned>(std::time(nullptr)));
+    std::srand(static_cast<unsigned int>(std::clock()));
 
-    std::rando_device rd;
-    std::default_rando_engine generator(rd());
-
-    // Generate two random integers
-    std::unifor_distribution<int> distribution(0, std::numeric_limits<int>::max());
-    int random1 = distribution(generator);
+    int random1 = std::rand();
 
     int index = random1 % 3;
 
@@ -72,7 +67,6 @@ void identify(Base& p)
     catch (std::bad_cast& e) 
     {
     }
-
     try 
     {
         B& refB = dynamic_cast<B&>(p);
