@@ -3,15 +3,10 @@
         {
             "type": "shell",
             "label": "build",
-            "command": "bash",
+            "command": "make",
             "args": [
-                "/home/luised2094/CP-Piscine/ex01/makebuild.sh",
-            ],
-            "options": {
-                "cwd": "${fileDirname}"
-            },
-            "problemMatcher": [
-                "$gcc"
+                "-C",
+                "/home/luised94/CP-Piscine/Cpp 04/ex03"
             ],
             "group": {
                 "kind": "build",

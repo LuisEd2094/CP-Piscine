@@ -44,7 +44,14 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp",
-        "cstring": "cpp"
+        "cstring": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "ctime": "cpp",
+        "numbers": "cpp",
+        "list": "cpp",
+        "set": "cpp",
+        "iomanip": "cpp"
     },
     "cSpell.words": [
         "phonebook"

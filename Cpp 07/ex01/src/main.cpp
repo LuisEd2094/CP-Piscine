@@ -31,6 +31,7 @@ int main()
     std::cout << "OG int array" << std::endl;
     for (size_t i = 0; i < int_length; ++i)
         std::cout << int_array[i] << std::endl;
+    std::cout << "OG string array" << std::endl;
     for (size_t i = 0; i < str_length; ++i)
         std::cout << str[i] << std::endl;
     std::cout << std::endl;
@@ -39,12 +40,12 @@ int main()
     iter(int_array, int_length, add_one);
     std::cout << "Calling print_element tempalte with iter to print after adding one" << std::endl;
     iter(int_array, int_length, print_element<int>);
-    std::cout << "Calling for loop" <<  std::endl;
 
+    std::cout << "Calling for loop" <<  std::endl;
     for (size_t i = 0; i < int_length; ++i)
         std::cout << int_array[i] << std::endl;
     std::cout << std::endl;
 
-
+    std::cout << "Calling print element template for str array" << std::endl;
     iter(str, str_length, print_element<std::string>);
 }

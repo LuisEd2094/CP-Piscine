@@ -3,11 +3,10 @@
     "configurations": [
 
         {
-            "preLaunchTask": "build",
-            "name": "PhoneBook Debug",
+            "name": "C++ Psicine",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/ex01/phonebook",
+            "program": "/home/luised94/CP-Piscine/Cpp 07/ex02/Array",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
