@@ -347,7 +347,7 @@ void ScalarConverter::convert(char *input)
             std::cout << "is char" << std::endl;
             break;
         default:
-            std::cout << "error" << std::endl;
+            std::cerr << "error no valid conversion for this input" << std::endl;
     }
     std::cout.precision(_og_precision);
 }
