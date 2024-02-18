@@ -22,7 +22,7 @@ template <typename T>
 void easyfind (T& container, int value)
 {
     if (std::find (container.begin(), container.end(), value) != container.end())
-        std::cout << "Found." << std::endl;
+        std::cout << "Found: " << value << std::endl;
     else 
         throw std::runtime_error("Value not found in container");
 }

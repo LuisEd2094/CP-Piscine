@@ -24,12 +24,13 @@ class Span
 {
     private:
         Span();
+        unsigned int        _n;
+        unsigned int        _shortestSpan;
+        std::multiset<int>  _multiset;
 
     public:
-        unsigned int    _n;
-        std::multiset<int> _multiset;
-        Span(unsigned int n);
         ~Span();
+        Span(unsigned int n);
         Span(const Span & other);
         Span& operator=(const Span& rhs);
 
@@ -39,9 +40,8 @@ class Span
         {
             for (T it = begin; it != end; ++it)
                 Span::addNumber(*it);
-            std::cout << _multiset.size() << _n << std::endl;
         }
-        unsigned int shortestSpan();
+        unsigned int shortestSpan() const;
         unsigned int longestSpan() const;
 };
 
