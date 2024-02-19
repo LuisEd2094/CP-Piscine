@@ -3,6 +3,8 @@
 #include <list>
 #include <stack>
 #include <deque>
+#include <set>
+#include <map>
 
 template< typename T, class Container = std::deque< T > > 
 class MutantStack : public std::stack< T, Container >
@@ -23,26 +25,27 @@ public:
 
     typedef typename Container::iterator    iterator;
 
-    iterator    begin() { return this->c.begin(); }
-    iterator    end() { return this->c.end(); }
+    iterator     begin() { return this->c.begin(); }
+    iterator     end() { return this->c.end(); }
 };
 
 int main ()
 {
-    std::stack<int> stack;
+    std::stack<int > stack;
 
 
     stack.push(1);
     stack.push(2);
 
 
-    MutantStack<int> mutant;
+
+    MutantStack<int > mutant;
+
 
     mutant.push(1);
-    stack.push(2);
 
 
-    MutantStack<int>::iterator it;
+    MutantStack<int>::iterator it = mutant.begin();
 
     std::cout << mutant.top() << std::endl;
 
