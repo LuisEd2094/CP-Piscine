@@ -1,23 +1,12 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: lsoto-do <lsoto-do@student.42barcel>       +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/12/26 10:55:00 by lsoto-do          #+#    #+#              #
-#    Updated: 2023/12/26 10:55:01 by lsoto-do         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
-NAME        = Span
+
+NAME        = MutantStack
 CFLAGS      = -std=c++98 -pedantic -Wall -Wextra  -Werror -g 
 CC			= c++
 RM          = rm -f
 SRCS_PATH	= src/
-SPAN_PATH	= Span/
 OBJS_PATH	= obj/
-MAKE_OBJ_DIR	=	$(OBJS_PATH) $(addprefix $(OBJS_PATH), $(SPAN_PATH)) 
+MAKE_OBJ_DIR	=	$(OBJS_PATH) $(addprefix $(OBJS_PATH), $(STACK_PATH)) 
 DEPS_PATH	= deps/
 INCS        = -I./includes
 
@@ -40,13 +29,7 @@ LIGHT_GREEN = \033[1;92m
 
 SRC        		=	main.cpp 
 
-SPAN			=	Span.cpp
-
-SPAN_FILES		=	$(addprefix $(SPAN_PATH), $(SPAN))
-
-DEPS			= 	$(addprefix $(DEPS_PATH), $(SRC:.cpp=.d) $(SPAN:.cpp=.d))
-
-SRC				+=	$(SPAN_FILES)
+DEPS			= 	$(addprefix $(DEPS_PATH), $(SRC:.cpp=.d))
 
 OBJS 			=	$(addprefix $(OBJS_PATH), $(SRC:.cpp=.o))
 				
@@ -58,9 +41,9 @@ $(NAME): $(OBJS)
 	@echo "$(LIGHT_GREEN)Created $(NAME) executable$(DEF_COLOR)"
 	
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.cpp | $(MAKE_OBJ_DIR) $(DEPS_PATH)
-			@echo "$(CYAN)Compiling $< $(DEF_COLOR)"
-			@$(CC) $(CFLAGS) $(INCS) -MMD -MP -c $< -o $@
-			@mv $(basename $@).d $(DEPS_PATH)
+	@echo "$(CYAN)Compiling $< $(DEF_COLOR)"
+	@$(CC) $(CFLAGS) $(INCS) -MMD -MP -c $< -o $@
+	@mv $(basename $@).d $(DEPS_PATH)
 
 $(MAKE_OBJ_DIR):
 	@echo "$(GREEN)Creating $(NAME) Obj Dir $(DEF_COLOR)"

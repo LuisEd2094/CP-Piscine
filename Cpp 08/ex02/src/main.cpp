@@ -1,57 +1,60 @@
 #include <iostream>
-#include <algorithm>
 #include <list>
 #include <stack>
 #include <deque>
 #include <set>
 #include <map>
-
-template< typename T, class Container = std::deque< T > > 
-class MutantStack : public std::stack< T, Container >
-{
-
-private:
-
-public:
-
-    MutantStack( void ) {};
-    ~MutantStack( void ) {};
-
-    MutantStack( const MutantStack& rhs ) { *this = rhs; }
-    MutantStack&    operator=( const MutantStack& rhs ) {
-        std::stack< T, Container >::operator=( rhs );
-        return *this;
-    }
-
-    typedef typename Container::iterator    iterator;
-
-    iterator     begin() { return this->c.begin(); }
-    iterator     end() { return this->c.end(); }
-};
+#include <MutantStack.hpp>
 
 int main ()
 {
-    std::stack<int > stack;
+    std::stack<char > stack;
 
 
-    stack.push(1);
-    stack.push(2);
+    stack.push(41);
+    stack.push(42);
 
 
-
-    MutantStack<int > mutant;
-
-
-    mutant.push(1);
+    std::cout << stack.top() << std::endl;
+    MutantStack<int> *mutant = new MutantStack<int>();
 
 
-    MutantStack<int>::iterator it = mutant.begin();
+    mutant->push(1);
+    mutant->push(2);
+    mutant->push(3);
+    mutant->push(4);
+    mutant->push(5);
+    mutant->push(6);
+    mutant->push(7);
+    mutant->push(8);
+    
+    MutantStack<int > mutan;
 
-    std::cout << mutant.top() << std::endl;
+    mutan = *mutant;
 
-    for (int i = 0; i < 2; ++i)
+    MutantStack<int>::iterator it = mutant->begin();
+    MutantStack<int>::iterator itend = mutant->end();
+    
+
+    for (; it != itend ; ++it)
     {
-        std::cout << stack.top() << std::endl;
-        stack.pop();
+        std::cout << *it << std::endl;
     }
+
+    std::cout << mutant->top() << std::endl;
+
+
+    delete mutant;
+
+    std::cout << "About to print from = operator " << std::endl;
+    it = mutan.begin();
+    itend = mutan.end();
+    
+
+    for (; it != itend ; ++it)
+    {
+        std::cout << *it << std::endl;
+    }
+
+    std::cout << mutan.top() << std::endl;
 }
