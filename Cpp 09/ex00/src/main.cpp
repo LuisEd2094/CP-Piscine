@@ -24,7 +24,6 @@ void exitError(std::string error)
     std::exit(EXIT_FAILURE);
 }
 
-
 bool isValidDateFormat(const std::string &dateString) 
 {
     int year;
@@ -58,37 +57,6 @@ bool    validFirstLine(std::string line, std::string firstLine)
 {
     return (line != firstLine);
 }
-
-// I made a mistake and thought I had to parse the input file too, but that't not really the case, I have to print the values line by line and make the checks there, not exit the program
-
-// void    parseInputFile(BitcoinExchange &data, std::string filePath, std::string sep, std::string firstLine, bool (*validPrice)(float))
-// {
-//     std::ifstream   file;
-//     std::string     line;
-//     std::size_t     found;
-//     std::string     date;
-//     std::string     priceStr;
-//     char            *buffer;
-//     float           price;
-
-//     file.open(filePath, std::ifstream::in);
-//     if (file.good())
-//     {
-//         std::getline(file, line);
-//         if (!validFirstLine(line, firstLine))
-//             exitError("Check the first line on file: " + filePath +" should be " + firstLine +" not :" + line);
-//         while (std::getline(file, line))
-//         {
-
-//         }
-
-//     }
-//     else
-//         exitError("There was an issue opening the file " + filePath);
-//     file.close();
-
-// }
-
 
 void    handleInFileError(std::string err)
 {

@@ -18,5 +18,8 @@ void BitcoinExchange::addToDataBase(const std::string date, const float price)
 
 void BitcoinExchange::checkPriceDataBase(const std::string date, const float price)
 {
-    std::cout << "checking" << std::endl;
+    std::map<std::string, float>::iterator it = _db.lower_bound(date);
+    if (it->first != date && it != _db.begin())
+        --it;
+    std::cout << date << " => " << price << " = " <<  it->second * price << std::endl; 
 }
