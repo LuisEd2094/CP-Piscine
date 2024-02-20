@@ -43,48 +43,110 @@ bool isValidDateFormat(const std::string &dateString)
     return (true);
 }
 
-
-void    loadDBToData(BitcoinExchange &data)
+bool    validINPUTPrice(float price)
 {
-    std::string     dataBaseFilePath = FILE_PATH;
+
+    return (!(price < 0 || price > 1000));
+}
+
+bool    validCSVPrice(float price)
+{
+    return (price >= 0);
+}
+
+bool    validFirstLine(std::string line, std::string firstLine)
+{
+    return (line != firstLine);
+}
+
+// I made a mistake and thought I had to parse the input file too, but that't not really the case, I have to print the values line by line and make the checks there, not exit the program
+
+// void    parseInputFile(BitcoinExchange &data, std::string filePath, std::string sep, std::string firstLine, bool (*validPrice)(float))
+// {
+//     std::ifstream   file;
+//     std::string     line;
+//     std::size_t     found;
+//     std::string     date;
+//     std::string     priceStr;
+//     char            *buffer;
+//     float           price;
+
+//     file.open(filePath, std::ifstream::in);
+//     if (file.good())
+//     {
+//         std::getline(file, line);
+//         if (!validFirstLine(line, firstLine))
+//             exitError("Check the first line on file: " + filePath +" should be " + firstLine +" not :" + line);
+//         while (std::getline(file, line))
+//         {
+
+//         }
+
+//     }
+//     else
+//         exitError("There was an issue opening the file " + filePath);
+//     file.close();
+
+// }
+
+
+void    handleInFileError(std::string err)
+{
+    std::cerr << err << std::endl;
+}
+
+void    handleCSVError(std::string err)
+{
+    exitError(err);
+}
+
+void    workOnFile(BitcoinExchange &data, std::string filePath, std::string sep, std::string firstLine, void (BitcoinExchange::*f)(std::string, float), bool (*validPrice)(float), void (*handleError)(std::string))
+{
     std::ifstream   file;
     std::string     line;
     std::size_t     found;
     std::string     date;
     std::string     priceStr;
+    bool            err;
     char            *buffer;
     float           price;
 
-    file.open(dataBaseFilePath, std::ifstream::in);
+    file.open(filePath, std::ifstream::in);
     if (file.good())
     {
         //Skip header line
         std::getline(file, line);
+        if (validFirstLine(line, firstLine))
+            exitError("Check the first line on file: " + filePath +" should be " + firstLine +" not:" + line);
         while (std::getline(file, line))
         {
-            found = line.find(",", 0);
+            found = line.find(sep,  0);
             date = line.substr(0, found);
             if (!isValidDateFormat(date))
-                exitError("Invalid date on the csv file: " + date);
-            priceStr = line.substr(found + 1);
+            {
+                ((*handleError)("Invalid date on " + filePath + ": " + date));
+                continue;
+            }
+            priceStr = line.substr(found + sep.length());
             price = std::strtod(priceStr.c_str(), &buffer);
             if (errno == ERANGE || buffer == priceStr)
-                exitError("Couldn't convert " + priceStr + " to float on line " + \
-                line);
-            if (price < 0)
-                exitError("Prices on csv file can't be negative: " + line);
-            data.addToDataBase(date, price);
+            {
+                (*handleError)("Couldn't convert " + priceStr + " to float on line " + \
+                line + " on file: " + filePath);
+                continue;
+            }
+            if (!(*validPrice)(price))
+            {
+                ((*handleError)("Invalid price: " + line + " on file: " + filePath));
+                continue;
+            }
+            (data.*f)(date, price);
         }
     }
     else
-        exitError("There was an issue opening the file " + dataBaseFilePath);
+        exitError("There was an issue opening the file " + filePath);
     file.close();
 
-}
-
-void loadFileToData(BitcoinExchange &data, std::string argv)
-{
-    
 }
 
 int main( int argc, char *argv[] )
@@ -96,11 +158,7 @@ int main( int argc, char *argv[] )
         std::cerr << "Incorrect use. Provide me with a file that contains data in a date | value format" << std::endl;
         std::exit(EXIT_FAILURE);
     }
-    loadDBToData(data);
-    loadFileToData(data, static_cast<std::string>(argv[1]));
-
-
-
-
-
+    workOnFile(data, FILE_PATH, "," , "date,exchange_rate",  &BitcoinExchange::addToDataBase, &validCSVPrice, &handleCSVError);
+    workOnFile(data, static_cast<std::string>(argv[1]), " | " , "date | value", &BitcoinExchange::checkPriceDataBase, &validINPUTPrice, &handleInFileError);
+    std::cout << std::endl;
 }

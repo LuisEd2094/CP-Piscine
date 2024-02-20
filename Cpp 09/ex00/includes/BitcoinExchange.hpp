@@ -13,7 +13,7 @@
 class BitcoinExchange
 {
     private:
-        std::map<std::string, float> _map;
+        std::map<std::string, float> _db;
 
     public:
         BitcoinExchange();
@@ -22,6 +22,7 @@ class BitcoinExchange
         BitcoinExchange& operator=(const BitcoinExchange& rhs);
         
         void addToDataBase(const std::string date, const float price);
+        void checkPriceDataBase(const std::string date, const float price);
 };
 
 #endif
