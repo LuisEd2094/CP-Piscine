@@ -3,22 +3,25 @@
 
 # include <iostream>
 # include <map>
-# include <cstdio>
+# include <fstream>
 # include <cstdlib>
 # include <iomanip> 
-#include <cmath>
+# include <cmath>
+# include <errno.h>
 
 
 class BitcoinExchange
 {
     private:
-        std::map<std::string, double> _map;
+        std::map<std::string, float> _map;
 
     public:
         BitcoinExchange();
         ~BitcoinExchange();
         BitcoinExchange(const BitcoinExchange & other);
         BitcoinExchange& operator=(const BitcoinExchange& rhs);
+        
+        void addToDataBase(const std::string date, const float price);
 };
 
 #endif

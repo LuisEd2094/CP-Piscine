@@ -13,52 +13,94 @@
 #include <map>
 #include <iostream>
 #include <BitcoinExchange.hpp>
+#include <sstream>
 
-int main( void )
+
+#define FILE_PATH "/Users/lsoto-do/core05/CP-Piscine/Cpp 09/ex00/dataBase/data.csv"
+
+void exitError(std::string error)
+{
+    std::cerr <<"Error: " << error << std::endl;
+    std::exit(EXIT_FAILURE);
+}
+
+
+bool isValidDateFormat(const std::string &dateString) 
+{
+    int year;
+    int month;
+    int day;
+
+    if (dateString.size() != 10)
+        return (false);
+    if (dateString[4] != '-' || dateString[7] != '-')
+        return (false);
+    year = atoi(dateString.substr(0, 4).c_str());
+    month = atoi(dateString.substr(5, 2).c_str());
+    day = atoi(dateString.substr(8, 2).c_str());
+    if (year < 1000 || year > 9999 || month < 1 || month > 12 || day < 1 || day > 31)
+        return (false);
+    return (true);
+}
+
+
+void    loadDBToData(BitcoinExchange &data)
+{
+    std::string     dataBaseFilePath = FILE_PATH;
+    std::ifstream   file;
+    std::string     line;
+    std::size_t     found;
+    std::string     date;
+    std::string     priceStr;
+    char            *buffer;
+    float           price;
+
+    file.open(dataBaseFilePath, std::ifstream::in);
+    if (file.good())
+    {
+        //Skip header line
+        std::getline(file, line);
+        while (std::getline(file, line))
+        {
+            found = line.find(",", 0);
+            date = line.substr(0, found);
+            if (!isValidDateFormat(date))
+                exitError("Invalid date on the csv file: " + date);
+            priceStr = line.substr(found + 1);
+            price = std::strtod(priceStr.c_str(), &buffer);
+            if (errno == ERANGE || buffer == priceStr)
+                exitError("Couldn't convert " + priceStr + " to float on line " + \
+                line);
+            if (price < 0)
+                exitError("Prices on csv file can't be negative: " + line);
+            data.addToDataBase(date, price);
+        }
+    }
+    else
+        exitError("There was an issue opening the file " + dataBaseFilePath);
+    file.close();
+
+}
+
+void loadFileToData(BitcoinExchange &data, std::string argv)
+{
+    
+}
+
+int main( int argc, char *argv[] )
 {
     BitcoinExchange data;
 
-
-    std::map<std::string, int> map;
-
-    map.insert(std::make_pair("10", 10));
-    map.insert(std::make_pair("15", 50));
-    map.insert(std::make_pair("11", 70));
-
-
-    std::string requestedDate = "12";
-
-    std::map<std::string, int>::iterator it = map.lower_bound(requestedDate);
-    if (it->first != requestedDate && it != map.begin())
-        --it;
-    std::cout << it->first << " " << it->second << std::endl; 
-/* 
-try
-{
-    std::cout << map.at(requestedDate) << std::endl;
-}
-catch(const std::exception& e)
-{
-    std::cerr << e.what() << '\n';
-
-    std::map<int, int>::iterator it = map.lower_bound(requestedDate);
-
-    std::map<int, int>::iterator end = map.end();
-
-    std::cout << end->first << "\n";
-
-    if (it != map.begin())
-        --it;
-if ((it == map.end()) && it->first != requestedDate)
-     {
-        // Adjust iterator to the closest lower date
-        {
-            --it;
-        }
+    if (argc != 2)
+    {
+        std::cerr << "Incorrect use. Provide me with a file that contains data in a date | value format" << std::endl;
+        std::exit(EXIT_FAILURE);
     }
+    loadDBToData(data);
+    loadFileToData(data, static_cast<std::string>(argv[1]));
 
-    std::cout << it->first <<" "<< it->second << std::endl;
-}
- */
+
+
+
 
 }
