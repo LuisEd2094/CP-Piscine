@@ -109,11 +109,10 @@ void    BitcoinExchange::workOnFile(std::string filePath, std::string sep, std::
     std::size_t     found;
     std::string     date;
     std::string     priceStr;
-    bool            err;
     char            *buffer;
     float           price;
 
-    file.open(filePath, std::ifstream::in);
+    file.open(filePath.c_str(), std::ifstream::in);
     if (file.good())
     {
         //Skip header line

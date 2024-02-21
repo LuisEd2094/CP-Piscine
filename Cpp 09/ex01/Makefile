@@ -10,14 +10,14 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME        = Span
-CFLAGS      = -std=c++98 -pedantic -Wall -Wextra  -Werror -g 
+NAME        = RPN
+CFLAGS      = -std=c++98 -pedantic  -g #-Wall -Wextra  -Werror
 CC			= c++
 RM          = rm -f
 SRCS_PATH	= src/
-SPAN_PATH	= Span/
+POLISH_PATH	= Polish/
 OBJS_PATH	= obj/
-MAKE_OBJ_DIR	=	$(OBJS_PATH) $(addprefix $(OBJS_PATH), $(SPAN_PATH)) 
+MAKE_OBJ_DIR	=	$(OBJS_PATH) $(addprefix $(OBJS_PATH), $(POLISH_PATH)) 
 DEPS_PATH	= deps/
 INCS        = -I./includes
 
@@ -40,13 +40,13 @@ LIGHT_GREEN = \033[1;92m
 
 SRC        		=	main.cpp 
 
-SPAN			=	Span.cpp
+POLISH			=	RPN.cpp
 
-SPAN_FILES		=	$(addprefix $(SPAN_PATH), $(SPAN))
+POLISH_FILES		=	$(addprefix $(POLISH_PATH), $(POLISH))
 
-DEPS			= 	$(addprefix $(DEPS_PATH), $(SRC:.cpp=.d) $(SPAN:.cpp=.d))
+DEPS			= 	$(addprefix $(DEPS_PATH), $(SRC:.cpp=.d) $(POLISH:.cpp=.d))
 
-SRC				+=	$(SPAN_FILES)
+SRC				+=	$(POLISH_FILES)
 
 OBJS 			=	$(addprefix $(OBJS_PATH), $(SRC:.cpp=.o))
 				

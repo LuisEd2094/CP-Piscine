@@ -1,77 +1,28 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lsoto-do <lsoto-do@student.42barcel>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/02 09:39:48 by lsoto-do          #+#    #+#             */
-/*   Updated: 2024/01/02 09:39:54 by lsoto-do         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include <RPN.hpp>
 
-#include "Span.hpp"
-#include <vector>
-#include <numeric>
-#include <set>
-#include <list>
-
-int main( void )
+void exitError(std::string error)
 {
-    Span span( 10000 );
-
-    // generate a list of numbers and then add them to the span object
-    try {
-        std::list<int>    l( 10000 );
-        std::srand( time ( NULL ) );
-        std::generate( l.begin(), l.end(), std::rand );
+    std::cerr <<"Error: " << error << std::endl;
+    std::exit(EXIT_FAILURE);
+}
 
 
-        span.addNumber( l.begin(), l.end() );
-
-        std::cout << "Longest span: " << span.longestSpan() << std::endl;
-        std::cout << "Shortest span: " << span.shortestSpan() << std::endl;
-        
-    } catch ( std::exception& e ) {
-        std::cout << e.what() << std::endl;
-    }
-    // Test to see what happens if you add once its full
-    try {
-        std::list<int>    l( 10000 );
-        std::srand( time ( NULL ) );
-        std::generate( l.begin(), l.end(), std::rand );
-
-
-        span.addNumber( l.begin(), l.end() );
-
-        std::cout << "Longest span: " << span.longestSpan() << std::endl;
-        std::cout << "Shortest span: " << span.shortestSpan() << std::endl;
-        
-    } catch ( std::exception& e ) {
-        std::cout << e.what() << std::endl;
-    }
-    Span span2(10);
-    span2.addNumber(5);
-    span2.addNumber(3);
-    span2.addNumber(9);
-    span2.addNumber(-9);
-    span2.addNumber(-11);
-    span2.addNumber(11);
-
+int main (int argc, char *argv[])
+{
+    std::string input;
+    RPN rpn;
+    if (argc != 2)
+        exitError("Incorrect usage, please provide me with a valid Polish mathematical expression");
+    input = static_cast<std::string>(argv[1]);
     try
     {
-
-        std::cout << "Longest span: " << span2.longestSpan() << std::endl;
-        std::cout << "Shortest span: " << span2.shortestSpan() << std::endl;    }
+        rpn.solveRPN(input);
+    }
     catch(const std::exception& e)
     {
         std::cerr << e.what() << std::endl;
     }
     
+    return (0);
 
-
-    // Elements are automatically sorted
-
-
-    return 0;
 }

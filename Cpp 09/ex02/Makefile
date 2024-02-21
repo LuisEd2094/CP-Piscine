@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME        = Span
-CFLAGS      = -std=c++98 -pedantic -Wall -Wextra  -Werror -g 
+CFLAGS      = -std=c++98 -pedantic #-Wall -Wextra  -Werror -g 
 CC			= c++
 RM          = rm -f
 SRCS_PATH	= src/
