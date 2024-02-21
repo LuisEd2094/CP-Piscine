@@ -66,7 +66,6 @@ void RPN::solveOperation(std::string &symbol)
 
     secondVal = getValFromStack(symbol);
     firstVal = getValFromStack(symbol);
-
     for (int i = 0; i < 4; ++i)
     {
         if (info[i].symbol == symbol)
@@ -94,8 +93,9 @@ void RPN::solveRPN(std::string str)
             throw RPN::parseException("Invalid input: " + parse);
         else
             solveOperation(parse);
-        std::cout << parse << std::endl;
     }
+    if (_stack.size() != 1)
+        throw RPN::parseException("Calculation expression incomplete, we are missing symbols!");
     std::cout << _stack.top() << std::endl;
 
 }
