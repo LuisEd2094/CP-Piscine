@@ -11,6 +11,7 @@ int main (int argc, char *argv[])
 {
     std::string input;
     RPN rpn;
+    
     if (argc != 2)
         exitError("Incorrect usage, please provide me with a valid Polish mathematical expression");
     input = static_cast<std::string>(argv[1]);
@@ -22,7 +23,6 @@ int main (int argc, char *argv[])
     {
         std::cerr << e.what() << std::endl;
     }
-    
     return (0);
 
 }

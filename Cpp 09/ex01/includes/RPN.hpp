@@ -6,6 +6,8 @@
 # include <stack>
 # include <sstream>
 # include <string>
+# include <limits>
+# include <numeric>
 
 class RPN
 {
@@ -15,6 +17,8 @@ class RPN
         bool    checkValidNumber(std::string &number);
         void    solveOperation(std::string &symbol);
         int     getValFromStack(std::string &symbol);
+
+        static void     checkIntOverflow(long &protection);
         static int     sum(int first, int second);
         static int     sub(int first, int second);
         static int     div(int first, int second);
@@ -25,13 +29,13 @@ class RPN
         RPN(const RPN & other);
         RPN& operator=(const RPN& rhs);
         void solveRPN(std::string str);
-        class parseException : public std::exception
+        class RPNException : public std::exception
         {
             private:
                 std::string _message;
             public:
-                parseException(std::string message): _message(message) {}
-                ~parseException() throw() {}
+                RPNException(std::string message): _message(message) {}
+                ~RPNException() throw() {}
                 const char * what() const throw()
                 {
                     return (_message.c_str());
@@ -46,5 +50,4 @@ struct symbol_info {
     std::string symbol;
     symbol_function f;
 };
-
 #endif
