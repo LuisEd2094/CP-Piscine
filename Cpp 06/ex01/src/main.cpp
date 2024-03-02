@@ -32,5 +32,5 @@ int main()
     std::cout << "Data_d. Age: " << data_d->_age << " Name: " << data_d->_name << " Total: " << Data::_data_total << std::endl;
     std::cout << "data_d dereference address :" << &*data_d << std::endl;
 
-    std::cout << " are they equal? = " << (&*data_d == &data) << std::endl;
+    std::cout << "Are they equal? = " << (&(*data_d) == &data) << std::endl;
 }

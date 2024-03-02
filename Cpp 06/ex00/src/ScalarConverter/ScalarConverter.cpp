@@ -332,19 +332,15 @@ void ScalarConverter::convert(char *input)
             break;
         case DOUBLE:
             double_case();
-            std::cout << "is double" << std::endl;
             break;
         case FLOAT:
             float_case();
-            std::cout << "is float" << std::endl;
             break;
         case INT:
             int_case();
-            std::cout << "is int" << std::endl;
             break;
         case CHAR:
             char_case();
-            std::cout << "is char" << std::endl;
             break;
         default:
             std::cerr << "error no valid conversion for this input" << std::endl;
