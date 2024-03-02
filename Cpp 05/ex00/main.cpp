@@ -59,13 +59,21 @@ void creationTest()
 
 int main()
 {
-    //upAndDownTest();
-    //creationTest();
-    Bureaucrat John("John", 100);
+    upAndDownTest();
+    creationTest();
+    //Bureaucrat John("John", 100);
     Bureaucrat Alice;
 
-    Alice = John;
+    Bureaucrat *John = new Bureaucrat();
+    Bureaucrat Jane(Alice);
+
+    std::cout << "HELLO \n";
+    std::cout << Jane;
+    std::cout << Alice;
+
+    Alice = *John;
+    
+    delete John;
 
     std::cout << Alice;
-    std::cout << John;
 }

@@ -13,6 +13,30 @@
 #include "AForm.hpp" 
 
 //Constructor and Deconstructor
+class AForm::GradeTooHighException : public std::exception
+{
+    public:
+        const char * what() const throw()
+        {
+            return ("AForm: Grade Too High");
+        }
+};
+class AForm::GradeTooLowException : public std::exception
+{
+    public:
+        const char * what() const throw()
+        {
+            return ("AForm: Grade Too Low");
+        }
+};
+class AForm::NotSignedException : public std::exception
+{
+    public:
+        const char * what() const throw()
+        {
+            return ("AForm: Form not signed");
+        }
+};
 
 AForm::AForm()
     : _name("Default"), 

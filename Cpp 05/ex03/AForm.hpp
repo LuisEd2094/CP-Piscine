@@ -41,30 +41,9 @@ class AForm
         bool beSigned(const Bureaucrat& signee);
         void checkValidExecution(const Bureaucrat& executor) const;
         virtual void execute(const Bureaucrat & executor) const = 0;
-        class GradeTooHighException : public std::exception
-        {
-            public:
-                const char * what() const throw()
-                {
-                    return ("AForm: Grade Too High");
-                }
-        };
-        class GradeTooLowException : public std::exception
-        {
-            public:
-                const char * what() const throw()
-                {
-                    return ("AForm: Grade Too Low");
-                }
-        };
-        class NotSignedException : public std::exception
-        {
-            public:
-                const char * what() const throw()
-                {
-                    return ("AForm: Form not signed");
-                }
-        };
+        class GradeTooHighException;
+        class GradeTooLowException;
+        class NotSignedException;
 };
 
 std::ostream& operator<<(std::ostream& os, const AForm& rhs);

@@ -12,6 +12,16 @@
 
 #include "Intern.hpp" 
 
+
+class Intern::makeFormException : public std::exception
+{
+    public:
+        const char * what() const throw()
+        {
+            return ("Unable to create form requested");
+        }
+};
+
 Intern::Intern() {}
 
 Intern::~Intern() {}
@@ -48,30 +58,24 @@ static AForm *newPresidential(const std::string target) {
 	return new PresidentialPardonForm(target);
 }
 
-typedef AForm *(*FormConstructorPtr)(const std::string);
 
 
 AForm* Intern::makeForm(const std::string& form, const std::string target)
 {
-    std::string copy = form;
-    std::string valid_forms[] = {
-        "shrubbery creation",
-        "robotomy request",
-        "presidential pardon"
-    };
-    FormConstructorPtr forms[]= {
-        &newShrubbery,
-        &newRobotomy,
-        &newPresidential
-    };
 
+    form_info forms[] = {
+        {"shrubbery creation", &newShrubbery},
+        {"robotomy request", &newRobotomy},
+        {"presidential pardon", &newPresidential},
+    };
+    std::string copy = form;
     tolower(copy);
     for (int i = 0; i < 3; i++)
     {
-        if (copy == valid_forms[i])
+        if (copy == forms[i].name)
         {
-            return (forms[i](target));
+            return (forms[i].f(target));
         }
     }
-    return (NULL);
+    throw Intern::makeFormException();
 }

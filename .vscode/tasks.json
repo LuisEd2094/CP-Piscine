@@ -6,7 +6,7 @@
             "command": "make",
             "args": [
                 "-C",
-                "/home/luised94/CP-Piscine/Cpp 04/ex03"
+                "/Users/lsoto-do/core05/CP-Piscine/Cpp 09/ex00"
             ],
             "group": {
                 "kind": "build",

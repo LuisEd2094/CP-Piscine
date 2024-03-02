@@ -29,9 +29,18 @@ class Intern
         Intern& operator=(const Intern& rhs);
 
         AForm* makeForm(const std::string& form, const std::string target);
+        class makeFormException;
     private:
         std::string tolower(std::string& str);
    
+};
+
+typedef AForm *(*FormConstructorPtr)(const std::string);
+
+struct form_info 
+{
+    std::string name;
+    FormConstructorPtr f;
 };
 
 #endif

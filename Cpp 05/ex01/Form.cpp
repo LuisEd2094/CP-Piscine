@@ -15,6 +15,23 @@
 
 //Constructor and Deconstructor
 
+class Form::GradeTooHighException : public std::exception
+{
+    public:
+        const char * what() const throw()
+        {
+            return ("Form: Grade Too High");
+        }
+};
+class Form::GradeTooLowException : public std::exception
+{
+    public:
+        const char * what() const throw()
+        {
+            return ("Form: Grade Too Low");
+        }
+};
+
 Form::Form()
     : _name("Default"), 
     _is_signed(false), 

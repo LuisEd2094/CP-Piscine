@@ -34,24 +34,8 @@ class Form
         int getGradeToExecute() const;
 
         bool beSigned(const Bureaucrat& signee);
-
-
-        class GradeTooHighException : public std::exception
-        {
-            public:
-                const char * what() const throw()
-                {
-                    return ("Form: Grade Too High");
-                }
-        };
-        class GradeTooLowException : public std::exception
-        {
-            public:
-                const char * what() const throw()
-                {
-                    return ("Form: Grade Too Low");
-                }
-        };
+        class GradeTooHighException;
+        class GradeTooLowException;
     private:
         const std::string _name;
         bool _is_signed;

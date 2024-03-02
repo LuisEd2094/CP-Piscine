@@ -13,6 +13,24 @@
 #include "Bureaucrat.hpp" 
 #include "AForm.hpp"
 
+class Bureaucrat::GradeTooHighException : public std::exception
+{
+    public:
+        const char * what() const throw()
+        {
+            return ("Grade Too High");
+        }
+};
+
+class Bureaucrat::GradeTooLowException : public std::exception
+{
+public:
+    const char* what() const throw()
+    {
+        return ("Grade too low");
+    }
+};
+
 Bureaucrat::Bureaucrat() : _name("default"), _grade(150){}
 Bureaucrat::~Bureaucrat() {}
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name)

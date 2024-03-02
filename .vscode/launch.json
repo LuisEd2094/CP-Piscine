@@ -3,16 +3,17 @@
     "configurations": [
 
         {
+            "preLaunchTask": "build",
             "name": "C++ Psicine",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/home/luised94/CP-Piscine/Cpp 07/ex02/Array",
-            "args": [],
+            "program": "/Users/lsoto-do/core05/CP-Piscine/Cpp 09/ex00/btc",
+            "args": ["/Users/lsoto-do/core05/CP-Piscine/Cpp 09/ex00/input.txt"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,
-            "MIMode": "gdb",
+            "MIMode": "lldb",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
@@ -20,7 +21,6 @@
                     "ignoreFailures": true
                 }
             ],
-            "miDebuggerPath": "/usr/bin/gdb" // Path to your GDB executable
         }
     ]
 }

@@ -21,11 +21,31 @@ void interTest()
 {
     Intern intern;
 
-    AForm *form = intern.makeForm("robotomy request", "Bender");
+    try
+    {
+        AForm *form = intern.makeForm("presidential pardon", "Bender");
 
-    std::cout << *form;
+        std::cout << *form;
 
-    delete form;
+        delete form;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+    
+    try
+    {
+        AForm *form = intern.makeForm("test", "Bender");
+        std::cout << *form;
+
+        delete form;
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
 }
 
 int main()
