@@ -61,19 +61,5 @@ unsigned int Span::shortestSpan() const
 {
     if (_multiset.size() < 2)
         throw std::out_of_range("multiset too short, no span to be found");
-
     return (_shortestSpan);
-    unsigned int min_val = std::numeric_limits<int>::max();
-    unsigned int difference;
-
-    std::multiset<int>::iterator it = _multiset.begin();
-    std::multiset<int>::iterator prev_it = it++;
-
-    for (; it != --_multiset.end(); ++it, ++prev_it)
-    {
-        difference = *it - *prev_it;
-        min_val = std::min(min_val, difference);
-    }
-
-    return (min_val);
 }

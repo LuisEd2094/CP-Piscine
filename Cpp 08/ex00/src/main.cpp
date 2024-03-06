@@ -17,7 +17,7 @@ int main( int ac, char ** av )
 {
     if ( ac != 2 )
     {        
-        std::cerr << "Give me a number between 1 and 10, inclusive, and I'd tell you if I find it in my conteiners"  << std::endl; 
+        std::cerr << "Give me a number between 1 and 10, inclusive, and I'd tell you if I find it in my containers"  << std::endl; 
         return (EXIT_FAILURE);
     }
     int                 arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};

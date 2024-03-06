@@ -67,10 +67,6 @@ int main( void )
     {
         std::cerr << e.what() << std::endl;
     }
-    
-
-
-    // Elements are automatically sorted
 
 
     return 0;
