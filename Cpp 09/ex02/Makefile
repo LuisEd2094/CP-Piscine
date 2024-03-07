@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME        = PmergeMe
-CFLAGS      = -std=c++98 -pedantic -Wall -Wextra  -Werror -g 
+CFLAGS      = -std=c++98 -pedantic -g  #-Wall -Wextra  -Werror 
 CC			= c++
 RM          = rm -f
 SRCS_PATH	= src/
