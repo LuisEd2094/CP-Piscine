@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME        = RPN
-CFLAGS      = -std=c++98 -pedantic  -g #-Wall -Wextra  -Werror
+CFLAGS      = -std=c++98 -pedantic  -g -Wall -Wextra  -Werror
 CC			= c++
 RM          = rm -f
 SRCS_PATH	= src/

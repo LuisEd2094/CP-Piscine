@@ -10,14 +10,14 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME        = Span
-CFLAGS      = -std=c++98 -pedantic #-Wall -Wextra  -Werror -g 
+NAME        = PmergeMe
+CFLAGS      = -std=c++98 -pedantic -Wall -Wextra  -Werror -g 
 CC			= c++
 RM          = rm -f
 SRCS_PATH	= src/
-SPAN_PATH	= Span/
+PMERG_PATH	= PmergeMe/
 OBJS_PATH	= obj/
-MAKE_OBJ_DIR	=	$(OBJS_PATH) $(addprefix $(OBJS_PATH), $(SPAN_PATH)) 
+MAKE_OBJ_DIR	=	$(OBJS_PATH) $(addprefix $(OBJS_PATH), $(PMERG_PATH)) 
 DEPS_PATH	= deps/
 INCS        = -I./includes
 
@@ -40,13 +40,13 @@ LIGHT_GREEN = \033[1;92m
 
 SRC        		=	main.cpp 
 
-SPAN			=	Span.cpp
+PmergeMe			=	PmergeMe.cpp
 
-SPAN_FILES		=	$(addprefix $(SPAN_PATH), $(SPAN))
+PmergeMe_FILES		=	$(addprefix $(PMERG_PATH), $(PmergeMe))
 
-DEPS			= 	$(addprefix $(DEPS_PATH), $(SRC:.cpp=.d) $(SPAN:.cpp=.d))
+DEPS			= 	$(addprefix $(DEPS_PATH), $(SRC:.cpp=.d) $(PmergeMe:.cpp=.d))
 
-SRC				+=	$(SPAN_FILES)
+SRC				+=	$(PmergeMe_FILES)
 
 OBJS 			=	$(addprefix $(OBJS_PATH), $(SRC:.cpp=.o))
 				
