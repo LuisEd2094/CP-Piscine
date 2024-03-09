@@ -49,11 +49,19 @@ int main(int argc, char *argv[])
         vect[i] = ints[i];
     // for (int i = 0; i < argc - 1; ++i)
     //     std::cout << vect[i]  << std::endl;
-    solverMergeInsertVector(vect);
+    solverMergeInsertVectorIncorrect(vect);
     end = clock();
     time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
 
-    std::cout << "MergeInsertVector time: " << time << std::endl;
+    std::cout << "MergeInsertVector INCORRECT time: " << time << std::endl;
+
+    start = clock();
+    solveMergeInsert<int, std::vector>(argc - 1, ints);
+
+    end = clock();
+    time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
+
+    std::cout << "MergeInsertVector  CORRECT time: " << time << std::endl;
     delete [] ints;
 }
 

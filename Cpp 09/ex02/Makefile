@@ -40,7 +40,7 @@ LIGHT_GREEN = \033[1;92m
 
 SRC        		=	main.cpp 
 
-PmergeMe			=	PmergeMe.cpp
+PmergeMe			=	PmergeMeIncorrect.cpp PmergeMe.cpp
 
 PmergeMe_FILES		=	$(addprefix $(PMERG_PATH), $(PmergeMe))
 
