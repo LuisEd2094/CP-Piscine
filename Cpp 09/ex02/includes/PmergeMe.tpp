@@ -132,37 +132,39 @@ void binaryInsertion(CONTAINER&container, CONTAINER_CONTAINER& twoPairs)
 
     //getJacobSequence(jacobSequence, jacobSize);
     int jacobIndexs[] ={
-        1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, 2731, 5461, 10923, 21845, 43691, 87381, 174763, 349525,
+        0, 1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, 2731, 5461, 10923, 21845, 43691, 87381, 174763, 349525,
     };
 /*     int loopSize;
     for (loopSize = 0; jacobIndexs[loopSize + 1]; loopSize++){std::cout << "HOLA";}; */
     int containerIndex = 0;
-    int lastIndex = -1;
+    int lastIndex = 0;
 
     for (int i = 0; ; ++i)
     {
+        if (jacobIndexs[i] >= twoPairs.size() - 1 )
+            break;
         int moves = jacobIndexs[i + 1] - jacobIndexs[i];
-        if (lastIndex + moves > twoPairs.size())
-            moves = twoPairs.size() - lastIndex - 2;
+/*         if (lastIndex + moves > twoPairs.size())
+            moves = twoPairs.size() - lastIndex - 2; */
         for (int j = 0; j < moves; ++j)
         {
             int start = containerIndex;
             int end = container.size();
-            int pairIndex = lastIndex + moves - j;
+            int pairIndex = lastIndex - j;
             int value = twoPairs[pairIndex][1];
             int index = binarySearch(container, value, start, end);
             container.insert(container.begin() + index, value);
             containerIndex++;
         }
+
         lastIndex += moves; 
-        if (jacobIndexs[i] >= twoPairs.size() * 2)
-            break;
     }
 
 }
 #include<iostream>
 #include<vector>
 #include<algorithm>
+#include <fstream>
 
 template <typename T, template <typename, typename> class Container>
 void solveMergeInsert(std::size_t argc, int *ints)
@@ -185,22 +187,50 @@ void solveMergeInsert(std::size_t argc, int *ints)
     if (isOdd)
     {
         int index = binarySearch(container, odd, 0, container.size() - 1);
-        container.insert(container.begin() + index, odd);
+        if (index == container.size())
+            container.push_back(odd);
+        else
+            container.insert(container.begin() + index, odd);
 
     }
 
-    CONTAINER temp(argc);
+     CONTAINER temp(argc);
     typename CONTAINER::iterator it;
     for (int i = 0; i < argc; ++i)
     {
         temp[i] = ints[i];
     }
+
+    // Open a file for writing
+    std::ofstream outputFile("temp.txt");
+    
+    // Redirect std::cout to the file
+    std::streambuf *coutBuffer = std::cout.rdbuf();
+    std::cout.rdbuf(outputFile.rdbuf());
+    
+    // Write to std::cout (which now redirects to the file)
+    
+    // Restore std::cout
+    
+    // Close the file
     std::sort(temp.begin(), temp.end());
     for (int i = 0; i < argc; ++i)
-    {
-        if (temp[i] != container[i])
-            std::cerr << "NOT SORTED" << std::endl;
+    {   
+        std::cout << temp[i] << "\n";
     }
+    std::cout.rdbuf(coutBuffer);
+    outputFile.close();
+
+    std::ofstream outputFile2("my.txt");
+    coutBuffer = std::cout.rdbuf();
+    std::cout.rdbuf(outputFile2.rdbuf());
+    for (int i = 0; i < argc; ++i)
+    {   
+        std::cout << container[i] << "\n";
+    }
+    std::cout.rdbuf(coutBuffer);
+    outputFile.close();
+
 
     std::cout << "SORTED!" << std::endl;
     // Container<Container<int> > twoPairs(size % 2 == 0 ? size / 2 : (size / 2) + 1, Container<int>(2));

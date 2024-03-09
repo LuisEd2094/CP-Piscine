@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 
 
 
-    start = clock();
+    /* start = clock();
     solveMergeSort<std::vector<int> > (argc - 1, ints);
     end = clock();
     time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
     end = clock();
     time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
 
-    std::cout << "MergeInsertVector INCORRECT time: " << time << std::endl;
+    std::cout << "MergeInsertVector INCORRECT time: " << time << std::endl; */
 
     start = clock();
     solveMergeInsert<int, std::vector>(argc - 1, ints);
