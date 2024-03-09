@@ -7,13 +7,13 @@
             "name": "C++ Psicine",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/Users/lsoto-do/core05/CP-Piscine/Cpp 09/ex02",
+            "program": "/home/luised94/CP-Piscine/Cpp 09/ex02/PmergeMe",
             "args": ["5 6 8"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,
-            "MIMode": "lldb",
+            "MIMode": "gdb",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
