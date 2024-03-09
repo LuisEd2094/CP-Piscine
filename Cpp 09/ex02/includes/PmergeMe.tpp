@@ -59,7 +59,7 @@ void mergeSort(Container& container, const int begin, const int end)
 }
 
 template<typename Container>
-void solve(std::size_t argc, int *ints)
+void solveMergeSort(std::size_t argc, int *ints)
 {
     Container container(argc);
     
@@ -68,6 +68,6 @@ void solve(std::size_t argc, int *ints)
 
     mergeSort(container, 0, argc - 1);
     
-    for (int i = 0; i < argc; ++i)
-        std::cout << container[i] << std::endl;
+    // for (int i = 0; i < argc; ++i)
+    //     std::cout << container[i] << std::endl;
 }

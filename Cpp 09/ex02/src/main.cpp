@@ -1,7 +1,7 @@
-#include <vector>
-#include <deque>
+
 #include <iostream>
-#include <PmergeMe.tpp>
+#include <PmergeMe.hpp>
+
 int* checkArgs(int argc, char *argv[])
 {
     try
@@ -23,10 +23,37 @@ int* checkArgs(int argc, char *argv[])
 int main(int argc, char *argv[])
 {
     int* ints =  checkArgs(argc - 1, &argv[1]);
+    clock_t start, end;
+    double time;
 
-    solve<std::vector<int> > (argc - 1, ints);
-    solve<std::deque<int> > (argc - 1, ints);
 
+
+    start = clock();
+    solveMergeSort<std::vector<int> > (argc - 1, ints);
+    end = clock();
+    time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
+
+    std::cout << "Vector time: " << time << std::endl;
+
+    start = clock();
+    solveMergeSort<std::deque<int> > (argc - 1, ints);
+    end = clock();
+    time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
+
+    std::cout << "Deque time: " << time << std::endl;
+
+    start = clock();
+
+    std::vector<int> vect (argc - 1);
+    for (int i = 0; ints[i]; ++i)
+        vect[i] = ints[i];
+    // for (int i = 0; i < argc - 1; ++i)
+    //     std::cout << vect[i]  << std::endl;
+    solverMergeInsertVector(vect);
+    end = clock();
+    time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
+
+    std::cout << "MergeInsertVector time: " << time << std::endl;
     delete [] ints;
 }
 
