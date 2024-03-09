@@ -109,22 +109,28 @@ int binarySearch(CONTAINER &vect, int value, int start, int end)
 }
 
 
+// 1, 1, 3, 5, 11, 21
 template <typename T, template <typename, typename> class Container>
 void binaryInsertion(CONTAINER&container, CONTAINER_CONTAINER& twoPairs)
 {
     int jacobsthal_diff[] =  {
         2u, 2u, 6u, 10u, 22u, 42u, 86u, 170u, 342u, 682u, 1366u,
         2730u, 5462u, 10922u, 21846u, 43690u, 87382u, 174762u };
+    int jjacobsthalSequence[] ={
+        1, 3, 5, 11, 21
+    };
     int lastIndex = 1;
     for (int i = 0; i < twoPairs.size() / 2; ++i)
     {
         int jacobIndex = jacobsthal_diff[i];
         for (int j = 0; j < jacobIndex; ++j)
         {
-            int start = lastIndex + j;
+            int start = jjacobsthalSequence[i] + j;
             int end = container.size() - 1;
-            int index = binarySearch(container, twoPairs[j][1], start, end);
-            container.insert(container.begin() + index, twoPairs[j][1]);
+            int pairIndex = jjacobsthalSequence[i + 1] - jjacobsthalSequence[i] - j - 1;
+            int value = twoPairs[pairIndex][1];
+            int index = binarySearch(container, value, start, end);
+            container.insert(container.begin() + index, value);
 
         }
 
@@ -174,7 +180,7 @@ void solveMergeInsert(std::size_t argc, int *ints)
     // int value = 3;
 
     // container.insert(container.begin() + index, 3);
-   // std::cout << "hola";
+    std::cout << "hola";
 
     
     // Container<Container<int> > twoPairs(size % 2 == 0 ? size / 2 : (size / 2) + 1, Container<int>(2));

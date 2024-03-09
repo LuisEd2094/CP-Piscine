@@ -3,13 +3,12 @@
 
 #include "MergeSort.tpp"
 #include "PmergeMe.tpp"
+#include <cstdlib>
 #include <ctime>
 #include <vector>
 #include <deque>
 
 void solverMergeInsertVectorIncorrect(std::vector<int>& vect);
-
-void solverMergeInsertVectorCorrect(std::vector<int>& vect);
 
 
 #endif
