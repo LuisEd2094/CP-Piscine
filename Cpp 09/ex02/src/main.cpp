@@ -61,6 +61,15 @@ int main(int argc, char *argv[])
 
     
     std::cout << "MergeInsertVector  CORRECT time: " << time << std::endl;
+
+     start = clock();
+    solveMergeInsert<int, std::deque>(argc - 1, ints);
+
+    end = clock();
+    time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
+
+    
+    std::cout << "MergeInsertDeque CORRECT time: " << time << std::endl; 
     delete [] ints;
 }
 

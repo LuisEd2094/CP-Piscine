@@ -1,17 +1,15 @@
 #include <PmergeMe.hpp>
-#define CONTAINER Container<T, std::allocator<T> > 
-#define CONTAINER_CONTAINER Container< Container<T, std::allocator<T> >,  std::allocator<Container <T, std::allocator <T> > > >
-
-
+#define CONTAINER Container<T, std::allocator<T> >
+#define CONTAINER_CONTAINER Container<Container<T, std::allocator<T> >, std::allocator<Container<T, std::allocator<T> > > > 
 
 template <typename T, template <typename, typename> class Container>
-void generatePairs(int*& container, CONTAINER_CONTAINER &twoPairs, std::size_t& size, bool& isOdd, int& odd)
+void generatePairs(int *&container, CONTAINER_CONTAINER &twoPairs, std::size_t &size, bool &isOdd, int &odd)
 {
     int i, j;
-    for (i = 0, j = 0; i < size; i += 2,  ++j)
+    for (i = 0, j = 0; i < size; i += 2, ++j)
     {
         CONTAINER temp;
-        if (container[i] <  container[i + 1])
+        if (container[i] < container[i + 1])
         {
             temp.push_back(container[i]);
             temp.push_back(container[i + 1]);
@@ -23,7 +21,6 @@ void generatePairs(int*& container, CONTAINER_CONTAINER &twoPairs, std::size_t& 
             temp.push_back(container[i]);
             twoPairs.push_back(temp);
         }
-
     }
     if (isOdd)
     {
@@ -31,14 +28,13 @@ void generatePairs(int*& container, CONTAINER_CONTAINER &twoPairs, std::size_t& 
     }
 }
 template <typename T, template <typename, typename> class Container>
-void addFirstElemtTocontaineror(CONTAINER &container, CONTAINER_CONTAINER& twoPairs)
+void addFirstElemtTocontaineror(CONTAINER &container, CONTAINER_CONTAINER &twoPairs)
 {
     int i = 0;
 
-
     for (typename CONTAINER_CONTAINER::iterator it = twoPairs.begin(); it != twoPairs.end(); ++it, ++i)
     {
-        CONTAINER& innercontaineror = *it;
+        CONTAINER &innercontaineror = *it;
         container.push_back(*(innercontaineror.begin()));
     }
     // if ((--twoPairs.end())->size() > 1)
@@ -82,7 +78,6 @@ void addFirstElemtTocontaineror(CONTAINER &container, CONTAINER_CONTAINER& twoPa
 //         }
 //     }
 
-
 // }
 
 template <typename T, template <typename, typename> class Container>
@@ -105,33 +100,28 @@ int binarySearch(CONTAINER &vect, int value, int start, int end)
         return (binarySearch(vect, value, start, midPoint - 1));
     else
         return (midPoint);
+}
+template <typename T, template <typename, typename> class Container>
+std::vector<int> calculateJacob(CONTAINER_CONTAINER &twoPairs)
+{
+    std::vector<int> values; // = new std::vector<int>();
+    std::size_t size = twoPairs.size();
 
+    values.push_back(1);
+    values.push_back(3);
+    for (int i = 1;; ++i)
+    {
+        values.push_back((values[i - 1] * 2) + values[i]);
+        if (values.back() >= size - 1)
+            break;
+    }
+    return (values);
 }
 
-
-// 1 0 3  11 10 9 8 7 6 21 20 19 18
-// 1, 1, 3, 5, 11, 21
 template <typename T, template <typename, typename> class Container>
-void binaryInsertion(CONTAINER&container, CONTAINER_CONTAINER& twoPairs)
+void binaryInsertion(CONTAINER &container, CONTAINER_CONTAINER &twoPairs)
 {
-/*     int jacobsthal_diff[] =  {
-        2, 2, 2, 6,
 
- }; */
-    /*
-    
-        3 - 1 = 2. 
-        last index 1.
-        5 - 3 = 2
-        index last index + 2 = 3
-        11 - 5 = 6
-        3 + 6 index = 9. 
-    */
-/*     int *jacobSequence;
-    int jacobSize; */
-
-    //getJacobSequence(jacobSequence, jacobSize);
-    // insert the first pair
     if (twoPairs.size() >= 1)
     {
         int index = binarySearch(container, twoPairs[0][1], 0, container.size() - 1);
@@ -142,21 +132,20 @@ void binaryInsertion(CONTAINER&container, CONTAINER_CONTAINER& twoPairs)
         int index = binarySearch(container, twoPairs[1][1], 0, container.size() - 1);
         container.insert(container.begin() + index, twoPairs[1][1]);
     }
-/* 
-    int jacobsthal_diff[] =  {
-        2, 2, 6, 10,
+    /*
+        int jacobsthal_diff[] =  {
+            2, 2, 6, 10,
 
- }; */
-    int jacobIndexs[] ={
-       1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, 2731, 5461, 10923, 21845, 43691, 87381, 174763, 349525,
-    };
-/*     int loopSize;
-    for (loopSize = 0; jacobIndexs[loopSize + 1]; loopSize++){std::cout << "HOLA";}; */
-    int containerIndex = 2;
-    int lastIndex = 0;
+     }; */
+
     if (twoPairs.size() >= 3)
     {
-        for (int i = 1; ; ++i)
+        std::vector<int> jacobIndexs = calculateJacob(twoPairs);
+        /*     int loopSize;
+            for (loopSize = 0; jacobIndexs[loopSize + 1]; loopSize++){std::cout << "HOLA";}; */
+        int containerIndex = 2;
+        int lastIndex = 0;
+        for (int i = 1;; ++i)
         {
             int startIndex;
             if (jacobIndexs[i] >= twoPairs.size())
@@ -164,44 +153,48 @@ void binaryInsertion(CONTAINER&container, CONTAINER_CONTAINER& twoPairs)
                 if (jacobIndexs[i] == twoPairs.size())
                     startIndex = jacobIndexs[i] - 1;
                 else
-                    startIndex = (twoPairs.size() - (jacobIndexs[i - 1])  - 1) + jacobIndexs[i - 1] ;
+                    startIndex = (twoPairs.size() - (jacobIndexs[i - 1]) - 1) + jacobIndexs[i - 1];
             }
             else
                 startIndex = jacobIndexs[i];
             int moves = startIndex - jacobIndexs[i - 1];
-    /*         if (lastIndex + moves > twoPairs.size())
-                moves = twoPairs.size() - lastIndex - 2; */
+            /*         if (lastIndex + moves > twoPairs.size())
+                        moves = twoPairs.size() - lastIndex - 2; */
             for (int j = 0; j < moves; ++j)
             {
-                int start = containerIndex;
                 int end = container.size() - 1;
                 int pairIndex = startIndex - j;
                 int value = twoPairs[pairIndex][1];
+                int start = pairIndex;
+                int lowerValue = twoPairs[pairIndex][0];
+
+                while (lowerValue < container[start])
+                    start--;
+                while (lowerValue > container[start])
+                    start++;
+
                 int index = binarySearch(container, value, start, end);
                 container.insert(container.begin() + index, value);
             }
             if (jacobIndexs[i] >= twoPairs.size() - 1)
                 break;
-            containerIndex += moves; 
+            containerIndex += moves;
         }
     }
-
-
 }
-
 
 template <typename T, template <typename, typename> class Container>
 void solveMergeInsert(std::size_t argc, int *ints)
 {
-    if (argc < 2) return ;
+    if (argc < 2)
+        return;
     CONTAINER container;
-    int         odd;
-    bool        isOdd = argc % 2;
+    int odd;
+    bool isOdd = argc % 2;
     std::size_t pairSize = isOdd ? argc - 1 : argc;
 
-    
-    //getJacob(argc);
-    //Init twoPair list to have half or half + 1 argc if argc is odd. internal containerors are size 2 int
+    // getJacob(argc);
+    // Init twoPair list to have half or half + 1 argc if argc is odd. internal containerors are size 2 int
     CONTAINER_CONTAINER twoPairs;
     generatePairs(ints, twoPairs, pairSize, isOdd, odd);
     mergeSort(twoPairs, 0, twoPairs.size() - 1);
@@ -216,7 +209,6 @@ void solveMergeInsert(std::size_t argc, int *ints)
             container.push_back(odd);
         else
             container.insert(container.begin() + index, odd);
-
     }
 
     CONTAINER temp(argc);
@@ -225,7 +217,7 @@ void solveMergeInsert(std::size_t argc, int *ints)
     {
         temp[i] = ints[i];
     }
-    
+
     std::sort(temp.begin(), temp.end());
     for (int i = 0; i < argc; ++i)
     {
@@ -233,20 +225,18 @@ void solveMergeInsert(std::size_t argc, int *ints)
         if (temp[i] != container[i])
         {
             std::cerr << "NOT SORTED" << std::endl;
-            std::cerr << "with: "<< argc << "numbers" <<  std::endl;
+            std::cerr << "with: " << argc << "numbers" << std::endl;
             for (int j = 0; j < argc; ++j)
                 std::cerr << ints[j] << std::endl;
             break;
         }
     }
-    std::cout<< "SORTED" << std::endl;
+    std::cout << "SORTED" << std::endl;
     // Container<Container<int> > twoPairs(size % 2 == 0 ? size / 2 : (size / 2) + 1, Container<int>(2));
-
 
     // addFirstElemtTocontaineror(container, twoPairs);
     // binaryInsertion(container, twoPairs);
     // container.resize(size);
     // for (Container<int>::iterator it = container.begin(); it != container.end(); ++it)
     //      std::cout <<  *it << std::endl;
-
 }
