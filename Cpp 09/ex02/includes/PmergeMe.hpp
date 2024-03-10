@@ -8,6 +8,7 @@
 # include <algorithm>
 # include <fstream>
 # include <iostream>
+# include <limits>
 # include "MergeSort.tpp"
 # include "PmergeMe.tpp"
 

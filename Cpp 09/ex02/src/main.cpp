@@ -11,6 +11,8 @@ int* checkArgs(int argc, char *argv[])
     }
     int* ints;
     bool isOrdered = 1;
+    long strlol_value;
+    char *end;
     try
     {
         ints = new int[argc + 1];
@@ -24,12 +26,19 @@ int* checkArgs(int argc, char *argv[])
     {
         for (int j = 0; argv[i][j]; ++j)
         {
-            if (!isdigit(argv[i][j]))
+            if (static_cast<std::string>(argv[i]).find_first_not_of("0123456789") != std::string::npos)
             {
                 std::cerr << "Invalid argument: " << argv[i] << std::endl;
                 delete [] ints;
                 std::exit(EXIT_FAILURE);
             }
+        }
+        strlol_value = strtol(argv[i], &end, 10);
+        if (strlol_value > std::numeric_limits<int>::max() || strlol_value < std::numeric_limits<int>::min())
+        {
+            std::cerr << "Invalid argument: " << argv[i] << std::endl;
+            delete [] ints;
+            std::exit(EXIT_FAILURE);
         }
         ints[i] = std::atoi(argv[i]);
     }
