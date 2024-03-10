@@ -1,7 +1,5 @@
-#include <iostream>
-#include <cstdlib>
-#include <fstream>
-#include <algorithm>
+#include "PmergeMe.hpp"
+
 template<typename Container>
 void merge(Container&  container, const int left, const int mid, const int right)
 {
@@ -70,8 +68,4 @@ void solveMergeSort(std::size_t argc, int *ints)
         container[i] = ints[i];
 
     mergeSort(container, 0, argc - 1);
-
-    
-    // for (int i = 0; i < argc; ++i)
-    //     std::cout << container[i] << std::endl;
 }
