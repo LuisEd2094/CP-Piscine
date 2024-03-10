@@ -227,6 +227,6 @@ clock_t solveMergeInsert(std::size_t argc, int *ints)
 
     /*Remove comment to launch this test, it'd call the std::sort() function and check to make sure the new container is ordered.
     If not ordered it'd print to the cerr the values used and "NOT SORTED", otherwise it'd print SORTED to the cout*/
-    //testIfSorted(argc, container, ints);
+    testIfSorted(argc, container, ints);
     return end;
 }
