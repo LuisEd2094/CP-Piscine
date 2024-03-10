@@ -81,8 +81,8 @@ void solverMergeInsertVectorIncorrect(std::vector<int>& vect)
     int         odd;
     bool        isOdd = size % 2;
 
-    std::vector<int> temp(vect);
-    if (size < 2) return ;
+/*     std::vector<int> temp(vect);
+ */    if (size < 2) return ;
     //Init twoPair list to have half or half + 1 argc if argc is odd. internal vectors are size 2 int
     std::vector<std::vector<int> > twoPairs(size % 2 == 0 ? size / 2 : (size / 2) + 1, std::vector<int>(2));
 
@@ -94,7 +94,7 @@ void solverMergeInsertVectorIncorrect(std::vector<int>& vect)
     vect.resize(size);
 
 
-    std::sort(temp.begin(), temp.end());
+/*     std::sort(temp.begin(), temp.end());
     for (int i = 0; i < temp.size(); ++i)
     {
         if (temp[i] != vect[i])
@@ -103,7 +103,7 @@ void solverMergeInsertVectorIncorrect(std::vector<int>& vect)
             break;
         }
     }
-    std::cout<< "SORTED" << std::endl;
+    std::cout<< "SORTED" << std::endl; */
     // for (std::vector<int>::iterator it = vect.begin(); it != vect.end(); ++it)
     //      std::cout <<  *it << std::endl;
 
