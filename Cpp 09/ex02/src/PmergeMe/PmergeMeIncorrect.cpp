@@ -62,14 +62,15 @@ int binarySearch(std::vector<int>&vect, int value, int start, int end)
 // the binary Inserton
 void binaryInsertion(std::vector<int>&vect, std::vector<std::vector<int> >& twoPairs)
 {
-    std::size_t subVectSize = twoPairs.size();
+    std::size_t subVectEnd = twoPairs.size() - 1;
     for (int i = 0; i < twoPairs.size(); ++i)
     {
         if (twoPairs[i].size() > 1) //Protect the odd
         {
-            int index = binarySearch(vect, twoPairs[i][1], 0, subVectSize);
+            int index = binarySearch(vect, twoPairs[i][1], 0, subVectEnd);
             vect.insert(vect.begin() + index, twoPairs[i][1]);
-            subVectSize++;
+/*             vect.insert(vect.begin() + index, twoPairs[i][1]);*/
+            subVectEnd++;
         }
     }
 }
@@ -80,6 +81,7 @@ void solverMergeInsertVectorIncorrect(std::vector<int>& vect)
     int         odd;
     bool        isOdd = size % 2;
 
+    std::vector<int> temp(vect);
     if (size < 2) return ;
     //Init twoPair list to have half or half + 1 argc if argc is odd. internal vectors are size 2 int
     std::vector<std::vector<int> > twoPairs(size % 2 == 0 ? size / 2 : (size / 2) + 1, std::vector<int>(2));
@@ -90,6 +92,18 @@ void solverMergeInsertVectorIncorrect(std::vector<int>& vect)
     addFirstElemtToVector(vect, twoPairs);
     binaryInsertion(vect, twoPairs);
     vect.resize(size);
+
+
+    std::sort(temp.begin(), temp.end());
+    for (int i = 0; i < temp.size(); ++i)
+    {
+        if (temp[i] != vect[i])
+        {
+            std::cerr << "NOT SORTED" << std::endl;
+            break;
+        }
+    }
+    std::cout<< "SORTED" << std::endl;
     // for (std::vector<int>::iterator it = vect.begin(); it != vect.end(); ++it)
     //      std::cout <<  *it << std::endl;
 

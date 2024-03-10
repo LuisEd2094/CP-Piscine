@@ -25,10 +25,8 @@ int main(int argc, char *argv[])
     int* ints =  checkArgs(argc - 1, &argv[1]);
     clock_t start, end;
     double time;
-
-
-
-    /* start = clock();
+/* 
+    start = clock();
     solveMergeSort<std::vector<int> > (argc - 1, ints);
     end = clock();
     time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
@@ -40,12 +38,12 @@ int main(int argc, char *argv[])
     end = clock();
     time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
 
-    std::cout << "Deque time: " << time << std::endl;
+    std::cout << "Deque time: " << time << std::endl; */
 
-    start = clock();
+     start = clock();
 
     std::vector<int> vect (argc - 1);
-    for (int i = 0; ints[i]; ++i)
+    for (int i = 0; i < argc - 1; ++i)
         vect[i] = ints[i];
     // for (int i = 0; i < argc - 1; ++i)
     //     std::cout << vect[i]  << std::endl;
@@ -53,15 +51,15 @@ int main(int argc, char *argv[])
     end = clock();
     time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
 
-    std::cout << "MergeInsertVector INCORRECT time: " << time << std::endl; */
+    std::cout << "MergeInsertVector INCORRECT time: " << time << std::endl;
 
-    start = clock();
+    /*start = clock();
     solveMergeInsert<int, std::vector>(argc - 1, ints);
 
     end = clock();
     time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
 
-    std::cout << "MergeInsertVector  CORRECT time: " << time << std::endl;
+    std::cout << "MergeInsertVector  CORRECT time: " << time << std::endl; */
     delete [] ints;
 }
 

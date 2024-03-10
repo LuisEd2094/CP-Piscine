@@ -161,10 +161,7 @@ void binaryInsertion(CONTAINER&container, CONTAINER_CONTAINER& twoPairs)
     }
 
 }
-#include<iostream>
-#include<vector>
-#include<algorithm>
-#include <fstream>
+
 
 template <typename T, template <typename, typename> class Container>
 void solveMergeInsert(std::size_t argc, int *ints)

@@ -1,21 +1,23 @@
 #include <iostream>
-
+#include <cstdlib>
+#include <fstream>
+#include <algorithm>
 template<typename Container>
 void merge(Container&  container, const int left, const int mid, const int right)
 {
-    const int subContOne = mid - left  + 1;
-    const int subContTwo = right - mid;
-    Container leftContainer(subContOne);
-    Container rightContainer(subContTwo);
+    const int leftSize = mid - left  + 1;
+    const int rightSize = right - mid;
+    Container leftContainer(leftSize);
+    Container rightContainer(rightSize);
 
-    for (int i = 0; i < subContOne; ++i)
+    for (int i = 0; i < leftSize; ++i)
         leftContainer[i] = container[left + i];
-    for (int i = 0; i < subContTwo; ++i)
+    for (int i = 0; i < rightSize; ++i)
         rightContainer[i] = container[mid + 1 + i];
 
     int indxSubOne = 0, indxSubTwo = 0, indxMerge = left;
 
-    while (indxSubOne < subContOne && indxSubTwo < subContTwo)
+    while (indxSubOne < leftSize && indxSubTwo < rightSize)
     {
         if (leftContainer[indxSubOne] <= rightContainer[indxSubTwo])
         {
@@ -30,14 +32,14 @@ void merge(Container&  container, const int left, const int mid, const int right
         indxMerge++;
 
     }
-    while (indxSubOne < subContOne)
+    while (indxSubOne < leftSize)
     {
         container[indxMerge] = leftContainer[indxSubOne];
         indxSubOne++;
         indxMerge++;
     }
 
-    while (indxSubTwo < subContTwo)
+    while (indxSubTwo < rightSize)
     {
         container[indxMerge] = rightContainer[indxSubTwo];
         indxSubTwo++;
@@ -58,6 +60,7 @@ void mergeSort(Container& container, const int begin, const int end)
 
 }
 
+
 template<typename Container>
 void solveMergeSort(std::size_t argc, int *ints)
 {
@@ -67,6 +70,7 @@ void solveMergeSort(std::size_t argc, int *ints)
         container[i] = ints[i];
 
     mergeSort(container, 0, argc - 1);
+
     
     // for (int i = 0; i < argc; ++i)
     //     std::cout << container[i] << std::endl;
