@@ -103,12 +103,22 @@ void RPN::solveRPN(std::string str)
 
     while (getline(iss, parse, ' '))
     {
+        std::string::iterator it = parse.begin();
+        while (it != parse.end()) {
+            if (*it == ' ') {
+                it = parse.erase(it);
+            } else {
+                ++it;
+            }
+        }
+        if (parse.empty())
+            continue;
         len = parse.length();
-        if (len > 2)
+        if (len > 1)
             throw RPN::RPNException("Invalid input: " + parse);
         else
         {
-            if (len == 1 && !isdigit(*parse.begin()))
+            if ( !isdigit(*parse.begin()))
             {
                 if (parse.find_first_of("+-/*")  == std::string::npos )
                         throw RPN::RPNException("Invalid input: " + parse);
@@ -116,12 +126,7 @@ void RPN::solveRPN(std::string str)
 
             }
             else 
-            {
-                if (!checkValidNumber(parse))
-                    throw RPN::RPNException("Valid numbers should be less than 10 not :" + parse);
-                _stack.push(std::atoi(parse.c_str()));
-
-            } 
+                _stack.push(std::atoi(parse.c_str())); 
 
         }
     }
