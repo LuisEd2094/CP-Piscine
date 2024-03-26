@@ -64,7 +64,7 @@ void solveMergeSort(std::size_t argc, int *ints)
 {
     Container container(argc);
     
-    for (int i = 0; i < argc; ++i)
+    for (std::size_t i = 0; i < argc; ++i)
         container[i] = ints[i];
 
     mergeSort(container, 0, argc - 1);

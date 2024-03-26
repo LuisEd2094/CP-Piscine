@@ -6,7 +6,7 @@
 template <typename T, template <typename, typename> class Container>
 void generatePairs(int *&container, CONTAINER_CONTAINER &pairs, std::size_t &size, bool &isOdd, int &odd)
 {
-    int i, j;
+    std::size_t i, j;
     for (i = 0, j = 0; i < size; i += 2, ++j)
     {
         CONTAINER temp;
@@ -39,7 +39,7 @@ void addFirstElemtTovector(CONTAINER &container, CONTAINER_CONTAINER &pairs)
 }
 
 template <typename T, template <typename, typename> class Container>
-int binarySearch(CONTAINER &container, int value, int start, int end)
+std::size_t binarySearch(CONTAINER &container, int value, std::size_t start, std::size_t end)
 {
     if (start == end)
     {
@@ -50,7 +50,7 @@ int binarySearch(CONTAINER &container, int value, int start, int end)
     }
     else if (start > end)
         return (start);
-    int midPoint = (start + end) / 2;
+    std::size_t midPoint = (start + end) / 2;
 
     if (container[midPoint] < value)
         return (binarySearch(container, value, midPoint + 1, end));
@@ -60,9 +60,9 @@ int binarySearch(CONTAINER &container, int value, int start, int end)
         return (midPoint);
 }
 template <typename T, template <typename, typename> class Container>
-std::vector<int> calculateJacob(CONTAINER_CONTAINER &pairs)
+std::vector<std::size_t> calculateJacob(CONTAINER_CONTAINER &pairs)
 {
-    std::vector<int> values;
+    std::vector<std::size_t> values;
     std::size_t size = pairs.size();
 
     values.push_back(1);
@@ -77,7 +77,7 @@ std::vector<int> calculateJacob(CONTAINER_CONTAINER &pairs)
 }
 
 template <typename T, template <typename, typename> class Container>
-int getStartIndex(int i, std::vector<int>& jacobIndexs, CONTAINER_CONTAINER& pairs )
+int getStartIndex(int i, std::vector<std::size_t>& jacobIndexs, CONTAINER_CONTAINER& pairs )
 {
     if (jacobIndexs[i] >= pairs.size())
     {
@@ -121,21 +121,20 @@ void binaryInsertion(CONTAINER& container, CONTAINER_CONTAINER& pairs)
     /*if there are any more pairs left we can use the sequence now and finish adding them to the container*/
     if (pairs.size() >= 3)
     {
-        std::vector<int> jacobIndexs = calculateJacob(pairs);
+        std::vector<std::size_t> jacobIndexs = calculateJacob(pairs);
         int startIndex;
-        int moves;
+        std::size_t moves;
         int start;
         int end;
         int pairIndex;
         int value;
-        int lowerValue;
-        int index;
+        std::size_t index;
 
-        for (int i = 1; ; ++i)
+        for (std::size_t i = 1; ; ++i)
         {
             startIndex = getStartIndex(i, jacobIndexs, pairs);
             moves = startIndex - jacobIndexs[i - 1];
-            for (int j = 0; j < moves; ++j)
+            for (std::size_t j = 0; j < moves; ++j)
             {
                 end = container.size() - 1;
                 pairIndex = startIndex - j;
@@ -154,7 +153,7 @@ void binaryInsertion(CONTAINER& container, CONTAINER_CONTAINER& pairs)
 template <typename T, template <typename, typename> class Container>
 void addOdd(CONTAINER& container, int& odd)
 {
-    int index = binarySearch(container, odd, 0, container.size() - 1);
+    std::size_t index = binarySearch(container, odd, 0, container.size() - 1);
     if (index == container.size())
         container.push_back(odd);
     else
@@ -167,20 +166,20 @@ void testIfSorted(std::size_t argc, CONTAINER& container, int *ints)
     bool isSorted = 1;
     CONTAINER temp(argc);
     typename CONTAINER::iterator it;
-    for (int i = 0; i < argc; ++i)
+    for (std::size_t i = 0; i < argc; ++i)
     {
         temp[i] = ints[i];
     }
 
     std::sort(temp.begin(), temp.end());
-    for (int i = 0; i < argc; ++i)
+    for (std::size_t i = 0; i < argc; ++i)
     {
         std::cout << container[i] << std::endl;
         if (temp[i] != container[i])
         {
             std::cerr << "NOT SORTED" << std::endl;
             std::cerr << "with: " << argc << "numbers" << std::endl;
-            for (int j = 0; j < argc; ++j)
+            for (std::size_t j = 0; j < argc; ++j)
                 std::cerr << ints[j] << std::endl;
             isSorted = 0;
             break;
@@ -217,7 +216,7 @@ clock_t solveMergeInsert(std::size_t argc, int *ints)
     if (isOdd)
         addOdd(container,odd);
     end = clock();
-    int i;
+    std::size_t i;
     std::cout << "After: ";
     for(i = 0 ; i < 20 && i < argc; ++i)
         std::cout << container[i] << " ";

@@ -2,7 +2,7 @@
 
 void generatePairs(std::vector<int>& vect, std::vector<std::vector<int> >& twoPairs, std::size_t& size, bool& isOdd)
 {
-    for (int i = 0, j = 0; i < size; i += 2,  ++j)
+    for (std::size_t i = 0, j = 0; i < size; i += 2,  ++j)
     {
         if (vect[i] <  vect[i + 1])
         {
@@ -63,11 +63,12 @@ int binarySearch(std::vector<int>&vect, int value, int start, int end)
 void binaryInsertion(std::vector<int>&vect, std::vector<std::vector<int> >& twoPairs)
 {
     std::size_t subVectEnd = twoPairs.size() - 1;
-    for (int i = 0; i < twoPairs.size(); ++i)
+    std::size_t start = 0;
+    for (std::size_t i = 0; i < twoPairs.size(); ++i)
     {
         if (twoPairs[i].size() > 1) //Protect the odd
         {
-            int index = binarySearch(vect, twoPairs[i][1], 0, subVectEnd);
+            std::size_t index = binarySearch(vect, twoPairs[i][1], start, subVectEnd);
             vect.insert(vect.begin() + index, twoPairs[i][1]);
 /*             vect.insert(vect.begin() + index, twoPairs[i][1]);*/
             subVectEnd++;
@@ -78,7 +79,6 @@ void binaryInsertion(std::vector<int>&vect, std::vector<std::vector<int> >& twoP
 void solverMergeInsertVectorIncorrect(std::vector<int>& vect)
 {
     std::size_t size = vect.size();
-    int         odd;
     bool        isOdd = size % 2;
 
 /*     std::vector<int> temp(vect);
