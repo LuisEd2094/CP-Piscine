@@ -1,6 +1,6 @@
 
 #include "BitcoinExchange.hpp" 
-#define DEFAULT_DB "/Users/lsoto-do/core05/CP-Piscine/Cpp 09/ex00/dataBase/data.csv"
+#define DEFAULT_DB "./dataBase/data.csv"
 
 BitcoinExchange::BitcoinExchange(void) 
 {
@@ -62,15 +62,14 @@ void    BitcoinExchange::handleCSVError(std::string err)
 }
 
 
-bool    BitcoinExchange::validINPUTPrice(float price)
+bool    BitcoinExchange::validINPUTPrice(float price, const std::string& priceStr)
 {
-
-    return (!(price < 0 || price > 1000));
+    return ((price >= 0 && price <= 1000) && priceStr.find_first_not_of(".0123456789") == std::string::npos);
 }
 
-bool    BitcoinExchange::validCSVPrice(float price)
+bool    BitcoinExchange::validCSVPrice(float price, const std::string& priceStr)
 {
-    return (price >= 0);
+    return (price >= 0 && priceStr.find_first_not_of(".0123456789") == std::string::npos  );
 }
 
 bool    BitcoinExchange::validFirstLine(std::string line, std::string firstLine)
@@ -92,7 +91,13 @@ bool BitcoinExchange::isValidDateFormat(const std::string &dateString)
 
     if (dateString.size() != 10)
         return (false);
+    if (dateString.find_first_not_of("0123456789-") != std::string::npos)
+        return (false);
     if (dateString[4] != '-' || dateString[7] != '-')
+        return (false);
+    if (dateString.substr(0, 4).find_first_not_of("0123456789") != std::string::npos || \
+        dateString.substr(5, 2).find_first_not_of("0123456789") != std::string::npos || \
+        dateString.substr(8, 2).find_first_not_of("0123456789") != std::string::npos)
         return (false);
     year = atoi(dateString.substr(0, 4).c_str());
     month = atoi(dateString.substr(5, 2).c_str());
@@ -102,7 +107,7 @@ bool BitcoinExchange::isValidDateFormat(const std::string &dateString)
     return (true);
 }
 
-void    BitcoinExchange::workOnFile(std::string filePath, std::string sep, std::string firstLine, void (BitcoinExchange::*f)(std::string, float), bool (BitcoinExchange::*validPrice)(float), void (BitcoinExchange::*handleError)(std::string))
+void    BitcoinExchange::workOnFile(std::string filePath, std::string sep, std::string firstLine, void (BitcoinExchange::*f)(std::string, float), bool (BitcoinExchange::*validPrice)(float, const std::string&), void (BitcoinExchange::*handleError)(std::string))
 {
     std::ifstream   file;
     std::string     line;
@@ -136,7 +141,7 @@ void    BitcoinExchange::workOnFile(std::string filePath, std::string sep, std::
                 line + " on file: " + filePath);
                 continue;
             }
-            if (!(this->*validPrice)(price))
+            if (!(this->*validPrice)(price, priceStr) )
             {
                 ((this->*handleError)("Invalid price: " + line + " on file: " + filePath));
                 continue;
